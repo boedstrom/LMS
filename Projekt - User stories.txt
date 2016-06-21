@@ -13,12 +13,12 @@ B1	vill jag kunna se vilken kurs jag går
 B2	vill jag kunna se vilka kurskamrater jag har
 	1	Jag klickar på länken "Klassen" till höger om kurs-listan
 	2	En lista över vilka som går på min kurs visas.
-	3	För att att komma tillbaka till översiktsvyn klickar jag på länken "Tillbaka till Kurser"
+	3	För att att komma tillbaka till översiktsvyn för kurser klickar jag på länken "Tillbaka till Kurser"
 
 B3	vill jag kunna se vilka moduler som ingår i kursen
 	1	Jag klickar på länken "Moduler" till höger om kurs-listan
 	2	En lista över vilka moduler som ingår i min kurs visas
-	3	För att att komma tillbaka till översiktsvyn klickar jag på länken "Tillbaka till Kurser"
+	3	För att att komma tillbaka till översiktsvyn för kurser klickar jag på länken "Tillbaka till Kurser"
 
 B4	vill jag kunna se vilka aktiviteter som ingår i modulerna
 	1	Jag klickar på länken "Moduler" till höger om kurs-listan
@@ -26,7 +26,7 @@ B4	vill jag kunna se vilka aktiviteter som ingår i modulerna
 	3	Jag klickar på länken "Aktiviteter" till höger om den aktuella modulen
 	4	En lista över vilka aktiviteter som ingår i den modulen visas
 	5	För att att komma tillbaka till översiktsvyn för moduler klickar jag på länken "Tillbaka till Moduler"
-	6	För att att komma tillbaka till översiktsvyn klickar jag på länken "Tillbaka till Kurser"
+	6	För att att komma tillbaka till översiktsvyn för kurser klickar jag på länken "Tillbaka till Kurser"
 
 B5	vill jag kunna ladda ner dokument
 	1	Jag klickar mig fram till den sida ("Kurs", "Modul", "Aktivitet") där dokumenten finns.
@@ -43,7 +43,7 @@ C1	vill jag kunna se alla kurser
 C2	vill jag kunna se alla moduler
 	1	Jag klickar på länken "Moduler" till höger om kurs-listan
 	2	En lista över vilka moduler som ingår i min kurs visas
-	3	För att att komma tillbaka till översiktsvyn klickar jag på länken "Tillbaka till Kurser"
+	3	För att att komma tillbaka till översiktsvyn för kurser klickar jag på länken "Tillbaka till Kurser"
 
 C3	vill jag kunna se alla aktiviteter
 	1	Jag klickar på länken "Moduler" till höger om kurs-listan
@@ -51,7 +51,7 @@ C3	vill jag kunna se alla aktiviteter
 	3	Jag klickar på länken "Aktiviteter" till höger om den aktuella modulen
 	4	En lista över vilka aktiviteter som ingår i den modulen visas
 	5	För att att komma tillbaka till översiktsvyn för moduler klickar jag på länken "Tillbaka till Moduler"
-	6	För att att komma tillbaka till översiktsvyn klickar jag på länken "Tillbaka till Kurser"
+	6	För att att komma tillbaka till översiktsvyn för kurser klickar jag på länken "Tillbaka till Kurser"
 
 C4	vill jag kunna lägga till/redigera kurser
 	1	Jag klickar mig till den första översiktsvyn
@@ -60,6 +60,7 @@ C4	vill jag kunna lägga till/redigera kurser
 	4	Jag fyller i aktuella uppgifter i respektive fält
 	5	Jag klickar på "Skapa"
 	8	Jag flyttas tillbaka till översiktsvyn för kurser
+	9	Den nya kursen visas i listan
 
 C5	vill jag kunna lägga till/redigera moduler till kurser
 	1	Jag klickar mig till den första översiktsvyn
@@ -70,6 +71,7 @@ C5	vill jag kunna lägga till/redigera moduler till kurser
 	6	Jag fyller i aktuella uppgifter i respektive fält
 	7	Jag klickar på "Skapa"
 	8	Jag flyttas tillbaka till översiktsvyn för moduler
+	9	Den nya modulen visas i listan
 
 C6	vill jag kunna lägga till/redigera aktiviteter till moduler
 	1	Jag klickar mig till den första översiktsvyn
@@ -82,6 +84,7 @@ C6	vill jag kunna lägga till/redigera aktiviteter till moduler
 	8	Jag fyller i aktuella uppgifter i respektive fält
 	9	Jag klickar på "Skapa"
 	10	Jag flyttas tillbaka till översiktsvyn för aktiviteter
+	11	Den nya aktiviteten visas i listan
 
 C7	vill jag kunna lägga till/redigera andra lärare
 	1	Jag klickar mig till den första översiktsvyn
@@ -92,7 +95,7 @@ C7	vill jag kunna lägga till/redigera andra lärare
 	6	Jag fyller i aktuella uppgifter i respektive fält
 	7	Jag klickar på "Skapa"
 	8	Jag flyttas tillbaka till översiktsvyn för användare
-	
+	9	Den nye läraren visas i listan
 
 C8	vill jag kunna lägga till/redigera elever till kurser
 	1	Jag klickar mig till den första översiktsvyn
@@ -103,6 +106,7 @@ C8	vill jag kunna lägga till/redigera elever till kurser
 	6	Jag fyller i aktuella uppgifter i respektive fält
 	7	Jag klickar på "Skapa"
 	8	Jag flyttas tillbaka till översiktsvyn för användare
+	9 	Den nya eleven visas i listan
 
 C9	vill jag kunna se alla dokument
 	1	TBA
