@@ -1,0 +1,72 @@
+User stories:
+
+Som användare:
+A1	vill jag kunna logga in	så att jag kan använda systemet
+	1	Jag startar applikationen, login-sidan kommer upp
+	2	Jag skriver in användar-id och lösenord i respektive fält och klickar på OK
+
+Som student:
+B1	vill jag kunna se vilken kurs jag går
+	1	Min aktuella kurs visas i den första översiktsvyn
+
+B2	vill jag kunna se vilka kurskamrater jag har
+	1	Jag klickar på länken "Klassen" till höger om kurs-listan, då visas en lista över vilka som går på min kurs.
+	2	För att att komma tillbaka till översiktsvyn klickar jag på länken "Tillbaka till Kurser"
+
+B3	vill jag kunna se vilka moduler som ingår i kursen
+	1	Jag klickar på länken "Moduler" till höger om kurs-listan, då visas en lista över vilka moduler som ingår i min kurs.
+	2	För att att komma tillbaka till översiktsvyn klickar jag på länken "Tillbaka till Kurser"
+
+B4	vill jag kunna se vilka aktiviteter som ingår i modulerna
+	1	Jag klickar på länken "Moduler" till höger på om kurs-listan, då visas en lista över vilka moduler som ingår i min kurs.
+	2	Jag klickar på länken "Aktiviteter" till höger om den aktuella modulen, då visas en lista över vilka aktiviteter som ingår i den modulen.
+	3	För att att komma tillbaka till översiktsvyn för moduler klickar jag på länken "Tillbaka till Moduler"
+	4	För att att komma tillbaka till översiktsvyn klickar jag på länken "Tillbaka till Kurser"
+
+B5	vill jag kunna ladda ner dokument
+	1	Jag klickar mig fram till den sida ("Kurs", "Modul", "Aktivitet") där dokumenten finns.
+	2	Jag klickar på dokumentets länk, ändrar eventuellt katalog att spara dokumenten i och trycker "OK".
+
+B6	vill jag kunna ladda upp inlämningsuppgifter
+	1	TBA
+
+
+Som lärare:
+C1	vill jag kunna se alla kurser
+	1	Alla aktuella kurser visas i den första översiktsvyn
+
+C2	vill jag kunna se alla moduler
+	1	Jag klickar på länken "Moduler" till höger om kurs-listan, då visas en lista över vilka moduler som ingår i den kursen.
+	2	För att att komma tillbaka till översiktsvyn klickar jag på länken "Tillbaka till Kurser"
+
+C3	vill jag kunna se alla aktiviteter
+	1	Jag klickar på länken "Moduler" till höger om kurs-listan, då visas en lista över vilka moduler som ingår i den kursen.
+	2	Jag klickar på länken "Aktiviteter" till höger om den aktuella modulen, då visas en lista över vilka aktiviteter som ingår i den modulen.
+	3	För att att komma tillbaka till översiktsvyn för moduler klickar jag på länken "Tillbaka till Moduler"
+	4	För att att komma tillbaka till översiktsvyn klickar jag på länken "Tillbaka till Kurser"
+
+C4	vill jag kunna se alla dokument
+	1	TBA
+
+C5	vill jag kunna lägga till/redigera kurser
+
+C6	vill jag kunna lägga till/redigera moduler till kurser
+
+C7	vill jag kunna lägga till/redigera aktiviteter till moduler
+
+C8	vill jag kunna lägga till/redigera dokument till kurser
+
+C9	vill jag kunna lägga till/redigera dokument till moduler
+
+C10	vill jag kunna lägga till/redigera dokument till aktiviteter
+
+C11	vill jag kunna lägga till/redigera andra lärare
+
+C12	vill jag kunna lägga till/redigera elever till kurser
+
+C13	vill jag kunna ta emot inlämningsuppgifter
+
+
+
+
+
