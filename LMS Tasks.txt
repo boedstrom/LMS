@@ -1,0 +1,55 @@
+Tasks
+
+Grundläggande
+A	1	Skapa MVC-projekt med behörighetskontroll
+	2	Skapa klasser för entiteterna
+	3	Skapa databasen (migreringar, seed, etc)
+	4	Lägg till auktorisering för Controller
+	5	Skapa login-vy med actions
+
+Elev
+B	1	Skapa index-vy med begränsade actions
+	2	Skapa klass-vy med begränsade actions
+	3	Skapa modul-vy med begränsade actions
+	4	Skapa aktivitetsvy med begränsade actions	
+	5	Skapa "ladda upp dokument"-vy med actions	
+	
+	
+Lärare
+C	1	Skapa index-vy med fullständiga actions
+	2	Skapa "ny kurs"-vy med fullständiga actions
+	3	Skapa "uppdatera kurs"-vy med fullständiga actions
+	4	Skapa "ta bort kurs"-vy med fullständiga actions
+	
+	5	Skapa modul-vy med fullständiga actions
+	6	Skapa "ny modul"-vy med fullständiga actions
+	7	Skapa "uppdatera modul"-vy med fullständiga actions
+	8	Skapa "ta bort modul"-vy med fullständiga actions
+	
+	9	Skapa aktivitetsvy med fullständiga actions	
+	10	Skapa "ny aktivitet"-vy med fullständiga actions
+	11	Skapa "uppdatera aktivitet"-vy med fullständiga actions
+	12	Skapa "ta bort aktivitet"-vy med fullständiga actions
+
+	13	Skapa användarvy med fullständiga actions	
+	14	Skapa "ny användare"-vy med fullständiga actions
+	15	Skapa "uppdatera användare"-vy med fullständiga actions
+	16	Skapa "ta bort användare"-vy med fullständiga actions
+
+	17	Skapa dokument-vy med fullständiga actions	
+	18	Skapa "ladda upp nytt dokument"-vy med actions	
+	19	Skapa "ta bort aktivitet"-vy med actions
+
+
+Dokument
+D
+
+
+
+
+
+Layout
+E
+	
+	
+	
