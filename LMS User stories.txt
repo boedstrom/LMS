@@ -1,10 +1,12 @@
 User stories:
 
-Som användare:
+Som generell användare:
 A1	vill jag kunna logga in	så att jag kan använda systemet
 	1	Jag startar applikationen
 	2	Login-sidan kommer upp
 	3	Jag skriver in användar-id och lösenord i respektive fält och klickar på OK
+	4	En översiktsvy vars innehåll är beroende på användarens behörighet visas
+
 
 Som student:
 B1	vill jag kunna se vilken kurs jag går
@@ -33,7 +35,10 @@ B5	vill jag kunna ladda ner dokument
 	2	Jag klickar på dokumentets länk, ändrar eventuellt katalog att spara dokumenten i och trycker "OK".
 
 B6	vill jag kunna ladda upp inlämningsuppgifter
-	1	TBA
+	1	Jag klickar på mig fram till aktuell aktivitet via "Kurs"-, "Modul"- och "Aktivitet"-vyerna.
+	2	Jag klickar på "ladda upp"-länken vid den aktuella aktiviteten
+	3	En dialog visas där jag kan välja det dokument jag vill ladda upp
+	4	Jag klickar på "OK" för att ladda upp filen
 
 
 Som lärare:
@@ -109,19 +114,35 @@ C8	vill jag kunna lägga till/redigera elever till kurser
 	9 	Den nya eleven visas i listan
 
 C9	vill jag kunna se alla dokument
-	1	TBA
+	1	Jag klickar på länken "Dokument" på den första översiktsvyn
+	2	Översiktsvyn för dokument öppnas.
+	3	För att filtrera olika dokumenttyper väljer jag typ via dropdown-menyn för Dokumenttyper
+	4	Vid ett menyval uppdateras översiktsvyn
 
 C10	vill jag kunna lägga till/redigera dokument till kurser
-	1	TBA
+	1	Jag klickar på mig fram till aktuell kurs via "Kurs"-vyn
+	2	Jag klickar på "ladda upp"-länken vid den aktuella kursen
+	3	En dialog visas där jag kan välja det dokument jag vill ladda upp
+	4	Jag klickar på "OK" för att ladda upp filen
 
 C11	vill jag kunna lägga till/redigera dokument till moduler
-	1	TBA
+	1	Jag klickar på mig fram till aktuell modul via "Kurs"- och "Modul"-vyn
+	2	Jag klickar på "ladda upp"-länken vid den aktuella modulen
+	3	En dialog visas där jag kan välja det dokument jag vill ladda upp
+	4	Jag klickar på "OK" för att ladda upp filen
 
 C12	vill jag kunna lägga till/redigera dokument till aktiviteter
-	1	TBA
+	1	Jag klickar på mig fram till aktuell aktivitet via "Kurs"-, "Modul"- och "Aktivitet"-vyerna.
+	2	Jag klickar på "ladda upp"-länken vid den aktuella aktiviteten
+	3	En dialog visas där jag kan välja det dokument jag vill ladda upp
+	4	Jag klickar på "OK" för att ladda upp filen
 
 C13	vill jag kunna ta emot inlämningsuppgifter
-	1	TBA
+	1	Jag klickar på mig fram till aktuell aktivitet via "Kurs"-, "Modul"- och "Aktivitet"-vyerna.
+	2	Jag klickar på "uppladdade filer"-länken vid den aktuella aktiviteten
+	3	En filtrerad översiktsvyn för dokument öppnas.
+	4	Jag klickar på det aktuella dokumentets länk, ändrar eventuellt katalog att spara dokumenten i och trycker "OK".
+
 
 
 
