@@ -8,11 +8,10 @@ A	1	Skapa MVC-projekt med behörighetskontroll
 	5	Skapa login-vy med actions
 
 Elev
-B	1	Skapa index-vy med begränsade actions
+B	1	Skapa index-vy med kurs-info, modul-vy och klass-länk med begränsade actions
 	2	Skapa klass-vy med begränsade actions
-	3	Skapa modul-vy med begränsade actions
-	4	Skapa aktivitetsvy med begränsade actions	
-	5	Skapa "ladda upp dokument"-vy med actions	
+	3	Skapa aktivitetsvy med begränsade actions	
+	4	Skapa "ladda upp dokument"-vy med actions	
 	
 	
 Lärare
