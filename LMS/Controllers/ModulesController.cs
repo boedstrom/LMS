@@ -10,9 +10,21 @@ using LMS.Models;
 
 namespace LMS.Controllers
 {
+    [Authorize]
     public class ModulesController : Controller
     {
         private ApplicationDbContext db = new ApplicationDbContext();
+
+        public ActionResult AddModule(int? id)
+        {
+            AddModuleViewModel courseModules = new AddModuleViewModel();
+
+            Course thisCourse = db.Courses.Where(c => c.Id == id).FirstOrDefault();
+            courseModules.CourseId = thisCourse.Id;
+            courseModules.CourseName = thisCourse.Name;
+            courseModules.Modules = db.Modules.Where(m => m.Course.Id == thisCourse.Id).ToList();
+            return View(courseModules);
+        }
 
         // GET: Modules
         public ActionResult Index()

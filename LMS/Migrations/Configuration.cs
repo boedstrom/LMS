@@ -17,17 +17,17 @@ namespace LMS.Migrations
 
         protected override void Seed(LMS.Models.ApplicationDbContext context)
         {
-            var rStore = new RoleStore<IdentityRole>(context);
-            var rManager = new RoleManager<IdentityRole>(rStore);
-            var role = new IdentityRole { Name = "teacher" };
-            rManager.Create(role);
+            //var rStore = new RoleStore<IdentityRole>(context);
+            //var rManager = new RoleManager<IdentityRole>(rStore);
+            //var role = new IdentityRole { Name = "teacher" };
+            //rManager.Create(role);
 
-            var uStore = new UserStore<ApplicationUser>(context);
-            var uManager = new UserManager<ApplicationUser>(uStore);
-            var user = new ApplicationUser { UserName = "admin@lexicon.se", Email = "admin@lexicon.se" };
-            uManager.Create(user, "password");
+            //var uStore = new UserStore<ApplicationUser>(context);
+            //var uManager = new UserManager<ApplicationUser>(uStore);
+            //var user = new ApplicationUser { UserName = "admin@lexicon.se", Email = "admin@lexicon.se" };
+            //uManager.Create(user, "password");
 
-            uManager.AddToRole(user.Id, role.Name);
+            //uManager.AddToRole(user.Id, role.Name);
         }
     }
 }

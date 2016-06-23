@@ -1,10 +1,10 @@
 ﻿@model IEnumerable<LMS.Models.Module>
 
 @{
-    ViewBag.Title = "Index";
+    ViewBag.Title = "Index Modules";
 }
 
-<h2>Index</h2>
+<h2>Index Modules</h2>
 
 <p>
     @Html.ActionLink("Create New", "Create")
@@ -41,11 +41,20 @@
             @Html.DisplayFor(modelItem => item.EndDate)
         </td>
         <td>
-            @Html.ActionLink("Edit", "Edit", new { id=item.Id }) |
-            @Html.ActionLink("Details", "Details", new { id=item.Id }) |
-            @Html.ActionLink("Delete", "Delete", new { id=item.Id })
+            @if (User.IsInRole("teacher"))
+            {
+                <span>|</span>
+                @Html.ActionLink("Edit", "Edit", new { id = item.Id })
+                <span>|</span>
+                @Html.ActionLink("Details", "Details", new { id = item.Id })
+                <span>|</span>
+                @Html.ActionLink("Delete", "Delete", new { id = item.Id })
+            }
         </td>
     </tr>
 }
 
 </table>
+<div>
+    @Html.ActionLink("Back to Courses", "Index", "Courses")
+</div>
