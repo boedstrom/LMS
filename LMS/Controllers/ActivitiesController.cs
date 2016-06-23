@@ -9,7 +9,8 @@ using System.Web.Mvc;
 using LMS.Models;
 
 namespace LMS.Controllers
-{
+{   
+    [Authorize]
     public class ActivitiesController : Controller
     {
         private ApplicationDbContext db = new ApplicationDbContext();
