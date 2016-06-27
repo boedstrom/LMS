@@ -48,23 +48,26 @@ namespace LMS.Controllers
         }
 
         // GET: Modules/Create
-        public ActionResult Create()
+        public ActionResult Create(int? id)
         {
-            return View();
+            Module module = new Module();
+            module.Course = db.Courses.Where(c => c.Id == id).FirstOrDefault();
+            return View(module);
         }
 
         // POST: Modules/Create
-        // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
-        // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "Id,Name,Description,StartDate,EndDate")] Module module)
+        public ActionResult Create([Bind(Include = "Id,Name,Description,StartDate,EndDate,Course")] Module module)
         {
             if (ModelState.IsValid)
             {
+                Course thisCourse = db.Courses.Where(c => c.Id == module.Course.Id).FirstOrDefault();
+                module.Course = thisCourse;
                 db.Modules.Add(module);
                 db.SaveChanges();
-                return RedirectToAction("Index");
+//                return RedirectToAction("Index");
+                return RedirectToAction("AddModule", "Modules", new { id = module.Course.Id });
             }
 
             return View(module);
@@ -82,12 +85,11 @@ namespace LMS.Controllers
             {
                 return HttpNotFound();
             }
+//            module.Course = db.Courses.Where(c => c.Id == currCourse).FirstOrDefault();
             return View(module);
         }
 
         // POST: Modules/Edit/5
-        // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
-        // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
         public ActionResult Edit([Bind(Include = "Id,Name,Description,StartDate,EndDate")] Module module)
