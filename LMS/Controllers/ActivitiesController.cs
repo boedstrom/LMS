@@ -15,6 +15,17 @@ namespace LMS.Controllers
     {
         private ApplicationDbContext db = new ApplicationDbContext();
 
+        public ActionResult AddActivity(int? id)
+        {
+            AddActivityViewModel moduleActivities = new AddActivityViewModel();
+
+            Module thisModule = db.Modules.Where(c => c.Id == id).FirstOrDefault();
+            moduleActivities.ModuleId = thisModule.Id;
+            moduleActivities.ModuleName = thisModule.Name;
+            moduleActivities.Activities = db.Activities.Where(m => m.Module.Id == thisModule.Id).ToList();
+            return View(moduleActivities);
+        }
+
         // GET: Activities
         public ActionResult Index()
         {
@@ -37,9 +48,11 @@ namespace LMS.Controllers
         }
 
         // GET: Activities/Create
-        public ActionResult Create()
+        public ActionResult Create(int? id)
         {
-            return View();
+            Activity activity = new Activity();
+            activity.Module = db.Modules.Where(c => c.Id == id).FirstOrDefault();
+            return View(activity);
         }
 
         // POST: Activities/Create
@@ -47,13 +60,15 @@ namespace LMS.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "Id,Name,Description,Type,StartTime,EndTime,Deadline")] Activity activity)
+        public ActionResult Create([Bind(Include = "Id,Name,Description,Type,StartTime,EndTime,Deadline,Module")] Activity activity)
         {
             if (ModelState.IsValid)
             {
+                Module thisModule = db.Modules.Where(c => c.Id == activity.Module.Id).FirstOrDefault();
+                activity.Module = thisModule;
                 db.Activities.Add(activity);
                 db.SaveChanges();
-                return RedirectToAction("Index");
+                return RedirectToAction("AddActivity","Activities",new {id = activity.Module.Id });
             }
 
             return View(activity);
@@ -79,13 +94,13 @@ namespace LMS.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "Id,Name,Description,Type,StartTime,EndTime,Deadline")] Activity activity)
+        public ActionResult Edit([Bind(Include = "Id,Name,Description,Type,StartTime,EndTime,Deadline,Module")] Activity activity)
         {
             if (ModelState.IsValid)
             {
                 db.Entry(activity).State = EntityState.Modified;
                 db.SaveChanges();
-                return RedirectToAction("Index");
+                return RedirectToAction("AddActivity","Activities",new {id=activity.Module.Id });
             }
             return View(activity);
         }
@@ -111,9 +126,10 @@ namespace LMS.Controllers
         public ActionResult DeleteConfirmed(int id)
         {
             Activity activity = db.Activities.Find(id);
+            int moduleid = activity.Module.Id;
             db.Activities.Remove(activity);
             db.SaveChanges();
-            return RedirectToAction("Index");
+            return RedirectToAction("AddActivity","Activities",new { id = moduleid });
         }
 
         protected override void Dispose(bool disposing)

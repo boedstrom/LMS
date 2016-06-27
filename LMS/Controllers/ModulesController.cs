@@ -26,6 +26,11 @@ namespace LMS.Controllers
             return View(courseModules);
         }
 
+        public ActionResult AddActivity(int? id)
+        {
+            return RedirectToAction("AddActivity", "Activities", new { id = id });
+        }
+
         // GET: Modules
         public ActionResult Index()
         {
