@@ -224,6 +224,10 @@
     <Compile Include="Migrations\201606281237481_4th_160628.Designer.cs">
       <DependentUpon>201606281237481_4th_160628.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201606281411165_RemoveViewModels.cs" />
+    <Compile Include="Migrations\201606281411165_RemoveViewModels.Designer.cs">
+      <DependentUpon>201606281411165_RemoveViewModels.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
     <Compile Include="Models\Activity.cs" />
@@ -362,6 +366,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201606281237481_4th_160628.resx">
       <DependentUpon>201606281237481_4th_160628.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201606281411165_RemoveViewModels.resx">
+      <DependentUpon>201606281411165_RemoveViewModels.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

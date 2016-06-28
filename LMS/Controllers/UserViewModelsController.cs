@@ -40,17 +40,17 @@ namespace LMS.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            ApplicationUser thisUser = db.Users.Where(u => u.Id == id).FirstOrDefault();
-            if (thisUser == null)
+            ApplicationUser user = db.Users.Where(u => u.Id == id).FirstOrDefault();
+            if (user == null)
             {
                 return HttpNotFound();
             }
             UserViewModel userViewModel = new UserViewModel();
-            userViewModel.UserId = thisUser.Id;
-            userViewModel.FirstName = thisUser.FirstName;
-            userViewModel.LastName = thisUser.LastName;
-            userViewModel.Email = thisUser.Email;
-            userViewModel.Course = thisUser.Course;
+            userViewModel.Id = user.Id;
+            userViewModel.FirstName = user.FirstName;
+            userViewModel.LastName = user.LastName;
+            userViewModel.Email = user.Email;
+            userViewModel.Course = user.Course;
             return View(userViewModel);
         }
 
@@ -65,7 +65,7 @@ namespace LMS.Controllers
         // POST: UserViewModels/Create
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "Id,UserId,FirstName,LastName,Email,DefaultPassword,UserType,Course")] UserViewModel userViewModel)
+        public ActionResult Create([Bind(Include = "Id,FirstName,LastName,Email,DefaultPassword,UserType,Course")] UserViewModel userViewModel)
         {
             if (ModelState.IsValid)
             {
@@ -95,17 +95,17 @@ namespace LMS.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            ApplicationUser thisUser = db.Users.Where(u => u.Id == id).FirstOrDefault();
-            if (thisUser == null)
+            ApplicationUser user = db.Users.Where(u => u.Id == id).FirstOrDefault();
+            if (user == null)
             {
                 return HttpNotFound();
             }
             UserViewModel userViewModel = new UserViewModel();
-            userViewModel.UserId = thisUser.Id;
-            userViewModel.FirstName = thisUser.FirstName;
-            userViewModel.LastName = thisUser.LastName;
-            userViewModel.Email = thisUser.Email;
-            userViewModel.Course = thisUser.Course;
+            userViewModel.Id = user.Id;
+            userViewModel.FirstName = user.FirstName;
+            userViewModel.LastName = user.LastName;
+            userViewModel.Email = user.Email;
+            userViewModel.Course = user.Course;
             return View(userViewModel);
         }
 
@@ -119,14 +119,13 @@ namespace LMS.Controllers
                 var uStore = new UserStore<ApplicationUser>(db);
                 var uManager = new UserManager<ApplicationUser>(uStore);
 
-                ApplicationUser user = db.Users.Where(u => u.Id == userViewModel.UserId).FirstOrDefault();
+                ApplicationUser user = db.Users.Where(u => u.Id == userViewModel.Id).FirstOrDefault();
                 user.FirstName = userViewModel.FirstName;
                 user.LastName = userViewModel.LastName;
                 user.Email = userViewModel.Email;
                 user.Course = db.Courses.Where(c => c.Id == userViewModel.Course.Id).FirstOrDefault();
 
                 uManager.Update(user);
-                db.Entry(userViewModel).State = EntityState.Modified;
                 db.SaveChanges();
                 return RedirectToAction("Index", "UserViewModels", new { id = userViewModel.Course.Id });
             }
@@ -146,7 +145,7 @@ namespace LMS.Controllers
                 return HttpNotFound();
             }
             UserViewModel userViewModel = new UserViewModel();
-            userViewModel.UserId = thisUser.Id;
+            userViewModel.Id = thisUser.Id;
             userViewModel.FirstName = thisUser.FirstName;
             userViewModel.LastName = thisUser.LastName;
             userViewModel.Email = thisUser.Email;
