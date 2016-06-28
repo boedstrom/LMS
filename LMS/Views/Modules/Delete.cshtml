@@ -45,12 +45,13 @@
 
     </dl>
 
+    @Html.HiddenFor(model => model.Course.Id)
     @using (Html.BeginForm()) {
         @Html.AntiForgeryToken()
 
         <div class="form-actions no-color">
             <input type="submit" value="Delete" class="btn btn-default" /> |
-            @Html.ActionLink("Back to List", "Index")
+            @Html.ActionLink("Back to List", "AddModule", new { id = Model.Course.Id })
         </div>
     }
 </div>

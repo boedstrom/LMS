@@ -71,7 +71,6 @@ namespace LMS.Controllers
                 module.Course = thisCourse;
                 db.Modules.Add(module);
                 db.SaveChanges();
-//                return RedirectToAction("Index");
                 return RedirectToAction("AddModule", "Modules", new { id = module.Course.Id });
             }
 
@@ -90,20 +89,20 @@ namespace LMS.Controllers
             {
                 return HttpNotFound();
             }
-//            module.Course = db.Courses.Where(c => c.Id == currCourse).FirstOrDefault();
             return View(module);
         }
 
         // POST: Modules/Edit/5
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "Id,Name,Description,StartDate,EndDate")] Module module)
+        public ActionResult Edit([Bind(Include = "Id,Name,Description,StartDate,EndDate,Course")] Module module)
         {
             if (ModelState.IsValid)
             {
                 db.Entry(module).State = EntityState.Modified;
                 db.SaveChanges();
-                return RedirectToAction("Index");
+
+                return RedirectToAction("AddModule", "Modules", new { id = module.Course.Id });
             }
             return View(module);
         }
@@ -129,9 +128,10 @@ namespace LMS.Controllers
         public ActionResult DeleteConfirmed(int id)
         {
             Module module = db.Modules.Find(id);
+            int courseId = module.Course.Id;
             db.Modules.Remove(module);
             db.SaveChanges();
-            return RedirectToAction("Index");
+            return RedirectToAction("AddModule", "Modules", new { id = courseId });
         }
 
         protected override void Dispose(bool disposing)
