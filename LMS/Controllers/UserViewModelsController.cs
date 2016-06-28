@@ -34,17 +34,23 @@ namespace LMS.Controllers
         }
 
         // GET: UserViewModels/Details/5
-        public ActionResult Details(int? id)
+        public ActionResult Details(string id)
         {
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            UserViewModel userViewModel = db.UserViewModels.Find(id);
-            if (userViewModel == null)
+            ApplicationUser thisUser = db.Users.Where(u => u.Id == id).FirstOrDefault();
+            if (thisUser == null)
             {
                 return HttpNotFound();
             }
+            UserViewModel userViewModel = new UserViewModel();
+            userViewModel.UserId = thisUser.Id;
+            userViewModel.FirstName = thisUser.FirstName;
+            userViewModel.LastName = thisUser.LastName;
+            userViewModel.Email = thisUser.Email;
+            userViewModel.Course = thisUser.Course;
             return View(userViewModel);
         }
 
@@ -59,7 +65,7 @@ namespace LMS.Controllers
         // POST: UserViewModels/Create
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "Id,FirstName,LastName,Email,DefaultPassword,UserType,Course")] UserViewModel userViewModel)
+        public ActionResult Create([Bind(Include = "Id,UserId,FirstName,LastName,Email,DefaultPassword,UserType,Course")] UserViewModel userViewModel)
         {
             if (ModelState.IsValid)
             {
@@ -76,80 +82,92 @@ namespace LMS.Controllers
                 uManager.Create(user, userViewModel.DefaultPassword);
                 
                 db.SaveChanges();
-                return RedirectToAction("AddUser", "UserViewModels", new { id = userViewModel.Course.Id });
+                return RedirectToAction("Index", "UserViewModels", new { id = userViewModel.Course.Id });
             }
 
             return View(userViewModel);
         }
 
         // GET: UserViewModels/Edit/5
-        public ActionResult Edit(int? id)
+        public ActionResult Edit(string id)
         {
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            UserViewModel userViewModel = db.UserViewModels.Find(id);
-            if (userViewModel == null)
+            ApplicationUser thisUser = db.Users.Where(u => u.Id == id).FirstOrDefault();
+            if (thisUser == null)
             {
                 return HttpNotFound();
             }
+            UserViewModel userViewModel = new UserViewModel();
+            userViewModel.UserId = thisUser.Id;
+            userViewModel.FirstName = thisUser.FirstName;
+            userViewModel.LastName = thisUser.LastName;
+            userViewModel.Email = thisUser.Email;
+            userViewModel.Course = thisUser.Course;
             return View(userViewModel);
         }
 
         // POST: UserViewModels/Edit/5
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "Id,FirstName,LastName,Email,DefaultPassword,UserType,Course")] UserViewModel userViewModel)
+        public ActionResult Edit([Bind(Include = "Id,UserId,FirstName,LastName,Email,DefaultPassword,UserType,Course")] UserViewModel userViewModel)
         {
             if (ModelState.IsValid)
             {
                 var uStore = new UserStore<ApplicationUser>(db);
                 var uManager = new UserManager<ApplicationUser>(uStore);
 
-                var user = new ApplicationUser { UserName = userViewModel.Email, Email = userViewModel.Email };
+                ApplicationUser user = db.Users.Where(u => u.Id == userViewModel.UserId).FirstOrDefault();
                 user.FirstName = userViewModel.FirstName;
                 user.LastName = userViewModel.LastName;
-
-                Course thisCourse = db.Courses.Where(c => c.Id == userViewModel.Course.Id).FirstOrDefault();
-                user.Course = thisCourse;
+                user.Email = userViewModel.Email;
+                user.Course = db.Courses.Where(c => c.Id == userViewModel.Course.Id).FirstOrDefault();
 
                 uManager.Update(user);
                 db.Entry(userViewModel).State = EntityState.Modified;
-
                 db.SaveChanges();
-                return RedirectToAction("AddUser", "UserViewModels", new { id = userViewModel.Course.Id });
+                return RedirectToAction("Index", "UserViewModels", new { id = userViewModel.Course.Id });
             }
             return View(userViewModel);
         }
 
         // GET: UserViewModels/Delete/5
-        public ActionResult Delete(int? id)
+        public ActionResult Delete(string id)
         {
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            UserViewModel userViewModel = db.UserViewModels.Find(id);
-            if (userViewModel == null)
+            ApplicationUser thisUser = db.Users.Where(u => u.Id == id).FirstOrDefault();
+            if (thisUser == null)
             {
                 return HttpNotFound();
             }
+            UserViewModel userViewModel = new UserViewModel();
+            userViewModel.UserId = thisUser.Id;
+            userViewModel.FirstName = thisUser.FirstName;
+            userViewModel.LastName = thisUser.LastName;
+            userViewModel.Email = thisUser.Email;
+            userViewModel.Course = thisUser.Course;
             return View(userViewModel);
         }
 
         // POST: UserViewModels/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
-        public ActionResult DeleteConfirmed(int id)
+        public ActionResult DeleteConfirmed(string id)
         {
-            //Module module = db.Modules.Find(id);
-            //int courseId = module.Course.Id;
-            //db.Modules.Remove(module);
-            UserViewModel userViewModel = db.UserViewModels.Find(id);
-            db.UserViewModels.Remove(userViewModel);
+            var uStore = new UserStore<ApplicationUser>(db);
+            var uManager = new UserManager<ApplicationUser>(uStore);
+
+            ApplicationUser user = db.Users.Where(u => u.Id == id).FirstOrDefault();
+            int courseId = user.Course.Id;
+
+            uManager.Delete(user);
             db.SaveChanges();
-            return RedirectToAction("Index");
+            return RedirectToAction("Index", new { id = courseId });
         }
 
         protected override void Dispose(bool disposing)
