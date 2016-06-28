@@ -309,8 +309,7 @@
     <Content Include="Views\Activities\Details.cshtml" />
     <Content Include="Views\Activities\Edit.cshtml" />
     <Content Include="Views\Activities\Index.cshtml" />
-    <Content Include="Views\Modules\AddModule.cshtml" />
-    <Content Include="Views\UserViewModels\AddUser.cshtml" />
+    <Content Include="Views\UserViewModels\Index.cshtml" />
     <Content Include="Views\UserViewModels\Create.cshtml" />
     <Content Include="Views\UserViewModels\Edit.cshtml" />
     <Content Include="Views\UserViewModels\Delete.cshtml" />

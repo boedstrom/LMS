@@ -21,7 +21,8 @@ namespace LMS.Controllers
             return RedirectToAction("Index", "Courses");
         }
 
-        public ActionResult AddUser(int? id)
+        // GET: UserViewModels
+        public ActionResult Index(int? id)
         {
             AddUserViewModel courseUsers = new AddUserViewModel();
 
@@ -30,13 +31,6 @@ namespace LMS.Controllers
             courseUsers.CourseName = thisCourse.Name;
             courseUsers.Users = db.Users.Where(u => u.Course.Id == thisCourse.Id).ToList();
             return View(courseUsers);
-        }
-
-
-        // GET: UserViewModels
-        public ActionResult Index()
-        {
-            return View(db.UserViewModels.ToList());
         }
 
         // GET: UserViewModels/Details/5

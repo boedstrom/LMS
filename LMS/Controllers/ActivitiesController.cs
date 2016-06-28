@@ -18,10 +18,11 @@ namespace LMS.Controllers
         public ActionResult BackToModule(int? id)
         {
             Module thisModule = db.Modules.Where(c => c.Id == id).FirstOrDefault();
-            return RedirectToAction("AddModule", "Modules", new { id = thisModule.Course.Id });
+            return RedirectToAction("Index", "Modules", new { id = thisModule.Course.Id });
         }
 
-        public ActionResult AddActivity(int? id)
+        // GET: Activities
+        public ActionResult Index(int? id)
         {
             AddActivityViewModel moduleActivities = new AddActivityViewModel();
 
@@ -30,12 +31,6 @@ namespace LMS.Controllers
             moduleActivities.ModuleName = thisModule.Name;
             moduleActivities.Activities = db.Activities.Where(m => m.Module.Id == thisModule.Id).ToList();
             return View(moduleActivities);
-        }
-
-        // GET: Activities
-        public ActionResult Index()
-        {
-            return View(db.Activities.ToList());
         }
 
         // GET: Activities/Details/5
@@ -62,8 +57,6 @@ namespace LMS.Controllers
         }
 
         // POST: Activities/Create
-        // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
-        // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
         public ActionResult Create([Bind(Include = "Id,Name,Description,Type,StartTime,EndTime,Deadline,Module")] Activity activity)
@@ -74,7 +67,7 @@ namespace LMS.Controllers
                 activity.Module = thisModule;
                 db.Activities.Add(activity);
                 db.SaveChanges();
-                return RedirectToAction("AddActivity","Activities",new {id = activity.Module.Id });
+                return RedirectToAction("Index", "Activities", new {id = activity.Module.Id });
             }
 
             return View(activity);
@@ -96,8 +89,6 @@ namespace LMS.Controllers
         }
 
         // POST: Activities/Edit/5
-        // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
-        // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
         public ActionResult Edit([Bind(Include = "Id,Name,Description,Type,StartTime,EndTime,Deadline,Module")] Activity activity)
@@ -106,7 +97,7 @@ namespace LMS.Controllers
             {
                 db.Entry(activity).State = EntityState.Modified;
                 db.SaveChanges();
-                return RedirectToAction("AddActivity", "Activities", new {id = activity.Module.Id });
+                return RedirectToAction("Index", "Activities", new {id = activity.Module.Id });
             }
             return View(activity);
         }
@@ -135,7 +126,7 @@ namespace LMS.Controllers
             int moduleid = activity.Module.Id;
             db.Activities.Remove(activity);
             db.SaveChanges();
-            return RedirectToAction("AddActivity","Activities",new { id = moduleid });
+            return RedirectToAction("Index", "Activities", new { id = moduleid });
         }
 
         protected override void Dispose(bool disposing)

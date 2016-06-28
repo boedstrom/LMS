@@ -20,7 +20,13 @@ namespace LMS.Controllers
             return RedirectToAction("Index", "Courses");
         }
 
-        public ActionResult AddModule(int? id)
+        public ActionResult AddActivity(int? id)
+        {
+            return RedirectToAction("Index", "Activities", new { id = id });
+        }
+
+        // GET: Modules
+        public ActionResult Index(int? id)
         {
             AddModuleViewModel courseModules = new AddModuleViewModel();
 
@@ -29,17 +35,6 @@ namespace LMS.Controllers
             courseModules.CourseName = thisCourse.Name;
             courseModules.Modules = db.Modules.Where(m => m.Course.Id == thisCourse.Id).ToList();
             return View(courseModules);
-        }
-
-        public ActionResult AddActivity(int? id)
-        {
-            return RedirectToAction("AddActivity", "Activities", new { id = id });
-        }
-
-        // GET: Modules
-        public ActionResult Index()
-        {
-            return View(db.Modules.ToList());
         }
 
         // GET: Modules/Details/5
@@ -76,7 +71,7 @@ namespace LMS.Controllers
                 module.Course = thisCourse;
                 db.Modules.Add(module);
                 db.SaveChanges();
-                return RedirectToAction("AddModule", "Modules", new { id = module.Course.Id });
+                return RedirectToAction("Index", "Modules", new { id = module.Course.Id });
             }
 
             return View(module);
@@ -107,7 +102,7 @@ namespace LMS.Controllers
                 db.Entry(module).State = EntityState.Modified;
                 db.SaveChanges();
 
-                return RedirectToAction("AddModule", "Modules", new { id = module.Course.Id });
+                return RedirectToAction("Index", "Modules", new { id = module.Course.Id });
             }
             return View(module);
         }
@@ -136,7 +131,7 @@ namespace LMS.Controllers
             int courseId = module.Course.Id;
             db.Modules.Remove(module);
             db.SaveChanges();
-            return RedirectToAction("AddModule", "Modules", new { id = courseId });
+            return RedirectToAction("Index", "Modules", new { id = courseId });
         }
 
         protected override void Dispose(bool disposing)

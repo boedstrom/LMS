@@ -46,5 +46,5 @@
 @Html.HiddenFor(model => model.Course.Id)
 <p>
     @Html.ActionLink("Edit", "Edit", new { id = Model.Id }) |
-    @Html.ActionLink("Back to List", "AddModule", new { id = Model.Course.Id })
+    @Html.ActionLink("Back to List", "Index", new { id = Model.Course.Id })
 </p>
