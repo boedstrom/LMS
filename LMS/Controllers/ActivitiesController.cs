@@ -15,6 +15,12 @@ namespace LMS.Controllers
     {
         private ApplicationDbContext db = new ApplicationDbContext();
 
+        public ActionResult BackToModule(int? id)
+        {
+            Module thisModule = db.Modules.Where(c => c.Id == id).FirstOrDefault();
+            return RedirectToAction("AddModule", "Modules", new { id = thisModule.Course.Id });
+        }
+
         public ActionResult AddActivity(int? id)
         {
             AddActivityViewModel moduleActivities = new AddActivityViewModel();
@@ -100,7 +106,7 @@ namespace LMS.Controllers
             {
                 db.Entry(activity).State = EntityState.Modified;
                 db.SaveChanges();
-                return RedirectToAction("AddActivity","Activities",new {id=activity.Module.Id });
+                return RedirectToAction("AddActivity", "Activities", new {id = activity.Module.Id });
             }
             return View(activity);
         }

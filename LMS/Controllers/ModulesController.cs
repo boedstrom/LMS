@@ -15,6 +15,11 @@ namespace LMS.Controllers
     {
         private ApplicationDbContext db = new ApplicationDbContext();
 
+        public ActionResult BackToCourse(int? id)
+        {
+            return RedirectToAction("Index", "Courses");
+        }
+
         public ActionResult AddModule(int? id)
         {
             AddModuleViewModel courseModules = new AddModuleViewModel();
