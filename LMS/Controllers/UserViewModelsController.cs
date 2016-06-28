@@ -112,7 +112,7 @@ namespace LMS.Controllers
         // POST: UserViewModels/Edit/5
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "Id,UserId,FirstName,LastName,Email,DefaultPassword,UserType,Course")] UserViewModel userViewModel)
+        public ActionResult Edit([Bind(Include = "Id,FirstName,LastName,Email,DefaultPassword,UserType,Course")] UserViewModel userViewModel)
         {
             if (ModelState.IsValid)
             {
