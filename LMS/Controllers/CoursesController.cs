@@ -51,7 +51,10 @@ namespace LMS.Controllers
         // GET: Courses/Create
         public ActionResult Create()
         {
-            return View();
+            Course course = new Course();
+            course.StartDate = DateTime.Now;
+            course.EndDate = DateTime.Now.AddDays(1);
+            return View(course);
         }
 
         // POST: Courses/Create

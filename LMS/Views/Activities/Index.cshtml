@@ -4,16 +4,17 @@
     ViewBag.Title = "Index";
 }
 
-<h2>Index Module Activities</h2>
+<h2>Activities for module @Html.DisplayFor(model => model.ModuleName)</h2>
 <table class="table">
     <tr>
         <th>
-            @Html.DisplayFor(model => model.ModuleName)
+            Module duration: @Convert.ToDateTime(Model.ModuleStart).ToString("yyyy-dd-MM") -
+            @Convert.ToDateTime(Model.ModuleEnd).ToString("yyyy-dd-MM")
         </th>
     </tr>
 </table>
 <p>
-    @Html.ActionLink("Create New Activity", "Create", new { id = Model.ModuleId })
+    @Html.ActionLink("Add new activity", "Create", new { id = Model.ModuleId })
 </p>
 <table class="table">
     <tr>

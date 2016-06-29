@@ -30,10 +30,12 @@ namespace LMS.Controllers
         {
             AddModuleViewModel courseModules = new AddModuleViewModel();
 
-            Course thisCourse = db.Courses.Where(c => c.Id == id).FirstOrDefault();
-            courseModules.CourseId = thisCourse.Id;
-            courseModules.CourseName = thisCourse.Name;
-            courseModules.Modules = db.Modules.Where(m => m.Course.Id == thisCourse.Id).ToList();
+            Course course = db.Courses.Where(c => c.Id == id).FirstOrDefault();
+            courseModules.CourseId = course.Id;
+            courseModules.CourseName = course.Name;
+            courseModules.CourseStart = course.StartDate.Date;
+            courseModules.CourseEnd = course.EndDate.Date;
+            courseModules.Modules = db.Modules.Where(m => m.Course.Id == course.Id).ToList();
             return View(courseModules);
         }
 
@@ -57,7 +59,7 @@ namespace LMS.Controllers
         {
             Module module = new Module();
             module.StartDate = DateTime.Now;
-            module.EndDate = DateTime.Now;
+            module.EndDate = DateTime.Now.AddDays(1);
             module.Course = db.Courses.Where(c => c.Id == id).FirstOrDefault();
             return View(module);
         }

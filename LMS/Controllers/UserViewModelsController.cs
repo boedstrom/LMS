@@ -26,10 +26,13 @@ namespace LMS.Controllers
         {
             AddUserViewModel courseUsers = new AddUserViewModel();
 
-            Course thisCourse = db.Courses.Where(c => c.Id == id).FirstOrDefault();
-            courseUsers.CourseId = thisCourse.Id;
-            courseUsers.CourseName = thisCourse.Name;
-            courseUsers.Users = db.Users.Where(u => u.Course.Id == thisCourse.Id).ToList();
+            Course course = db.Courses.Where(c => c.Id == id).FirstOrDefault();
+            courseUsers.CourseId = course.Id;
+            courseUsers.CourseName = course.Name;
+            courseUsers.CourseStart = course.StartDate.Date;
+            courseUsers.CourseEnd = course.EndDate.Date;
+
+            courseUsers.Users = db.Users.Where(u => u.Course.Id == course.Id).ToList();
             return View(courseUsers);
         }
 

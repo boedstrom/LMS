@@ -4,16 +4,17 @@
     ViewBag.Title = "Index";
 }
 
-<h2>Index Course Students</h2>
+<h2>Students for course @Html.DisplayFor(model => model.CourseName)</h2>
 <table class="table">
     <tr>
         <th>
-            @Html.DisplayFor(model => model.CourseName)
+            Course duration: @Convert.ToDateTime(Model.CourseStart).ToString("yyyy-dd-MM") -
+            @Convert.ToDateTime(Model.CourseEnd).ToString("yyyy-dd-MM")
         </th>
     </tr>
 </table>
 <p>
-    @Html.ActionLink("Create New Student", "Create", new { id = Model.CourseId })
+    @Html.ActionLink("Register new student", "Create", new { id = Model.CourseId })
 </p>
 <table class="table">
     <tr>

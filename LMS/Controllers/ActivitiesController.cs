@@ -26,10 +26,12 @@ namespace LMS.Controllers
         {
             AddActivityViewModel moduleActivities = new AddActivityViewModel();
 
-            Module thisModule = db.Modules.Where(c => c.Id == id).FirstOrDefault();
-            moduleActivities.ModuleId = thisModule.Id;
-            moduleActivities.ModuleName = thisModule.Name;
-            moduleActivities.Activities = db.Activities.Where(m => m.Module.Id == thisModule.Id).ToList();
+            Module module = db.Modules.Where(c => c.Id == id).FirstOrDefault();
+            moduleActivities.ModuleId = module.Id;
+            moduleActivities.ModuleName = module.Name;
+            moduleActivities.ModuleStart = module.StartDate.Date;
+            moduleActivities.ModuleEnd = module.EndDate.Date;
+            moduleActivities.Activities = db.Activities.Where(m => m.Module.Id == module.Id).ToList();
             return View(moduleActivities);
         }
 
@@ -54,7 +56,7 @@ namespace LMS.Controllers
             Activity activity = new Activity();
             activity.Module = db.Modules.Where(c => c.Id == id).FirstOrDefault();
             activity.StartTime = DateTime.Now;
-            activity.EndTime = DateTime.Now;
+            activity.EndTime = DateTime.Now.AddHours(1);
             return View(activity);
         }
 
