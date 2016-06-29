@@ -232,6 +232,18 @@
     <Compile Include="Migrations\201606290719588_ReqFields.Designer.cs">
       <DependentUpon>201606290719588_ReqFields.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201606290733327_ReqFields2.cs" />
+    <Compile Include="Migrations\201606290733327_ReqFields2.Designer.cs">
+      <DependentUpon>201606290733327_ReqFields2.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201606290945529_RemovedReqFields.cs" />
+    <Compile Include="Migrations\201606290945529_RemovedReqFields.Designer.cs">
+      <DependentUpon>201606290945529_RemovedReqFields.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201606291117584_RemovedReqFields2.cs" />
+    <Compile Include="Migrations\201606291117584_RemovedReqFields2.Designer.cs">
+      <DependentUpon>201606291117584_RemovedReqFields2.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
     <Compile Include="Models\Activity.cs" />
@@ -326,7 +338,6 @@
     <Content Include="Views\UserViewModels\Edit.cshtml" />
     <Content Include="Views\UserViewModels\Delete.cshtml" />
     <Content Include="Views\UserViewModels\Details.cshtml" />
-    <Content Include="Views\Activities\AddActivity.cshtml" />
   </ItemGroup>
   <ItemGroup />
   <ItemGroup>
@@ -376,6 +387,15 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201606290719588_ReqFields.resx">
       <DependentUpon>201606290719588_ReqFields.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201606290733327_ReqFields2.resx">
+      <DependentUpon>201606290733327_ReqFields2.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201606290945529_RemovedReqFields.resx">
+      <DependentUpon>201606290945529_RemovedReqFields.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201606291117584_RemovedReqFields2.resx">
+      <DependentUpon>201606291117584_RemovedReqFields2.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

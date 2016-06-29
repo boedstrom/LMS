@@ -15,14 +15,12 @@ namespace LMS.Models
     public class Activity
     {
         public int Id { get; set; }
-        [Required]
         public string Name { get; set; }
         public string Description { get; set; }
-        [Required]
         public ActivityType Type { get; set; }
-        [Required]
+        [DataType(DataType.DateTime)]
         public DateTime StartTime { get; set; }
-        [Required]
+        [DataType(DataType.DateTime)]
         public DateTime EndTime { get; set; }
         public DateTime? Deadline { get; set; }
 

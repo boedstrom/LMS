@@ -53,6 +53,8 @@ namespace LMS.Controllers
         {
             Activity activity = new Activity();
             activity.Module = db.Modules.Where(c => c.Id == id).FirstOrDefault();
+            activity.StartTime = DateTime.Now;
+            activity.EndTime = DateTime.Now;
             return View(activity);
         }
 
@@ -67,7 +69,7 @@ namespace LMS.Controllers
                 activity.Module = thisModule;
                 db.Activities.Add(activity);
                 db.SaveChanges();
-                return RedirectToAction("Index", "Activities", new {id = activity.Module.Id });
+                return RedirectToAction("Index", "Activities", new { id = activity.Module.Id });
             }
 
             return View(activity);

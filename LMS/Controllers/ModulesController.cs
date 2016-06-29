@@ -56,6 +56,8 @@ namespace LMS.Controllers
         public ActionResult Create(int? id)
         {
             Module module = new Module();
+            module.StartDate = DateTime.Now;
+            module.EndDate = DateTime.Now;
             module.Course = db.Courses.Where(c => c.Id == id).FirstOrDefault();
             return View(module);
         }
