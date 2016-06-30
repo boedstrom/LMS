@@ -15,6 +15,12 @@ namespace LMS.Controllers
     {
         private ApplicationDbContext db = new ApplicationDbContext();
 
+        // 
+        public ActionResult AddDocuments(int? id)
+        {
+            return RedirectToAction("FromActivity", "Documents", new { id });
+        }
+
         public ActionResult BackToModule(int? id)
         {
             Module thisModule = db.Modules.Where(c => c.Id == id).FirstOrDefault();

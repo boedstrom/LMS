@@ -1,0 +1,43 @@
+﻿@model LMS.Models.AddDocumentViewModel
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2>Documents for @Html.DisplayFor(model => model.ParentClass) @Html.DisplayFor(model => model.Name)</h2>
+
+@Html.HiddenFor(model => model.Id)
+@Html.HiddenFor(model => model.ParentType)
+<p>
+    @Html.ActionLink("Add new document", "Create", Model)
+</p>
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.Documents.First().Name)
+        <th>
+            @Html.DisplayNameFor(model => model.Documents.First().Description)
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model.Documents) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.Name)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Description)
+        </td>
+        <td>
+            @Html.ActionLink("Edit", "Edit", new { id=item.Id }) |
+            @Html.ActionLink("Details", "Details", new { id=item.Id }) |
+            @Html.ActionLink("Delete", "Delete", new { id=item.Id })
+        </td>
+    </tr>
+}
+
+</table>
+<div>
+    @Html.ActionLink("Back to list", "ReturnToList", Model)
+</div>
