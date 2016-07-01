@@ -6,13 +6,10 @@
 
 <h2>Add new document for @Html.DisplayFor(model => model.ParentClass) @Html.DisplayFor(model => model.Name)</h2>
 
-@Html.HiddenFor(model => model.Id)
-@Html.HiddenFor(model => model.ParentType)
-
-@using (Html.BeginForm()) 
+@using (Html.BeginForm("Create", "Documents", FormMethod.Post, new { enctype = "multipart/form-data" }))
 {
     @Html.AntiForgeryToken()
-    
+
     <div class="form-horizontal">
         <h4>Document</h4>
         <hr />
@@ -40,14 +37,42 @@
                 @Html.ValidationMessageFor(model => model.Document.DocumentType, "", new { @class = "text-danger" })
             </div>
         </div>
+        @*
+            <div class="form-group">
+                @Html.LabelFor(model => model.Document.CreationDate, htmlAttributes: new { @class = "control-label col-md-2" })
+                <div class="col-md-10">
+                    @Html.EditorFor(model => model.Document.CreationDate, new { htmlAttributes = new { @class = "form-control" } })
+                    @Html.ValidationMessageFor(model => model.Document.CreationDate, "", new { @class = "text-danger" })
+                </div>
+            </div>
+              <div class="form-group">
+                    @using (Html.BeginForm("Index", "Home", FormMethod.Post, new { enctype = "multipart/form-data" }))
+                    {
+                        <div class="col-md-offset-2 col-md-10">
+                            <input type="file" value="Select file" class="btn btn-default" />
+                        </div>
+                    }
+                </div>
+        *@
 
         <div class="form-group">
-            @Html.LabelFor(model => model.Document.CreationDate, htmlAttributes: new { @class = "control-label col-md-2" })
+            @Html.LabelFor(model => model.Document.Url, htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
-                @Html.EditorFor(model => model.Document.CreationDate, new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.Document.CreationDate, "", new { @class = "text-danger" })
+                @Html.EditorFor(model => model.Document.Url, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.Document.Url, "", new { @class = "text-danger" })
             </div>
         </div>
+
+        <div class="form-group">
+            @Html.Label("File", new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                    <input type="file" value="Select file" name="file" class="btn btn-default" />
+                    @ViewBag.Message
+            </div>
+        </div>
+@Html.HiddenFor(model => model.Id)
+@Html.HiddenFor(model => model.ParentType)
+
 
         <div class="form-group">
             <div class="col-md-offset-2 col-md-10">

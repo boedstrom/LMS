@@ -245,6 +245,10 @@
     <Compile Include="Migrations\201606291117584_RemovedReqFields2.Designer.cs">
       <DependentUpon>201606291117584_RemovedReqFields2.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201607010955394_20160701_1.cs" />
+    <Compile Include="Migrations\201607010955394_20160701_1.Designer.cs">
+      <DependentUpon>201607010955394_20160701_1.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
     <Compile Include="Models\Activity.cs" />
@@ -401,6 +405,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201606291117584_RemovedReqFields2.resx">
       <DependentUpon>201606291117584_RemovedReqFields2.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201607010955394_20160701_1.resx">
+      <DependentUpon>201607010955394_20160701_1.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

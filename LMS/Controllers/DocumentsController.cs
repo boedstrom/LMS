@@ -7,6 +7,7 @@ using System.Net;
 using System.Web;
 using System.Web.Mvc;
 using LMS.Models;
+using System.IO;
 
 namespace LMS.Controllers
 {
@@ -33,7 +34,6 @@ namespace LMS.Controllers
                 default:
                     return RedirectToAction("Index");
             }
-            return RedirectToAction("Index");
         }
 
         // 
@@ -115,11 +115,29 @@ namespace LMS.Controllers
         // public ActionResult Create([Bind(Include = "Id,Name,Description,DocumentType,CreationDate")] Document document)
         [HttpPost, ActionName("Create")]
         [ValidateAntiForgeryToken]
-        public ActionResult CreateDocument([Bind(Include = "Id,Name,ParentClass,ParentType,Document")] CreateDocumentViewModel createDocView)
+        public ActionResult CreateDocument([Bind(Include = "Id,Name,ParentClass,ParentType,Document")] CreateDocumentViewModel createDocView, HttpPostedFileBase file)
         {
             if (ModelState.IsValid)
             {
                 Document newDoc = new Document();
+
+                if (file != null && file.ContentLength > 0)
+                    try
+                    {
+                        string path = Path.Combine(Server.MapPath("~/Content"), Path.GetFileName(file.FileName));
+                        file.SaveAs(path);
+                        newDoc.Url = path;
+                    }
+                    catch (Exception ex)
+                    {
+                        ViewBag.Message = "ERROR:" + ex.Message.ToString();
+                        return View(createDocView);
+                    }
+                else
+                {
+                    ViewBag.Message = "You have not specified a file.";
+                    return View(createDocView);
+                }
                 newDoc.User = db.Users.Where(u => u.UserName == User.Identity.Name).FirstOrDefault();
                 newDoc.Name = createDocView.Document.Name;
                 newDoc.Description = createDocView.Document.Description;
