@@ -124,7 +124,7 @@ namespace LMS.Controllers
                 if (file != null && file.ContentLength > 0)
                     try
                     {
-                        string path = Path.Combine(Server.MapPath("~/Content"), Path.GetFileName(file.FileName));
+                        string path = Path.Combine(Server.MapPath("~/Content/Files"), Path.GetFileName(file.FileName));
                         file.SaveAs(path);
                         newDoc.Url = path;
                     }
