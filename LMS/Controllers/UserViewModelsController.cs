@@ -36,6 +36,24 @@ namespace LMS.Controllers
             return View(courseUsers);
         }
 
+        public ActionResult TeacherIndex()
+        {
+
+
+            TeacherViewModel teachers = new TeacherViewModel();
+
+            var roleId = db.Roles.FirstOrDefault(x => x.Name == "teacher").Id;
+           teachers.Teachers = db.Users.Where(u => u.Roles.FirstOrDefault().RoleId == roleId).ToList();
+            return View(teachers);
+        }
+
+        public ActionResult AddTeacher()
+        {
+
+
+
+        }
+
         // GET: UserViewModels/Details/5
         public ActionResult Details(string id)
         {

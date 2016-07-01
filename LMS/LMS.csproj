@@ -255,6 +255,7 @@
     <Compile Include="Models\IdentityModels.cs" />
     <Compile Include="Models\ManageViewModels.cs" />
     <Compile Include="Models\Module.cs" />
+    <Compile Include="Models\TeacherViewModel.cs" />
     <Compile Include="Models\UserViewModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Startup.cs" />
@@ -338,6 +339,8 @@
     <Content Include="Views\UserViewModels\Edit.cshtml" />
     <Content Include="Views\UserViewModels\Delete.cshtml" />
     <Content Include="Views\UserViewModels\Details.cshtml" />
+    <Content Include="Views\UserViewModels\TeacherIndex.cshtml" />
+    <Content Include="Views\UserViewModels\CreateTeacher.cshtml" />
   </ItemGroup>
   <ItemGroup />
   <ItemGroup>

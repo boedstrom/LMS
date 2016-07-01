@@ -1,0 +1,53 @@
+﻿@model LMS.Models.TeacherViewModel
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2>Teachers</h2>
+<p>
+    @Html.ActionLink("Register new teacher", "CreateTeacher")
+  
+</p>
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.Teachers.First().FullName)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Teachers.First().Email)
+        </th>
+@*        <th>
+        @Html.DisplayNameFor(model => model.DefaultPassword)
+    </th>
+    <th>
+        @Html.DisplayNameFor(model => model.UserType)
+    </th>*@
+        <th></th>
+    </tr>
+
+@foreach (var user in Model.Teachers) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => user.FullName)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => user.Email)
+        </td>
+@*
+        <td>
+            @Html.DisplayFor(modelItem => user.DefaultPassword)
+        </td>
+    <td>
+        @Html.DisplayFor(modelItem => user.UserType)
+    </td>
+*@
+        <td>
+            @Html.ActionLink("Edit", "Edit", new { id = user.Id }) |
+            @Html.ActionLink("Details", "Details", new { id = user.Id }) |
+            @Html.ActionLink("Delete", "Delete", new { id = user.Id })
+        </td>
+    </tr>
+}
+</table>
+@Html.ActionLink("Back to Course List", "BackToCourse")
