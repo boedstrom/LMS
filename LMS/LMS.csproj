@@ -181,73 +181,9 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
-    <Compile Include="Migrations\201606221314106_Initial.cs" />
-    <Compile Include="Migrations\201606221314106_Initial.Designer.cs">
-      <DependentUpon>201606221314106_Initial.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201606231245113_AddModules.cs" />
-    <Compile Include="Migrations\201606231245113_AddModules.Designer.cs">
-      <DependentUpon>201606231245113_AddModules.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201606231346319_AddModules2.cs" />
-    <Compile Include="Migrations\201606231346319_AddModules2.Designer.cs">
-      <DependentUpon>201606231346319_AddModules2.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201606231353420_new_AddModules.cs" />
-    <Compile Include="Migrations\201606231353420_new_AddModules.Designer.cs">
-      <DependentUpon>201606231353420_new_AddModules.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201606231423366_zz1.cs" />
-    <Compile Include="Migrations\201606231423366_zz1.Designer.cs">
-      <DependentUpon>201606231423366_zz1.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201606270917017_addactivity.cs" />
-    <Compile Include="Migrations\201606270917017_addactivity.Designer.cs">
-      <DependentUpon>201606270917017_addactivity.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201606271339017_newUser.cs" />
-    <Compile Include="Migrations\201606271339017_newUser.Designer.cs">
-      <DependentUpon>201606271339017_newUser.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201606271400135_newUser2.cs" />
-    <Compile Include="Migrations\201606271400135_newUser2.Designer.cs">
-      <DependentUpon>201606271400135_newUser2.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201606280705122_1st_160628.cs" />
-    <Compile Include="Migrations\201606280705122_1st_160628.Designer.cs">
-      <DependentUpon>201606280705122_1st_160628.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201606280735028_2nd_160628.cs" />
-    <Compile Include="Migrations\201606280735028_2nd_160628.Designer.cs">
-      <DependentUpon>201606280735028_2nd_160628.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201606281237481_4th_160628.cs" />
-    <Compile Include="Migrations\201606281237481_4th_160628.Designer.cs">
-      <DependentUpon>201606281237481_4th_160628.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201606281411165_RemoveViewModels.cs" />
-    <Compile Include="Migrations\201606281411165_RemoveViewModels.Designer.cs">
-      <DependentUpon>201606281411165_RemoveViewModels.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201606290719588_ReqFields.cs" />
-    <Compile Include="Migrations\201606290719588_ReqFields.Designer.cs">
-      <DependentUpon>201606290719588_ReqFields.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201606290733327_ReqFields2.cs" />
-    <Compile Include="Migrations\201606290733327_ReqFields2.Designer.cs">
-      <DependentUpon>201606290733327_ReqFields2.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201606290945529_RemovedReqFields.cs" />
-    <Compile Include="Migrations\201606290945529_RemovedReqFields.Designer.cs">
-      <DependentUpon>201606290945529_RemovedReqFields.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201606291117584_RemovedReqFields2.cs" />
-    <Compile Include="Migrations\201606291117584_RemovedReqFields2.Designer.cs">
-      <DependentUpon>201606291117584_RemovedReqFields2.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201607010955394_20160701_1.cs" />
-    <Compile Include="Migrations\201607010955394_20160701_1.Designer.cs">
-      <DependentUpon>201607010955394_20160701_1.cs</DependentUpon>
+    <Compile Include="Migrations\201607041218291_NewDB_160704.cs" />
+    <Compile Include="Migrations\201607041218291_NewDB_160704.Designer.cs">
+      <DependentUpon>201607041218291_NewDB_160704.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
@@ -360,56 +296,8 @@
     <Content Include="Scripts\jquery-1.10.2.min.map" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Migrations\201606221314106_Initial.resx">
-      <DependentUpon>201606221314106_Initial.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201606231245113_AddModules.resx">
-      <DependentUpon>201606231245113_AddModules.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201606231346319_AddModules2.resx">
-      <DependentUpon>201606231346319_AddModules2.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201606231353420_new_AddModules.resx">
-      <DependentUpon>201606231353420_new_AddModules.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201606231423366_zz1.resx">
-      <DependentUpon>201606231423366_zz1.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201606270917017_addactivity.resx">
-      <DependentUpon>201606270917017_addactivity.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201606271339017_newUser.resx">
-      <DependentUpon>201606271339017_newUser.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201606271400135_newUser2.resx">
-      <DependentUpon>201606271400135_newUser2.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201606280705122_1st_160628.resx">
-      <DependentUpon>201606280705122_1st_160628.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201606280735028_2nd_160628.resx">
-      <DependentUpon>201606280735028_2nd_160628.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201606281237481_4th_160628.resx">
-      <DependentUpon>201606281237481_4th_160628.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201606281411165_RemoveViewModels.resx">
-      <DependentUpon>201606281411165_RemoveViewModels.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201606290719588_ReqFields.resx">
-      <DependentUpon>201606290719588_ReqFields.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201606290733327_ReqFields2.resx">
-      <DependentUpon>201606290733327_ReqFields2.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201606290945529_RemovedReqFields.resx">
-      <DependentUpon>201606290945529_RemovedReqFields.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201606291117584_RemovedReqFields2.resx">
-      <DependentUpon>201606291117584_RemovedReqFields2.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201607010955394_20160701_1.resx">
-      <DependentUpon>201607010955394_20160701_1.cs</DependentUpon>
+    <EmbeddedResource Include="Migrations\201607041218291_NewDB_160704.resx">
+      <DependentUpon>201607041218291_NewDB_160704.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

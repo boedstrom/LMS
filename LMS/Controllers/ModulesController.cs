@@ -20,12 +20,14 @@ namespace LMS.Controllers
             return RedirectToAction("Index", "Courses");
         }
 
+        [Authorize(Roles = "Teacher")]
         public ActionResult AddActivity(int? id)
         {
             return RedirectToAction("Index", "Activities", new { id });
         }
 
         // 
+        [Authorize(Roles = "Teacher")]
         public ActionResult AddDocuments(int? id)
         {
             return RedirectToAction("FromModule", "Documents", new { id });
@@ -61,6 +63,7 @@ namespace LMS.Controllers
         }
 
         // GET: Modules/Create
+        [Authorize(Roles = "Teacher")]
         public ActionResult Create(int? id)
         {
             Module module = new Module();
@@ -73,6 +76,7 @@ namespace LMS.Controllers
         // POST: Modules/Create
         [HttpPost]
         [ValidateAntiForgeryToken]
+        [Authorize(Roles = "Teacher")]
         public ActionResult Create([Bind(Include = "Id,Name,Description,StartDate,EndDate,Course")] Module module)
         {
             if (ModelState.IsValid)
@@ -88,6 +92,7 @@ namespace LMS.Controllers
         }
 
         // GET: Modules/Edit/5
+        [Authorize(Roles = "Teacher")]
         public ActionResult Edit(int? id)
         {
             if (id == null)
@@ -105,6 +110,7 @@ namespace LMS.Controllers
         // POST: Modules/Edit/5
         [HttpPost]
         [ValidateAntiForgeryToken]
+        [Authorize(Roles = "Teacher")]
         public ActionResult Edit([Bind(Include = "Id,Name,Description,StartDate,EndDate,Course")] Module module)
         {
             if (ModelState.IsValid)
@@ -118,6 +124,7 @@ namespace LMS.Controllers
         }
 
         // GET: Modules/Delete/5
+        [Authorize(Roles = "Teacher")]
         public ActionResult Delete(int? id)
         {
             if (id == null)
@@ -135,6 +142,7 @@ namespace LMS.Controllers
         // POST: Modules/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
+        [Authorize(Roles = "Teacher")]
         public ActionResult DeleteConfirmed(int id)
         {
             Module module = db.Modules.Find(id);
