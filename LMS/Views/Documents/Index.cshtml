@@ -6,11 +6,10 @@
 
 <h2>Documents for @Html.DisplayFor(model => model.ParentClass) @Html.DisplayFor(model => model.Name)</h2>
 
-@Html.HiddenFor(model => model.Id)
-@Html.HiddenFor(model => model.ParentType)
 <p>
     @Html.ActionLink("Add new document", "Create", Model)
 </p>
+@ViewBag.Message
 <table class="table">
     <tr>
         <th>
@@ -21,6 +20,9 @@
         </th>
         <th>
             @Html.DisplayNameFor(model => model.Documents.First().Url)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Documents.First().User.UserName)
         </th>
         <th></th>
     </tr>
@@ -34,8 +36,13 @@
             @Html.DisplayFor(modelItem => item.Description)
         </td>
         <td>
-@*            @Html.DisplayFor(modelItem => item.Url)*@
-            @Html.ActionLink(item.Url+" ", "a")
+@*
+            @Html.DisplayFor(modelItem => item.Url)  
+*@
+            @Html.ActionLink(item.Url + " ", "Download", new { Model, item.Id } )
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.User.UserName)
         </td>
 @*
     <td>
@@ -44,6 +51,8 @@
         @Html.ActionLink("Delete", "Delete", new { id=item.Id })
     </td>
 *@
+@Html.HiddenFor(model => model.Id)
+@Html.HiddenFor(model => model.ParentType)
     </tr>
 }
 
