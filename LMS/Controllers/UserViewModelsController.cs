@@ -74,6 +74,10 @@ namespace LMS.Controllers
         {
             if (ModelState.IsValid)
             {
+                var rStore = new RoleStore<IdentityRole>(db);
+                var rManager = new RoleManager<IdentityRole>(rStore);
+                var role =  rManager.FindByName("Student");
+
                 var uStore = new UserStore<ApplicationUser>(db);
                 var uManager = new UserManager<ApplicationUser>(uStore);
 
@@ -85,7 +89,8 @@ namespace LMS.Controllers
                 user.Course = thisCourse;
 
                 uManager.Create(user, userViewModel.DefaultPassword);
-                
+                uManager.AddToRole(user.Id, role.Name);
+
                 db.SaveChanges();
                 return RedirectToAction("Index", "UserViewModels", new { id = userViewModel.Course.Id });
             }
