@@ -1,0 +1,58 @@
+﻿@model LMS.Models.UserViewModel
+
+@{
+    ViewBag.Title = "DetailsTeacher";
+}
+
+<h2>Teacher details</h2>
+
+<div>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.FirstName)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.FirstName)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.LastName)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.LastName)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Email)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Email)
+        </dd>
+@*
+    <dt>
+        @Html.DisplayNameFor(model => model.DefaultPassword)
+    </dt>
+
+    <dd>
+        @Html.DisplayFor(model => model.DefaultPassword)
+    </dd>
+
+    <dt>
+        @Html.DisplayNameFor(model => model.UserType)
+    </dt>
+
+    <dd>
+        @Html.DisplayFor(model => model.UserType)
+    </dd>*@
+    </dl>
+</div>
+@Html.HiddenFor(model => model.Id)
+@Html.HiddenFor(model => model.Course.Id)
+<p>
+    @Html.ActionLink("Edit", "EditTeacher", new { id = Model.Id }) |
+    @Html.ActionLink("Back to List", "TeacherIndex")
+</p>
