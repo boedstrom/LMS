@@ -8,12 +8,34 @@ using System.Web;
 using System.Web.Mvc;
 using LMS.Models;
 using System.IO;
+using System.Threading.Tasks;
 
 namespace LMS.Controllers
 {
     public class DocumentsController : Controller
     {
         private ApplicationDbContext db = new ApplicationDbContext();
+
+        // 
+        public ActionResult Download(int? id)
+        {
+            Document dlDoc = db.Documents.FirstOrDefault(m => m.Id == id);
+            if (dlDoc.Course != null)
+            {
+                Course course = db.Courses.Where(c => c.Id == dlDoc.Course.Id).FirstOrDefault();
+                return (ActionResult)FromCourse(course.Id);
+            }
+            else if (dlDoc.Module != null)
+            {
+                Module module = db.Modules.Where(c => c.Id == dlDoc.Module.Id).FirstOrDefault();
+                return (ActionResult)FromModule(module.Id);
+            }
+            else 
+            {
+                Activity activity = db.Activities.Where(c => c.Id == dlDoc.Activity.Id).FirstOrDefault();
+                return (ActionResult)FromActivity(activity.Id);
+            }
+        }
 
         //
         public ActionResult ReturnToList(AddDocumentViewModel addDocView)

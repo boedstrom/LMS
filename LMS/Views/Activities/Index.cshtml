@@ -14,7 +14,10 @@
     </tr>
 </table>
 <p>
+@if (User.IsInRole("Teacher"))
+{
     @Html.ActionLink("Add new activity", "Create", new { id = Model.ModuleId })
+}
 </p>
 <table class="table">
     <tr>
@@ -62,10 +65,16 @@
                 @Html.DisplayFor(modelItem => item.Deadline)
             </td>
             <td>
-                @Html.ActionLink("Documents", "AddDocuments", new { id = item.Id }) |
-                @Html.ActionLink("Edit", "Edit", new { id = item.Id }) |
-                @Html.ActionLink("Details", "Details", new { id = item.Id }) |
-                @Html.ActionLink("Delete", "Delete", new { id = item.Id })
+                @if (User.IsInRole("Teacher"))
+                {
+                    @Html.ActionLink("Documents", "AddDocuments", new { id = item.Id })
+                    <span>|</span>
+                    @Html.ActionLink("Edit", "Edit", new { id = item.Id })
+                    <span>|</span>
+                    @Html.ActionLink("Details", "Details", new { id = item.Id })
+                    <span>|</span>
+                    @Html.ActionLink("Delete", "Delete", new { id = item.Id })
+                }
             </td>
         </tr>
     }

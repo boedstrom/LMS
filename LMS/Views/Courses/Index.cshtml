@@ -7,7 +7,10 @@
 <h2>Current courses</h2>
 
 <p>
+@if (User.IsInRole("Teacher"))
+{
     @Html.ActionLink("Add new course", "Create")
+}
 </p>
 <table class="table">
     <tr>
@@ -41,7 +44,7 @@
             @Html.DisplayFor(modelItem => item.EndDate)
         </td>
         <td>
-            @if (User.IsInRole("teacher"))
+            @if (User.IsInRole("Teacher"))
             {
                 @Html.ActionLink("Modules", "AddModules", new { id = item.Id })
                 <span>|</span>

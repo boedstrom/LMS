@@ -7,13 +7,13 @@ namespace LMS.Migrations
     using System.Resources;
     
     [GeneratedCode("EntityFramework.Migrations", "6.1.3-40302")]
-    public sealed partial class RemovedReqFields2 : IMigrationMetadata
+    public sealed partial class lotsofthings : IMigrationMetadata
     {
-        private readonly ResourceManager Resources = new ResourceManager(typeof(RemovedReqFields2));
+        private readonly ResourceManager Resources = new ResourceManager(typeof(lotsofthings));
         
         string IMigrationMetadata.Id
         {
-            get { return "201606291117584_RemovedReqFields2"; }
+            get { return "201607050738535_lotsofthings"; }
         }
         
         string IMigrationMetadata.Source

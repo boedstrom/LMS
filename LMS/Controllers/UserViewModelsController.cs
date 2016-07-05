@@ -73,13 +73,14 @@ namespace LMS.Controllers
 
 
                 uManager.Create(user, userViewModel.DefaultPassword);
-                
+
 
                 db.SaveChanges();
                 return RedirectToAction("Index", "UserViewModels", new { id = userViewModel.Course.Id });
             }
 
             return View(userViewModel);
+        }
 
         // GET: UserViewModels/Details/5
         public ActionResult Details(string id)
@@ -103,6 +104,7 @@ namespace LMS.Controllers
         }
 
         // GET: UserViewModels/Create
+        [Authorize(Roles = "Teacher")]
         public ActionResult Create(int? id)
         {
             UserViewModel userViewModel = new UserViewModel();
@@ -113,10 +115,15 @@ namespace LMS.Controllers
         // POST: UserViewModels/Create
         [HttpPost]
         [ValidateAntiForgeryToken]
+        [Authorize(Roles = "Teacher")]
         public ActionResult Create([Bind(Include = "Id,FirstName,LastName,Email,DefaultPassword,UserType,Course")] UserViewModel userViewModel)
         {
             if (ModelState.IsValid)
             {
+                var rStore = new RoleStore<IdentityRole>(db);
+                var rManager = new RoleManager<IdentityRole>(rStore);
+                var role =  rManager.FindByName("Student");
+
                 var uStore = new UserStore<ApplicationUser>(db);
                 var uManager = new UserManager<ApplicationUser>(uStore);
 
@@ -128,7 +135,8 @@ namespace LMS.Controllers
                 user.Course = thisCourse;
 
                 uManager.Create(user, userViewModel.DefaultPassword);
-                
+                uManager.AddToRole(user.Id, role.Name);
+
                 db.SaveChanges();
                 return RedirectToAction("Index", "UserViewModels", new { id = userViewModel.Course.Id });
             }
@@ -137,6 +145,7 @@ namespace LMS.Controllers
         }
 
         // GET: UserViewModels/Edit/5
+        [Authorize(Roles = "Teacher")]
         public ActionResult Edit(string id)
         {
             if (id == null)
@@ -160,6 +169,7 @@ namespace LMS.Controllers
         // POST: UserViewModels/Edit/5
         [HttpPost]
         [ValidateAntiForgeryToken]
+        [Authorize(Roles = "Teacher")]
         public ActionResult Edit([Bind(Include = "Id,FirstName,LastName,Email,DefaultPassword,UserType,Course")] UserViewModel userViewModel)
         {
             if (ModelState.IsValid)
@@ -181,6 +191,7 @@ namespace LMS.Controllers
         }
 
         // GET: UserViewModels/Delete/5
+        [Authorize(Roles = "Teacher")]
         public ActionResult Delete(string id)
         {
             if (id == null)
@@ -204,6 +215,7 @@ namespace LMS.Controllers
         // POST: UserViewModels/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
+        [Authorize(Roles = "Teacher")]
         public ActionResult DeleteConfirmed(string id)
         {
             var uStore = new UserStore<ApplicationUser>(db);
