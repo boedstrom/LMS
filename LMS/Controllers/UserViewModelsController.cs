@@ -47,12 +47,39 @@ namespace LMS.Controllers
             return View(teachers);
         }
 
-        public ActionResult AddTeacher()
+        //public ActionResult AddTeacher()
+        //{
+
+        //    TeacherViewModel teachers = new TeacherViewModel();
+        //    var roleId = db.Roles.FirstOrDefault(x => x.Name == "teacher").Id;
+        //    teachers.Teachers = db.Users.Where(u => u.Roles.FirstOrDefault().RoleId == roleId).ToList();
+        //    return View(teachers);
+
+        //}
+
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult AddTeacher([Bind(Include = "Id,FirstName,LastName,Email,DefaultPassword,UserType,Course")] UserViewModel userViewModel)
         {
+            if (ModelState.IsValid)
+            {
+                var uStore = new UserStore<ApplicationUser>(db);
+                var uManager = new UserManager<ApplicationUser>(uStore);
+
+                var user = new ApplicationUser { UserName = userViewModel.Email, Email = userViewModel.Email };
+                user.FirstName = userViewModel.FirstName;
+                user.LastName = userViewModel.LastName;
 
 
+                uManager.Create(user, userViewModel.DefaultPassword);
+                
 
-        }
+                db.SaveChanges();
+                return RedirectToAction("Index", "UserViewModels", new { id = userViewModel.Course.Id });
+            }
+
+            return View(userViewModel);
 
         // GET: UserViewModels/Details/5
         public ActionResult Details(string id)

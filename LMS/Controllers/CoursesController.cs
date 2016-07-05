@@ -24,13 +24,19 @@ namespace LMS.Controllers
         // 
         public ActionResult AddModules(int? id)
         {
-            return RedirectToAction("Index", "Modules", new { id = id });
+            return RedirectToAction("Index", "Modules", new { id });
         }
 
         // 
         public ActionResult AddUsers(int? id)
         {
-            return RedirectToAction("Index", "UserViewModels", new { id = id });
+            return RedirectToAction("Index", "UserViewModels", new { id });
+        }
+
+        // 
+        public ActionResult AddDocuments(int? id)
+        {
+            return RedirectToAction("FromCourse", "Documents", new { id });
         }
 
         // GET: Courses/Details/5

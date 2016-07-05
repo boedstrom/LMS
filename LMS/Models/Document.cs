@@ -9,7 +9,8 @@ namespace LMS.Models
     public enum DocType
     {
         Schedule,
-        Task
+        Task,
+        Assignment
     }
 
     public class Document
@@ -17,6 +18,7 @@ namespace LMS.Models
         public int Id { get; set; }
         public string Name { get; set; }
         public string Description { get; set; }
+        public string Url { get; set; }
         public DocType DocumentType { get; set; }
         public DateTime CreationDate { get; set; }
 

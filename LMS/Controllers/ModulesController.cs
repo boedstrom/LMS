@@ -22,7 +22,13 @@ namespace LMS.Controllers
 
         public ActionResult AddActivity(int? id)
         {
-            return RedirectToAction("Index", "Activities", new { id = id });
+            return RedirectToAction("Index", "Activities", new { id });
+        }
+
+        // 
+        public ActionResult AddDocuments(int? id)
+        {
+            return RedirectToAction("FromModule", "Documents", new { id });
         }
 
         // GET: Modules

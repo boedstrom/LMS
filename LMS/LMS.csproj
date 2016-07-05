@@ -173,6 +173,7 @@
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\ActivitiesController.cs" />
     <Compile Include="Controllers\CoursesController.cs" />
+    <Compile Include="Controllers\DocumentsController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\ManageController.cs" />
     <Compile Include="Controllers\ModulesController.cs" />
@@ -244,10 +245,16 @@
     <Compile Include="Migrations\201606291117584_RemovedReqFields2.Designer.cs">
       <DependentUpon>201606291117584_RemovedReqFields2.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201607010955394_20160701_1.cs" />
+    <Compile Include="Migrations\201607010955394_20160701_1.Designer.cs">
+      <DependentUpon>201607010955394_20160701_1.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
     <Compile Include="Models\Activity.cs" />
     <Compile Include="Models\AddActivityViewModel.cs" />
+    <Compile Include="Models\CreateDocumentViewModel.cs" />
+    <Compile Include="Models\AddDocumentViewModel.cs" />
     <Compile Include="Models\AddModuleViewModel.cs" />
     <Compile Include="Models\AddUserViewModel.cs" />
     <Compile Include="Models\Course.cs" />
@@ -255,7 +262,6 @@
     <Compile Include="Models\IdentityModels.cs" />
     <Compile Include="Models\ManageViewModels.cs" />
     <Compile Include="Models\Module.cs" />
-    <Compile Include="Models\TeacherViewModel.cs" />
     <Compile Include="Models\UserViewModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Startup.cs" />
@@ -339,10 +345,12 @@
     <Content Include="Views\UserViewModels\Edit.cshtml" />
     <Content Include="Views\UserViewModels\Delete.cshtml" />
     <Content Include="Views\UserViewModels\Details.cshtml" />
-    <Content Include="Views\UserViewModels\TeacherIndex.cshtml" />
-    <Content Include="Views\UserViewModels\CreateTeacher.cshtml" />
+    <Content Include="Views\Documents\Index.cshtml" />
+    <Content Include="Views\Documents\Create.cshtml" />
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <Folder Include="Content\Files\" />
+  </ItemGroup>
   <ItemGroup>
     <Content Include="fonts\glyphicons-halflings-regular.woff" />
     <Content Include="fonts\glyphicons-halflings-regular.ttf" />
@@ -399,6 +407,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201606291117584_RemovedReqFields2.resx">
       <DependentUpon>201606291117584_RemovedReqFields2.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201607010955394_20160701_1.resx">
+      <DependentUpon>201607010955394_20160701_1.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>
