@@ -44,7 +44,7 @@
                     </li>
                     @if (User.IsInRole("Teacher"))
                     {
-                        <li>@Html.ActionLink("Add new teacher", "Index", "UserViewModels")</li>
+                        <li>@Html.ActionLink("Add new teacher", "TeacherIndex", "UserViewModels")</li>
                     }
                 </ul>
                 @Html.Partial("_LoginPartial")
