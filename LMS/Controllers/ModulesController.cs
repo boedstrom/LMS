@@ -41,6 +41,7 @@ namespace LMS.Controllers
             Course course = db.Courses.Where(c => c.Id == id).FirstOrDefault();
             courseModules.CourseId = course.Id;
             courseModules.CourseName = course.Name;
+            courseModules.CourseDescription = course.Description;
             courseModules.CourseStart = course.StartDate.Date;
             courseModules.CourseEnd = course.EndDate.Date;
             courseModules.Modules = db.Modules.Where(m => m.Course.Id == course.Id).ToList();

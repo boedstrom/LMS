@@ -1,0 +1,21 @@
+﻿@model LMS.Models.AddModuleViewModel
+@{
+    ViewBag.Title = "StudentIndex";
+}
+
+<h2>My current course: @Html.DisplayFor(model => model.CourseName)</h2>
+
+<div>
+    <h4>@Html.DisplayFor(model => model.CourseDescription)</h4>
+    <h4>
+        Course duration: @Convert.ToDateTime(Model.CourseStart).ToString("yyyy-MM-dd") -
+        @Convert.ToDateTime(Model.CourseEnd).ToString("yyyy-MM-dd")
+    </h4>
+    @Html.ActionLink("Students in this course", "AddUsers", new { id = Model.CourseId })
+    @Html.HiddenFor(model => model.CourseId)
+    <hr />
+</div>
+<div>
+    @Html.Action("StudentActivityPartial", new { id = Model.CourseId })
+    @Html.Partial("StudentModulePartial", Model)
+</div>

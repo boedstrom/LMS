@@ -1,0 +1,40 @@
+﻿@model LMS.Models.AddModuleViewModel
+@{
+    ViewBag.Title = "Index";
+}
+<h4>Modules</h4>
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.Modules.First().Name)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Modules.First().Description)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Modules.First().StartDate)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Modules.First().EndDate)
+        </th>
+        <th></th>
+    </tr>
+
+    @foreach (var item in Model.Modules)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.Name)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Description)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.StartDate)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.EndDate)
+            </td>
+        </tr>
+    }
+</table>

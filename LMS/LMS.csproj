@@ -283,6 +283,9 @@
     <Content Include="Views\UserViewModels\Details.cshtml" />
     <Content Include="Views\Documents\Index.cshtml" />
     <Content Include="Views\Documents\Create.cshtml" />
+    <Content Include="Views\Courses\StudentIndex.cshtml" />
+    <Content Include="Views\Courses\StudentModulePartial.cshtml" />
+    <Content Include="Views\Courses\StudentActivityPartial.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Content\Files\" />

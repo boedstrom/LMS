@@ -15,6 +15,102 @@ namespace LMS.Controllers
     {
         private ApplicationDbContext db = new ApplicationDbContext();
 
+        public ActionResult StudentActivityPartial(int? id)
+        {
+            Course course = db.Courses.Find(id);
+            AddModuleViewModel courseModules = new AddModuleViewModel();
+            courseModules.CourseId = course.Id;
+            courseModules.CourseName = course.Name;
+            courseModules.CourseDescription = course.Description;
+            courseModules.CourseStart = course.StartDate.Date;
+            courseModules.CourseEnd = course.EndDate.Date;
+            courseModules.Modules = db.Modules.Where(m => m.Course.Id == course.Id).ToList();
+            Module currentModule = courseModules.Modules.FirstOrDefault();
+
+            int compareEnd = course.EndDate.CompareTo(DateTime.Today);
+
+            //  Course has not ended yet, check start date
+            if (compareEnd > 0)
+            {
+                int compareStart = course.StartDate.CompareTo(DateTime.Today);
+
+                // Course has not started, show first activities for first module
+                if (compareStart > 0)
+                {
+                    currentModule = courseModules.Modules.FirstOrDefault();
+                }
+                // Course has already started or starts today, show activities for current module            
+                else
+                {
+                    foreach (var module in courseModules.Modules)
+                    {
+                        compareStart = module.StartDate.CompareTo(DateTime.Today);
+
+                        //  Module has started, check end date
+//                        if (compareStart > 0)
+                        if (compareStart < 0)
+                        {
+                            compareEnd = module.EndDate.CompareTo(DateTime.Today);
+
+                            // Module has not ended yet, show activities for this module
+                            if (compareEnd > 0)
+                            {
+                                currentModule = module;
+                                break;
+                            }
+                            // Module ends today, show activities for this module
+                            else if (compareEnd == 0)
+                            {
+                                currentModule = module;
+                                break;
+                            }
+                        }
+                        // Module starts today, show activities for this module
+                        else if (compareStart == 0)
+                        {
+                            currentModule = module;
+                            break;
+                        }
+                    }
+                }
+            }
+            // Course has already ended or ends today, show activities for last module            
+            else
+            {
+                currentModule = courseModules.Modules.LastOrDefault();
+            }
+
+            AddActivityViewModel studentActivityView = new AddActivityViewModel();
+
+            studentActivityView.ModuleId = currentModule.Id;
+            studentActivityView.ModuleName = currentModule.Name;
+            studentActivityView.ModuleStart = currentModule.StartDate.Date;
+            studentActivityView.ModuleEnd = currentModule.EndDate.Date;
+            studentActivityView.Activities = db.Activities.Where(m => m.Module.Id == currentModule.Id).ToList();
+            return PartialView("StudentActivityPartial", studentActivityView);
+        }
+        
+        // Student Index
+        public ActionResult StudentIndex()
+        {
+            ApplicationUser student = db.Users.Where(u => u.UserName == User.Identity.Name).FirstOrDefault();
+            Course course = student.Course;
+            AddModuleViewModel courseModules = new AddModuleViewModel();
+            courseModules.CourseId = course.Id;
+            courseModules.CourseName = course.Name;
+            courseModules.CourseDescription = course.Description;
+            courseModules.CourseStart = course.StartDate.Date;
+            courseModules.CourseEnd = course.EndDate.Date;
+            courseModules.Modules = db.Modules.Where(m => m.Course.Id == course.Id).ToList();
+            return View(courseModules);
+        }
+
+        // Student Modules
+        public ActionResult ViewActivities(int? id)
+        {
+            return RedirectToAction("Index", "Activities", new { id });
+        }
+
         // GET: Courses
         public ActionResult Index()
         {
@@ -29,7 +125,6 @@ namespace LMS.Controllers
         }
 
         // 
-        [Authorize(Roles = "Teacher")]
         public ActionResult AddUsers(int? id)
         {
             return RedirectToAction("Index", "UserViewModels", new { id });

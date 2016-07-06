@@ -1,24 +1,8 @@
 ﻿@model LMS.Models.AddActivityViewModel
-
 @{
     ViewBag.Title = "Index";
 }
-
-<h2>Activities for module @Html.DisplayFor(model => model.ModuleName)</h2>
-<table class="table">
-    <tr>
-        <th>
-            Module duration: @Convert.ToDateTime(Model.ModuleStart).ToString("yyyy-MM-dd") -
-            @Convert.ToDateTime(Model.ModuleEnd).ToString("yyyy-MM-dd")
-        </th>
-    </tr>
-</table>
-<p>
-@if (User.IsInRole("Teacher"))
-{
-    @Html.ActionLink("Add new activity", "Create", new { id = Model.ModuleId })
-}
-</p>
+<h4>Activities in current module</h4>
 <table class="table">
     <tr>
         <th>
@@ -65,28 +49,9 @@
             </td>
             <td>
                 @Html.ActionLink("Documents", "AddDocuments", new { id = item.Id })
-
-                @if (User.IsInRole("Teacher"))
-                {
-                    <span>|</span>
-                    @Html.ActionLink("Edit", "Edit", new { id = item.Id })
-                    <span>|</span>
-                    @Html.ActionLink("Details", "Details", new { id = item.Id })
-                    <span>|</span>
-                    @Html.ActionLink("Delete", "Delete", new { id = item.Id })
-                }
             </td>
         </tr>
     }
 
 </table>
-<div>
-    @if (User.IsInRole("Student"))
-    {
-        @Html.ActionLink("Back to start page", "BackToStudent", new { id = Model.ModuleId })
-    }
-    @if (User.IsInRole("Teacher"))
-    {
-        @Html.ActionLink("Back to module list", "BackToModule", new { id = Model.ModuleId })
-    }
-</div>
+
