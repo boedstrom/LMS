@@ -21,6 +21,11 @@ namespace LMS.Controllers
             return RedirectToAction("Index", "Courses");
         }
 
+        public ActionResult BackToStudent(int? id)
+        {
+            return RedirectToAction("StudentIndex", "Courses", new { id });
+        }
+
         // GET: UserViewModels
         public ActionResult Index(int? id)
         {

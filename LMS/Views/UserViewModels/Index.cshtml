@@ -8,13 +8,16 @@
 <table class="table">
     <tr>
         <th>
-            Course duration: @Convert.ToDateTime(Model.CourseStart).ToString("yyyy-dd-MM") -
-            @Convert.ToDateTime(Model.CourseEnd).ToString("yyyy-dd-MM")
+            Course duration: @Convert.ToDateTime(Model.CourseStart).ToString("yyyy-MM-dd") -
+            @Convert.ToDateTime(Model.CourseEnd).ToString("yyyy-MM-dd")
         </th>
     </tr>
 </table>
 <p>
-    @Html.ActionLink("Register new student", "Create", new { id = Model.CourseId })
+    @if (User.IsInRole("Teacher"))
+    {
+        @Html.ActionLink("Register new student", "Create", new { id = Model.CourseId })
+    }
 </p>
 <table class="table">
     <tr>
@@ -50,11 +53,25 @@
     </td>
 *@
         <td>
-            @Html.ActionLink("Edit", "Edit", new { id = user.Id }) |
-            @Html.ActionLink("Details", "Details", new { id = user.Id }) |
-            @Html.ActionLink("Delete", "Delete", new { id = user.Id })
+            @if (User.IsInRole("Teacher"))
+            {
+                @Html.ActionLink("Edit", "Edit", new { id = user.Id })
+                <span>|</span>
+                @Html.ActionLink("Details", "Details", new { id = user.Id })
+                <span>|</span>
+                @Html.ActionLink("Delete", "Delete", new { id = user.Id })
+            }
         </td>
     </tr>
 }
 </table>
-@Html.ActionLink("Back to Course List", "BackToCourse", new { id = Model.CourseId })
+<div>
+    @if (User.IsInRole("Student"))
+    {
+        @Html.ActionLink("Back to start page", "BackToStudent", new { id = Model.CourseId })
+    }
+    @if (User.IsInRole("Teacher"))
+    {
+        @Html.ActionLink("Back to Courses", "BackToCourse", new { id = Model.CourseId })
+    }
+</div>

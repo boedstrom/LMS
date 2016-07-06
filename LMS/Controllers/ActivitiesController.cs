@@ -27,6 +27,12 @@ namespace LMS.Controllers
             return RedirectToAction("Index", "Modules", new { id = thisModule.Course.Id });
         }
 
+        public ActionResult BackToStudent(int? id)
+        {
+            Module thisModule = db.Modules.Where(c => c.Id == id).FirstOrDefault();
+            return RedirectToAction("StudentIndex", "Courses", new { id = thisModule.Course.Id });
+        }
+
         // GET: Activities
         public ActionResult Index(int? id)
         {

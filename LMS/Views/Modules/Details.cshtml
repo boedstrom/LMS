@@ -44,6 +44,10 @@
 </div>
 @Html.HiddenFor(model => model.Course.Id)
 <p>
-    @Html.ActionLink("Edit", "Edit", new { id = Model.Id }) |
+    @if (User.IsInRole("Teacher"))
+    {
+        @Html.ActionLink("Edit", "Edit", new { id = Model.Id })
+        <span>|</span>
+    }
     @Html.ActionLink("Back to List", "Index", new { id = Model.Course.Id })
 </p>
