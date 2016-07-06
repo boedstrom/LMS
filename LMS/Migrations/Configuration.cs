@@ -65,15 +65,15 @@ namespace LMS.Migrations
             //context.Modules.AddOrUpdate(m => m.Name, modules);
             //context.SaveChanges();
 
-            //var rStore = new RoleStore<IdentityRole>(context);
-            //var rManager = new RoleManager<IdentityRole>(rStore);
-            //var role = new IdentityRole { Name = "Student" };
-            //rManager.Create(role);
+            // rStore = new RoleStore<IdentityRole>(context);
+            // rManager = new RoleManager<IdentityRole>(rStore);
+            // role = new IdentityRole { Name = "Student" };
+            // rManager.Create(role);
 
-            //var uStore = new UserStore<ApplicationUser>(context);
-            //var uManager = new UserManager<ApplicationUser>(uStore);
+            // uStore = new UserStore<ApplicationUser>(context);
+            // uManager = new UserManager<ApplicationUser>(uStore);
 
-            //var user = new ApplicationUser { UserName = "emil.kork@gmail.com", Email = "emil.kork@gmail.com", FirstName = "Emil", LastName = "Kork", Course = course };
+            // user = new ApplicationUser { UserName = "emil.kork@gmail.com", Email = "emil.kork@gmail.com", FirstName = "Emil", LastName = "Kork", Course = course };
             //uManager.Create(user, "Abcd1234");
             //uManager.AddToRole(user.Id, role.Name);
 
@@ -111,9 +111,9 @@ namespace LMS.Migrations
             //uManager.AddToRole(user.Id, role.Name);
             //context.SaveChanges();
 
-            //Course course = context.Courses.FirstOrDefault(c => c.Id == 1);
+            //course = context.Courses.FirstOrDefault(c => c.Id == 1);
             //Module module = context.Modules.FirstOrDefault(m => m.Course.Id == course.Id);
-            
+
             //DateTime startTime = module.StartDate;
             //DateTime endTime = module.StartDate;
             //TimeSpan ts = new TimeSpan(08, 30, 0);
@@ -130,7 +130,6 @@ namespace LMS.Migrations
             //};
             //context.Activities.AddOrUpdate(a => a.Name, activities);
             //context.SaveChanges();
-
         }
     }
 }

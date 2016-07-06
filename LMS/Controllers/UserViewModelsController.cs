@@ -41,6 +41,54 @@ namespace LMS.Controllers
             return View(courseUsers);
         }
 
+        public ActionResult TeacherIndex()
+        {
+
+
+            TeacherViewModel teachers = new TeacherViewModel();
+
+            var roleId = db.Roles.FirstOrDefault(x => x.Name == "Teacher").Id;
+           teachers.Teachers = db.Users.Where(u => u.Roles.FirstOrDefault().RoleId == roleId).ToList();
+            return View(teachers);
+        }
+        // GET
+        public ActionResult CreateTeacher()
+        {
+
+           
+            return View();
+
+        }
+
+        //POST
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult CreateTeacher([Bind(Include = "Id,FirstName,LastName,Email,DefaultPassword,UserType,Course")] UserViewModel userViewModel)
+        {
+            if (ModelState.IsValid)
+            {
+                var uStore = new UserStore<ApplicationUser>(db);
+                var uManager = new UserManager<ApplicationUser>(uStore);
+
+                var rStore = new RoleStore<IdentityRole>(db);
+                var rManager = new RoleManager<IdentityRole>(rStore);
+                var role = rManager.FindByName("Teacher");
+
+                var user = new ApplicationUser { UserName = userViewModel.Email, Email = userViewModel.Email };
+                user.FirstName = userViewModel.FirstName;
+                user.LastName = userViewModel.LastName;
+
+
+                uManager.Create(user, userViewModel.DefaultPassword);
+                uManager.AddToRole(user.Id, role.Name);
+
+                db.SaveChanges();
+                return RedirectToAction("Index", "UserViewModels", new { id = userViewModel.Course.Id });
+            }
+
+            return View(userViewModel);
+        }
+
         // GET: UserViewModels/Details/5
         public ActionResult Details(string id)
         {
@@ -59,6 +107,30 @@ namespace LMS.Controllers
             userViewModel.LastName = user.LastName;
             userViewModel.Email = user.Email;
             userViewModel.Course = user.Course;
+            return View(userViewModel);
+        }
+
+
+        public ActionResult DetailsTeacher(string id)
+        {
+            if (id == null)
+            {
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            }
+            ApplicationUser user = db.Users.Where(u => u.Id == id).FirstOrDefault();
+            if (user == null)
+            {
+                return HttpNotFound();
+            }
+
+
+
+            UserViewModel userViewModel = new UserViewModel();
+            userViewModel.Id = user.Id;
+            userViewModel.FirstName = user.FirstName;
+            userViewModel.LastName = user.LastName;
+            userViewModel.Email = user.Email;
+
             return View(userViewModel);
         }
 
@@ -149,6 +221,72 @@ namespace LMS.Controllers
             return View(userViewModel);
         }
 
+        // GET: UserViewModels/EditTeacher/5
+        public ActionResult EditTeacher(string id)
+        {
+            if (id == null)
+            {
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            }
+            ApplicationUser user = db.Users.Where(u => u.Id == id).FirstOrDefault();
+            if (user == null)
+            {
+                return HttpNotFound();
+            }
+            UserViewModel userViewModel = new UserViewModel();
+            userViewModel.Id = user.Id;
+            userViewModel.FirstName = user.FirstName;
+            userViewModel.LastName = user.LastName;
+            userViewModel.Email = user.Email;
+            return View(userViewModel);
+        }
+
+
+
+        //Post
+        [HttpPost]
+        public ActionResult EditTeacher([Bind(Include = "Id,FirstName,LastName,Email,DefaultPassword,UserType")] UserViewModel userViewModel)
+        {
+            if (ModelState.IsValid)
+            {
+                var uStore = new UserStore<ApplicationUser>(db);
+                var uManager = new UserManager<ApplicationUser>(uStore);
+
+                ApplicationUser user = db.Users.Where(u => u.Id == userViewModel.Id).FirstOrDefault();
+                user.FirstName = userViewModel.FirstName;
+                user.LastName = userViewModel.LastName;
+                user.Email = userViewModel.Email;
+
+                uManager.Update(user);
+                db.SaveChanges();
+                return RedirectToAction("TeacherIndex", "UserViewModels");
+            }
+            return View(userViewModel);
+        }
+
+        //Get 
+        public ActionResult DeleteTeacher(string id)
+        {
+            if (id == null)
+            {
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            }
+            ApplicationUser thisUser = db.Users.Where(u => u.Id == id).FirstOrDefault();
+            if (thisUser == null)
+            {
+                return HttpNotFound();
+            }
+            UserViewModel userViewModel = new UserViewModel();
+            userViewModel.Id = thisUser.Id;
+            userViewModel.FirstName = thisUser.FirstName;
+            userViewModel.LastName = thisUser.LastName;
+            userViewModel.Email = thisUser.Email;
+            return View(userViewModel);
+        }
+
+
+
+
         // GET: UserViewModels/Delete/5
         [Authorize(Roles = "Teacher")]
         public ActionResult Delete(string id)
@@ -171,6 +309,22 @@ namespace LMS.Controllers
             return View(userViewModel);
         }
 
+        // POST: UserViewModels/Delete/5
+        [HttpPost, ActionName("DeleteTeacher")]
+        [ValidateAntiForgeryToken]
+        [Authorize(Roles = "Teacher")]
+        public ActionResult DeleteTeacherConfirmed(string id)
+        {
+            var uStore = new UserStore<ApplicationUser>(db);
+            var uManager = new UserManager<ApplicationUser>(uStore);
+
+            ApplicationUser user = db.Users.Where(u => u.Id == id).FirstOrDefault();
+ 
+
+            uManager.Delete(user);
+            db.SaveChanges();
+            return RedirectToAction("TeacherIndex");
+        }
         // POST: UserViewModels/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
