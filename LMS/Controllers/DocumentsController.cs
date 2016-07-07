@@ -17,26 +17,58 @@ namespace LMS.Controllers
     {
         private ApplicationDbContext db = new ApplicationDbContext();
 
-        // 
-        //public ActionResult Download(int? id)
-        //{
-        //    Document dlDoc = db.Documents.FirstOrDefault(m => m.Id == id);
-        //    if (dlDoc.Course != null)
-        //    {
-        //        Course course = db.Courses.Where(c => c.Id == dlDoc.Course.Id).FirstOrDefault();
-        //        return (ActionResult)FromCourse(course.Id);
-        //    }
-        //    else if (dlDoc.Module != null)
-        //    {
-        //        Module module = db.Modules.Where(c => c.Id == dlDoc.Module.Id).FirstOrDefault();
-        //        return (ActionResult)FromModule(module.Id);
-        //    }
-        //    else 
-        //    {
-        //        Activity activity = db.Activities.Where(c => c.Id == dlDoc.Activity.Id).FirstOrDefault();
-        //        return (ActionResult)FromActivity(activity.Id);
-        //    }
-        //}
+        //
+        public ActionResult AssignmentDocsPartial(int? id)
+        {
+            Activity activity = db.Activities.Where(c => c.Id == id).FirstOrDefault();
+            ShowDocumentsViewModel showDocViewModel = new ShowDocumentsViewModel();
+            showDocViewModel.Id = activity.Id;
+            showDocViewModel.Name = activity.Name;
+            showDocViewModel.ParentType = DocParent.Activity;
+            showDocViewModel.ParentClass = "activity";
+
+            showDocViewModel.Documents = db.Documents.Where(m => m.Activity.Id == activity.Id &&
+                                                           m.DocumentType == DocType.Assignment).ToList();
+            return PartialView("AssignmentDocsPartial", showDocViewModel);
+        }
+
+        //
+        public ActionResult StudentDocsPartial(int? id)
+        {
+            ApplicationUser student = db.Users.Where(u => u.UserName == User.Identity.Name).FirstOrDefault();
+            Activity activity = db.Activities.Where(c => c.Id == id).FirstOrDefault();
+            ShowDocumentsViewModel showDocViewModel = new ShowDocumentsViewModel();
+            showDocViewModel.Id = activity.Id;
+            showDocViewModel.Name = activity.Name;
+            showDocViewModel.ParentType = DocParent.Activity;
+            showDocViewModel.ParentClass = "activity";
+
+            showDocViewModel.Documents = db.Documents.Where(m => m.Activity.Id == activity.Id && 
+                                                           m.DocumentType == DocType.Assignment &&
+                                                           m.User.UserName == student.UserName).ToList();
+            return PartialView("StudentDocsPartial", showDocViewModel);
+        }
+
+        //
+        public ActionResult ReturnToIndex(int? id)
+        {
+            Document dlDoc = db.Documents.FirstOrDefault(m => m.Id == id);
+            if (dlDoc.Course != null)
+            {
+                Course course = db.Courses.Where(c => c.Id == dlDoc.Course.Id).FirstOrDefault();
+                return (ActionResult)FromCourse(course.Id);
+            }
+            else if (dlDoc.Module != null)
+            {
+                Module module = db.Modules.Where(c => c.Id == dlDoc.Module.Id).FirstOrDefault();
+                return (ActionResult)FromModule(module.Id);
+            }
+            else
+            {
+                Activity activity = db.Activities.Where(c => c.Id == dlDoc.Activity.Id).FirstOrDefault();
+                return (ActionResult)FromActivity(activity.Id);
+            }
+        }
 
         //
         public ActionResult ReturnToList(ShowDocumentsViewModel addDocView)
@@ -63,48 +95,55 @@ namespace LMS.Controllers
         public ActionResult FromCourse(int? id)
         {
             Course course = db.Courses.Where(c => c.Id == id).FirstOrDefault();
-            ShowDocumentsViewModel addDocViewModel = new ShowDocumentsViewModel();
-            addDocViewModel.Id = course.Id;
-            addDocViewModel.Name = course.Name;
-            addDocViewModel.ParentType = DocParent.Course;
-            addDocViewModel.ParentClass = "course";
-            addDocViewModel.Documents = db.Documents.Where(m => m.Course.Id == course.Id).ToList();
+            ShowDocumentsViewModel showDocViewModel = new ShowDocumentsViewModel();
+            showDocViewModel.Id = course.Id;
+            showDocViewModel.Name = course.Name;
+            showDocViewModel.ParentType = DocParent.Course;
+            showDocViewModel.ParentClass = "course";
+            showDocViewModel.Documents = db.Documents.Where(m => m.Course.Id == course.Id).ToList();
 
-            return View("Index", addDocViewModel);
+            return View("Index", showDocViewModel);
         }
 
         // 
         public ActionResult FromModule(int? id)
         {
             Module module = db.Modules.Where(c => c.Id == id).FirstOrDefault();
-            ShowDocumentsViewModel addDocViewModel = new ShowDocumentsViewModel();
-            addDocViewModel.Id = module.Id;
-            addDocViewModel.Name = module.Name;
-            addDocViewModel.ParentType = DocParent.Module;
-            addDocViewModel.ParentClass = "module";
-            addDocViewModel.Documents = db.Documents.Where(m => m.Module.Id == module.Id).ToList();
+            ShowDocumentsViewModel showDocViewModel = new ShowDocumentsViewModel();
+            showDocViewModel.Id = module.Id;
+            showDocViewModel.Name = module.Name;
+            showDocViewModel.ParentType = DocParent.Module;
+            showDocViewModel.ParentClass = "module";
+            showDocViewModel.Documents = db.Documents.Where(m => m.Module.Id == module.Id).ToList();
 
-            return View("Index", addDocViewModel);
+            return View("Index", showDocViewModel);
         }
 
         // 
         public ActionResult FromActivity(int? id)
         {
             Activity activity = db.Activities.Where(c => c.Id == id).FirstOrDefault();
-            ShowDocumentsViewModel addDocViewModel = new ShowDocumentsViewModel();
-            addDocViewModel.Id = activity.Id;
-            addDocViewModel.Name = activity.Name;
-            addDocViewModel.ParentType = DocParent.Activity;
-            addDocViewModel.ParentClass = "activity";
-            addDocViewModel.Documents = db.Documents.Where(m => m.Activity.Id == activity.Id).ToList();
+            ShowDocumentsViewModel showDocViewModel = new ShowDocumentsViewModel();
+            showDocViewModel.Id = activity.Id;
+            showDocViewModel.Name = activity.Name;
+            showDocViewModel.ParentType = DocParent.Activity;
+            showDocViewModel.ParentClass = "activity";
+            showDocViewModel.Documents = db.Documents.Where(m => m.Activity.Id == activity.Id && m.DocumentType != DocType.Assignment).ToList();
 
-            return View("Index", addDocViewModel);
+            if (User.IsInRole("Student"))
+            {
+                return View("StudentDocIndex", showDocViewModel);
+            }
+            else
+            {
+                return View("ActivityDocIndex", showDocViewModel);
+            }
         }
 
         // GET: Documents
-        public ActionResult Index(ShowDocumentsViewModel addDocViewModel)
+        public ActionResult Index(ShowDocumentsViewModel showDocViewModel)
         {
-            return View(addDocViewModel);
+            return View(showDocViewModel);
         }
 
         // GET: Documents/Details/5
@@ -130,7 +169,15 @@ namespace LMS.Controllers
             createDocView.Name = addDocView.Name;
             createDocView.ParentClass = addDocView.ParentClass;
             createDocView.ParentType = addDocView.ParentType;
+
             createDocView.Document = new Document();
+
+            ApplicationUser currUser = db.Users.Where(u => u.UserName == User.Identity.Name).FirstOrDefault();
+            if (User.IsInRole("Student"))
+            {
+                createDocView.Document.DocumentType = DocType.Assignment;
+            }
+
             return View(createDocView);
         }
 
@@ -255,9 +302,27 @@ namespace LMS.Controllers
         public ActionResult DeleteConfirmed(int id)
         {
             Document document = db.Documents.Find(id);
-            db.Documents.Remove(document);
-            db.SaveChanges();
-            return RedirectToAction("Index");
+            if (document.Course != null)
+            {
+                Course course = db.Courses.Where(c => c.Id == document.Course.Id).FirstOrDefault();
+                db.Documents.Remove(document);
+                db.SaveChanges();
+                return (ActionResult)FromCourse(course.Id);
+            }
+            else if (document.Module != null)
+            {
+                Module module = db.Modules.Where(c => c.Id == document.Module.Id).FirstOrDefault();
+                db.Documents.Remove(document);
+                db.SaveChanges();
+                return (ActionResult)FromModule(module.Id);
+            }
+            else
+            {
+                Activity activity = db.Activities.Where(c => c.Id == document.Activity.Id).FirstOrDefault();
+                db.Documents.Remove(document);
+                db.SaveChanges();
+                return (ActionResult)FromActivity(activity.Id);
+            }
         }
 
         protected override void Dispose(bool disposing)

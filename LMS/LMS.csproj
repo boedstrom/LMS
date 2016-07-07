@@ -361,6 +361,12 @@
     <Content Include="Views\Courses\StudentActivityPartial.cshtml" />
     <Content Include="Views\Courses\StudentIndex.cshtml" />
     <Content Include="Views\Courses\StudentModulePartial.cshtml" />
+    <Content Include="Views\Documents\Delete.cshtml" />
+    <Content Include="Views\Documents\CourseDocsPartial.cshtml" />
+    <Content Include="Views\Documents\StudentDocsPartial.cshtml" />
+    <Content Include="Views\Documents\StudentDocIndex.cshtml" />
+    <Content Include="Views\Documents\ActivityDocIndex.cshtml" />
+    <Content Include="Views\Documents\AssignmentDocsPartial.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Content\Files\" />

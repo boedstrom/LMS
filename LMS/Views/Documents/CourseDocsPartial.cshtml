@@ -1,18 +1,10 @@
 ﻿@model LMS.Models.ShowDocumentsViewModel
-
-@{
-    ViewBag.Title = "Index";
-}
-
-<h2>Documents for @Html.DisplayFor(model => model.ParentClass) @Html.DisplayFor(model => model.Name)</h2>
-
 <p>
-@if (User.IsInRole("Teacher"))
-{
-    @Html.ActionLink("Add new document", "Create", Model)
-}
+    @if (User.IsInRole("Teacher"))
+    {
+        @Html.ActionLink("Add new document", "Create", Model)
+    }
 </p>
-@ViewBag.Message
 <table class="table">
     <tr>
         <th>
@@ -25,16 +17,12 @@
             @Html.DisplayNameFor(model => model.Documents.First().DocumentType)
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.Documents.First().User.UserName)
-        </th>
-        <th>
             @Html.DisplayNameFor(model => model.Documents.First().Url)
         </th>
     </tr>
-@Html.HiddenFor(model => model.Id)
-@Html.HiddenFor(model => model.ParentType)
 
-@foreach (var item in Model.Documents) {
+@foreach (var item in Model.Documents)
+{
     <tr>
         <td>
             @Html.DisplayFor(modelItem => item.Name)
@@ -46,9 +34,6 @@
             @Html.DisplayFor(modelItem => item.DocumentType)
         </td>
         <td>
-            @Html.DisplayFor(modelItem => item.User.UserName)
-        </td>
-        <td>
             <a href="~/Content/Files/@item.Url">@item.Url</a>
         </td>
         <td>
@@ -57,17 +42,8 @@
                 @Html.ActionLink("Delete", "Delete", new { id = item.Id })
             }
         </td>
+
     </tr>
 }
 
 </table>
-<div>
-@if (User.IsInRole("Student"))
-{
-    @Html.ActionLink("Back", "StudentIndex", "Courses")
-}
-@if (User.IsInRole("Teacher"))
-{
-    @Html.ActionLink("Back", "ReturnToList", Model)
-}
-</div>

@@ -1,0 +1,20 @@
+﻿@model LMS.Models.ShowDocumentsViewModel
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2>Documents for @Html.DisplayFor(model => model.ParentClass) @Html.DisplayFor(model => model.Name)</h2>
+
+<div>
+    @Html.HiddenFor(model => model.Id)
+    @Html.HiddenFor(model => model.ParentType)
+    <h4>Course documents</h4>
+    @Html.Partial("CourseDocsPartial", Model)
+    <hr />
+    <h4>Students documents</h4>
+    @Html.Action("AssignmentDocsPartial", new { id = Model.Id })
+</div>
+<div>
+    @Html.ActionLink("Back", "ReturnToList", Model)
+</div>
