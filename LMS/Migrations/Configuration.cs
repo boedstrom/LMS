@@ -65,15 +65,15 @@ namespace LMS.Migrations
             //context.Modules.AddOrUpdate(m => m.Name, modules);
             //context.SaveChanges();
 
-            // rStore = new RoleStore<IdentityRole>(context);
-            // rManager = new RoleManager<IdentityRole>(rStore);
-            // role = new IdentityRole { Name = "Student" };
-            // rManager.Create(role);
+            //rStore = new RoleStore<IdentityRole>(context);
+            //rManager = new RoleManager<IdentityRole>(rStore);
+            //role = new IdentityRole { Name = "Student" };
+            //rManager.Create(role);
 
-            // uStore = new UserStore<ApplicationUser>(context);
-            // uManager = new UserManager<ApplicationUser>(uStore);
+            //uStore = new UserStore<ApplicationUser>(context);
+            //uManager = new UserManager<ApplicationUser>(uStore);
 
-            // user = new ApplicationUser { UserName = "emil.kork@gmail.com", Email = "emil.kork@gmail.com", FirstName = "Emil", LastName = "Kork", Course = course };
+            //user = new ApplicationUser { UserName = "emil.kork@gmail.com", Email = "emil.kork@gmail.com", FirstName = "Emil", LastName = "Kork", Course = course };
             //uManager.Create(user, "Abcd1234");
             //uManager.AddToRole(user.Id, role.Name);
 

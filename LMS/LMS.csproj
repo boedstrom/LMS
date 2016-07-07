@@ -181,10 +181,6 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
-    <Compile Include="Migrations\201607040805375_teacherview.cs" />
-    <Compile Include="Migrations\201607040805375_teacherview.Designer.cs">
-      <DependentUpon>201607040805375_teacherview.cs</DependentUpon>
-    </Compile>
     <Compile Include="Migrations\201607041218291_NewDB_160704.cs" />
     <Compile Include="Migrations\201607041218291_NewDB_160704.Designer.cs">
       <DependentUpon>201607041218291_NewDB_160704.cs</DependentUpon>
@@ -379,9 +375,6 @@
     <Content Include="Scripts\jquery-1.10.2.min.map" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Migrations\201607040805375_teacherview.resx">
-      <DependentUpon>201607040805375_teacherview.cs</DependentUpon>
-    </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201607041218291_NewDB_160704.resx">
       <DependentUpon>201607041218291_NewDB_160704.cs</DependentUpon>
     </EmbeddedResource>

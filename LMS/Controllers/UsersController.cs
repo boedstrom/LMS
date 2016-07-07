@@ -63,7 +63,7 @@ namespace LMS.Controllers
         //POST
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult CreateTeacher([Bind(Include = "Id,FirstName,LastName,Email,DefaultPassword,UserType,Course")] UserViewModel userViewModel)
+        public ActionResult CreateTeacher([Bind(Include = "FirstName,LastName,Email,DefaultPassword,UserType")] UserViewModel userViewModel)
         {
             if (ModelState.IsValid)
             {
@@ -74,16 +74,30 @@ namespace LMS.Controllers
                 var rManager = new RoleManager<IdentityRole>(rStore);
                 var role = rManager.FindByName("Teacher");
 
-                var user = new ApplicationUser { UserName = userViewModel.Email, Email = userViewModel.Email };
-                user.FirstName = userViewModel.FirstName;
-                user.LastName = userViewModel.LastName;
+                var user = new ApplicationUser {
+                    UserName = userViewModel.Email,
+                    Email = userViewModel.Email,
+                    FirstName = userViewModel.FirstName,
+                    LastName = userViewModel.LastName,
+                };
 
 
-                uManager.Create(user, userViewModel.DefaultPassword);
-                uManager.AddToRole(user.Id, role.Name);
+                var result = uManager.Create(user, userViewModel.DefaultPassword);
+                if (result.Succeeded)
+                {
+                    user = uManager.FindById(user.Id);
+                    uManager.AddToRole(user.Id, role.Name);
+                } else
+                {
+                    foreach (var error in result.Errors)
+                    {
+                        ModelState.AddModelError("", error);
+                    }
+                    return View("CreateTeacher");
+                }
 
                 db.SaveChanges();
-                return RedirectToAction("Index", "UserViewModels", new { id = userViewModel.Course.Id });
+                return RedirectToAction("TeacherIndex", "UserViewModels");
             }
 
             return View(userViewModel);
