@@ -46,11 +46,11 @@
         <td>
             @if (User.IsInRole("Teacher"))
             {
-                @Html.ActionLink("Modules", "AddModules", new { id = item.Id })
+                @Html.ActionLink("Modules", "ShowModules", new { id = item.Id })
                 <span>|</span>
-                @Html.ActionLink("Students", "AddUsers", new { id = item.Id })
+                @Html.ActionLink("Students", "ShowUsers", new { id = item.Id })
                 <span>|</span>
-                @Html.ActionLink("Documents", "AddDocuments", new { id = item.Id })
+                @Html.ActionLink("Documents", "ShowDocuments", new { id = item.Id })
                 <span>|</span>
                 @Html.ActionLink("Edit", "Edit", new { id = item.Id })
                 <span>|</span>

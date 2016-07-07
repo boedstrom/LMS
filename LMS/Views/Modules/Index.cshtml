@@ -1,4 +1,4 @@
-﻿@model LMS.Models.AddModuleViewModel
+﻿@model LMS.Models.ShowModulesViewModel
 @{
     ViewBag.Title = "Index";
 }
@@ -54,9 +54,9 @@
             <td>
                 @if (User.IsInRole("Teacher"))
                 {
-                    @Html.ActionLink("Activities", "AddActivity", new { id = item.Id })
+                    @Html.ActionLink("Activities", "ShowActivities", new { id = item.Id })
                     <span>|</span>
-                    @Html.ActionLink("Documents", "AddDocuments", new { id = item.Id })
+                    @Html.ActionLink("Documents", "ShowDocuments", new { id = item.Id })
                     <span>|</span>
                     @Html.ActionLink("Edit", "Edit", new { id = item.Id })
                     <span>|</span>

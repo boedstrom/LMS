@@ -18,7 +18,7 @@ namespace LMS.Controllers
         public ActionResult StudentActivityPartial(int? id)
         {
             Course course = db.Courses.Find(id);
-            AddModuleViewModel courseModules = new AddModuleViewModel();
+            ShowModulesViewModel courseModules = new ShowModulesViewModel();
             courseModules.CourseId = course.Id;
             courseModules.CourseName = course.Name;
             courseModules.CourseDescription = course.Description;
@@ -47,7 +47,6 @@ namespace LMS.Controllers
                         compareStart = module.StartDate.CompareTo(DateTime.Today);
 
                         //  Module has started, check end date
-//                        if (compareStart > 0)
                         if (compareStart < 0)
                         {
                             compareEnd = module.EndDate.CompareTo(DateTime.Today);
@@ -80,7 +79,7 @@ namespace LMS.Controllers
                 currentModule = courseModules.Modules.LastOrDefault();
             }
 
-            AddActivityViewModel studentActivityView = new AddActivityViewModel();
+            ShowActivitiesViewModel studentActivityView = new ShowActivitiesViewModel();
 
             studentActivityView.ModuleId = currentModule.Id;
             studentActivityView.ModuleName = currentModule.Name;
@@ -95,7 +94,7 @@ namespace LMS.Controllers
         {
             ApplicationUser student = db.Users.Where(u => u.UserName == User.Identity.Name).FirstOrDefault();
             Course course = student.Course;
-            AddModuleViewModel courseModules = new AddModuleViewModel();
+            ShowModulesViewModel courseModules = new ShowModulesViewModel();
             courseModules.CourseId = course.Id;
             courseModules.CourseName = course.Name;
             courseModules.CourseDescription = course.Description;
@@ -119,22 +118,33 @@ namespace LMS.Controllers
 
         // 
         [Authorize(Roles = "Teacher")]
-        public ActionResult AddModules(int? id)
+        public ActionResult ShowModules(int? id)
         {
             return RedirectToAction("Index", "Modules", new { id });
         }
 
         // 
-        public ActionResult AddUsers(int? id)
+        public ActionResult ShowUsers(int? id)
         {
-            return RedirectToAction("Index", "UserViewModels", new { id });
+            return RedirectToAction("Index", "Users", new { id });
         }
 
         // 
-        [Authorize(Roles = "Teacher")]
-        public ActionResult AddDocuments(int? id)
+        public ActionResult ShowCourseDocuments(int? id)
         {
             return RedirectToAction("FromCourse", "Documents", new { id });
+        }
+
+        // 
+        public ActionResult ShowModuleDocuments(int? id)
+        {
+            return RedirectToAction("FromModule", "Documents", new { id });
+        }
+
+        // 
+        public ActionResult ShowActivityDocuments(int? id)
+        {
+            return RedirectToAction("FromActivity", "Documents", new { id });
         }
 
         // GET: Courses/Details/5

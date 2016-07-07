@@ -12,33 +12,34 @@ using System.Threading.Tasks;
 
 namespace LMS.Controllers
 {
+    [Authorize]
     public class DocumentsController : Controller
     {
         private ApplicationDbContext db = new ApplicationDbContext();
 
         // 
-        public ActionResult Download(int? id)
-        {
-            Document dlDoc = db.Documents.FirstOrDefault(m => m.Id == id);
-            if (dlDoc.Course != null)
-            {
-                Course course = db.Courses.Where(c => c.Id == dlDoc.Course.Id).FirstOrDefault();
-                return (ActionResult)FromCourse(course.Id);
-            }
-            else if (dlDoc.Module != null)
-            {
-                Module module = db.Modules.Where(c => c.Id == dlDoc.Module.Id).FirstOrDefault();
-                return (ActionResult)FromModule(module.Id);
-            }
-            else 
-            {
-                Activity activity = db.Activities.Where(c => c.Id == dlDoc.Activity.Id).FirstOrDefault();
-                return (ActionResult)FromActivity(activity.Id);
-            }
-        }
+        //public ActionResult Download(int? id)
+        //{
+        //    Document dlDoc = db.Documents.FirstOrDefault(m => m.Id == id);
+        //    if (dlDoc.Course != null)
+        //    {
+        //        Course course = db.Courses.Where(c => c.Id == dlDoc.Course.Id).FirstOrDefault();
+        //        return (ActionResult)FromCourse(course.Id);
+        //    }
+        //    else if (dlDoc.Module != null)
+        //    {
+        //        Module module = db.Modules.Where(c => c.Id == dlDoc.Module.Id).FirstOrDefault();
+        //        return (ActionResult)FromModule(module.Id);
+        //    }
+        //    else 
+        //    {
+        //        Activity activity = db.Activities.Where(c => c.Id == dlDoc.Activity.Id).FirstOrDefault();
+        //        return (ActionResult)FromActivity(activity.Id);
+        //    }
+        //}
 
         //
-        public ActionResult ReturnToList(AddDocumentViewModel addDocView)
+        public ActionResult ReturnToList(ShowDocumentsViewModel addDocView)
         {
             switch (addDocView.ParentType)
             {
@@ -62,7 +63,7 @@ namespace LMS.Controllers
         public ActionResult FromCourse(int? id)
         {
             Course course = db.Courses.Where(c => c.Id == id).FirstOrDefault();
-            AddDocumentViewModel addDocViewModel = new AddDocumentViewModel();
+            ShowDocumentsViewModel addDocViewModel = new ShowDocumentsViewModel();
             addDocViewModel.Id = course.Id;
             addDocViewModel.Name = course.Name;
             addDocViewModel.ParentType = DocParent.Course;
@@ -76,7 +77,7 @@ namespace LMS.Controllers
         public ActionResult FromModule(int? id)
         {
             Module module = db.Modules.Where(c => c.Id == id).FirstOrDefault();
-            AddDocumentViewModel addDocViewModel = new AddDocumentViewModel();
+            ShowDocumentsViewModel addDocViewModel = new ShowDocumentsViewModel();
             addDocViewModel.Id = module.Id;
             addDocViewModel.Name = module.Name;
             addDocViewModel.ParentType = DocParent.Module;
@@ -90,7 +91,7 @@ namespace LMS.Controllers
         public ActionResult FromActivity(int? id)
         {
             Activity activity = db.Activities.Where(c => c.Id == id).FirstOrDefault();
-            AddDocumentViewModel addDocViewModel = new AddDocumentViewModel();
+            ShowDocumentsViewModel addDocViewModel = new ShowDocumentsViewModel();
             addDocViewModel.Id = activity.Id;
             addDocViewModel.Name = activity.Name;
             addDocViewModel.ParentType = DocParent.Activity;
@@ -101,7 +102,7 @@ namespace LMS.Controllers
         }
 
         // GET: Documents
-        public ActionResult Index(AddDocumentViewModel addDocViewModel)
+        public ActionResult Index(ShowDocumentsViewModel addDocViewModel)
         {
             return View(addDocViewModel);
         }
@@ -122,7 +123,7 @@ namespace LMS.Controllers
         }
 
         // GET: Documents/Create
-        public ActionResult Create(AddDocumentViewModel addDocView)
+        public ActionResult Create(ShowDocumentsViewModel addDocView)
         {
             CreateDocumentViewModel createDocView = new CreateDocumentViewModel();
             createDocView.Id = addDocView.Id;
@@ -134,7 +135,6 @@ namespace LMS.Controllers
         }
 
         // POST: Documents/Create
-        // public ActionResult Create([Bind(Include = "Id,Name,Description,DocumentType,CreationDate")] Document document)
         [HttpPost, ActionName("Create")]
         [ValidateAntiForgeryToken]
         public ActionResult CreateDocument([Bind(Include = "Id,Name,ParentClass,ParentType,Document")] CreateDocumentViewModel createDocView, HttpPostedFileBase file)
@@ -148,7 +148,7 @@ namespace LMS.Controllers
                     {
                         string path = Path.Combine(Server.MapPath("~/Content/Files"), Path.GetFileName(file.FileName));
                         file.SaveAs(path);
-                        newDoc.Url = path;
+                        newDoc.Url = Path.GetFileName(file.FileName);
                     }
                     catch (Exception ex)
                     {

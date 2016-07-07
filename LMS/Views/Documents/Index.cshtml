@@ -1,4 +1,4 @@
-﻿@model LMS.Models.AddDocumentViewModel
+﻿@model LMS.Models.ShowDocumentsViewModel
 
 @{
     ViewBag.Title = "Index";
@@ -19,12 +19,14 @@
             @Html.DisplayNameFor(model => model.Documents.First().Description)
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.Documents.First().Url)
+            @Html.DisplayNameFor(model => model.Documents.First().DocumentType)
         </th>
         <th>
             @Html.DisplayNameFor(model => model.Documents.First().User.UserName)
         </th>
-        <th></th>
+        <th>
+            @Html.DisplayNameFor(model => model.Documents.First().Url)
+        </th>
     </tr>
 
 @foreach (var item in Model.Documents) {
@@ -36,21 +38,19 @@
             @Html.DisplayFor(modelItem => item.Description)
         </td>
         <td>
-@*
-            @Html.DisplayFor(modelItem => item.Url)  
-*@
-            @Html.ActionLink(item.Url + " ", "Download", new { Model, item.Id } )
+            @Html.DisplayFor(modelItem => item.DocumentType)
         </td>
         <td>
             @Html.DisplayFor(modelItem => item.User.UserName)
         </td>
-@*
-    <td>
-        @Html.ActionLink("Edit", "Edit", new { id=item.Id }) |
-        @Html.ActionLink("Details", "Details", new { id=item.Id }) |
-        @Html.ActionLink("Delete", "Delete", new { id=item.Id })
-    </td>
-*@
+        <td>
+            @*
+            @Html.ActionLink(item.Url, "Download", new { Model, item.Id } )
+            <br />*@
+
+            <a href="~/Content/Files/@item.Url">@item.Url</a>
+        </td>
+
 @Html.HiddenFor(model => model.Id)
 @Html.HiddenFor(model => model.ParentType)
     </tr>
@@ -58,5 +58,12 @@
 
 </table>
 <div>
-    @Html.ActionLink("Back to list", "ReturnToList", Model)
+@if (User.IsInRole("Student"))
+{
+    @Html.ActionLink("Back", "StudentIndex", "Courses")
+}
+@if (User.IsInRole("Teacher"))
+{
+    @Html.ActionLink("Back", "ReturnToList", Model)
+}
 </div>

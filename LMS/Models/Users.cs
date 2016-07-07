@@ -21,4 +21,9 @@ namespace LMS.Models
         public UserType UserType { get; set; }
         public Course Course { get; set; }
     }
+
+    public class TeacherViewModel
+    {
+        public IEnumerable<ApplicationUser> Teachers { get; set; }
+    }
 }

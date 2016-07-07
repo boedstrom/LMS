@@ -12,7 +12,7 @@ using Microsoft.AspNet.Identity;
 
 namespace LMS.Controllers
 {
-    public class UserViewModelsController : Controller
+    public class UsersController : Controller
     {
         private ApplicationDbContext db = new ApplicationDbContext();
 
@@ -29,7 +29,7 @@ namespace LMS.Controllers
         // GET: UserViewModels
         public ActionResult Index(int? id)
         {
-            AddUserViewModel courseUsers = new AddUserViewModel();
+            ShowUsersViewModel courseUsers = new ShowUsersViewModel();
 
             Course course = db.Courses.Where(c => c.Id == id).FirstOrDefault();
             courseUsers.CourseId = course.Id;

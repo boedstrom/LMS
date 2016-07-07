@@ -1,4 +1,4 @@
-﻿@model LMS.Models.AddUserViewModel
+﻿@model LMS.Models.ShowUsersViewModel
 
 @{
     ViewBag.Title = "Index";
@@ -68,10 +68,10 @@
 <div>
     @if (User.IsInRole("Student"))
     {
-        @Html.ActionLink("Back to start page", "BackToStudent", new { id = Model.CourseId })
+        @Html.ActionLink("Back", "BackToStudent", new { id = Model.CourseId })
     }
     @if (User.IsInRole("Teacher"))
     {
-        @Html.ActionLink("Back to Courses", "BackToCourse", new { id = Model.CourseId })
+        @Html.ActionLink("Back", "BackToCourse", new { id = Model.CourseId })
     }
 </div>

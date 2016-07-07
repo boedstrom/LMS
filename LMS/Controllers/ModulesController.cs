@@ -21,14 +21,14 @@ namespace LMS.Controllers
         }
 
         [Authorize(Roles = "Teacher")]
-        public ActionResult AddActivity(int? id)
+        public ActionResult ShowActivities(int? id)
         {
             return RedirectToAction("Index", "Activities", new { id });
         }
 
         // 
         [Authorize(Roles = "Teacher")]
-        public ActionResult AddDocuments(int? id)
+        public ActionResult ShowDocuments(int? id)
         {
             return RedirectToAction("FromModule", "Documents", new { id });
         }
@@ -36,7 +36,7 @@ namespace LMS.Controllers
         // GET: Modules
         public ActionResult Index(int? id)
         {
-            AddModuleViewModel courseModules = new AddModuleViewModel();
+            ShowModulesViewModel courseModules = new ShowModulesViewModel();
 
             Course course = db.Courses.Where(c => c.Id == id).FirstOrDefault();
             courseModules.CourseId = course.Id;

@@ -1,4 +1,4 @@
-﻿@model LMS.Models.AddActivityViewModel
+﻿@model LMS.Models.ShowActivitiesViewModel
 @{
     ViewBag.Title = "Index";
 }
@@ -48,7 +48,7 @@
                 @Html.DisplayFor(modelItem => item.Deadline)
             </td>
             <td>
-                @Html.ActionLink("Documents", "AddDocuments", new { id = item.Id })
+                @Html.ActionLink("Documents", "ShowActivityDocuments", new { id = item.Id })
             </td>
         </tr>
     }

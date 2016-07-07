@@ -16,7 +16,7 @@ namespace LMS.Controllers
         private ApplicationDbContext db = new ApplicationDbContext();
 
         // 
-        public ActionResult AddDocuments(int? id)
+        public ActionResult ShowDocuments(int? id)
         {
             return RedirectToAction("FromActivity", "Documents", new { id });
         }
@@ -36,7 +36,7 @@ namespace LMS.Controllers
         // GET: Activities
         public ActionResult Index(int? id)
         {
-            AddActivityViewModel moduleActivities = new AddActivityViewModel();
+            ShowActivitiesViewModel moduleActivities = new ShowActivitiesViewModel();
 
             Module module = db.Modules.Where(c => c.Id == id).FirstOrDefault();
             moduleActivities.ModuleId = module.Id;

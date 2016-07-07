@@ -12,7 +12,7 @@ namespace LMS.Models
         Activity
     }
 
-    public class AddDocumentViewModel
+    public class ShowDocumentsViewModel
     {
         public int Id { get; set; }
         public string Name { get; set; }

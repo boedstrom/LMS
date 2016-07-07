@@ -1,4 +1,4 @@
-﻿@model LMS.Models.AddActivityViewModel
+﻿@model LMS.Models.ShowActivitiesViewModel
 
 @{
     ViewBag.Title = "Index";
@@ -64,7 +64,7 @@
                 @Html.DisplayFor(modelItem => item.Deadline)
             </td>
             <td>
-                @Html.ActionLink("Documents", "AddDocuments", new { id = item.Id })
+                @Html.ActionLink("Documents", "ShowDocuments", new { id = item.Id })
 
                 @if (User.IsInRole("Teacher"))
                 {
@@ -83,10 +83,10 @@
 <div>
     @if (User.IsInRole("Student"))
     {
-        @Html.ActionLink("Back to start page", "BackToStudent", new { id = Model.ModuleId })
+        @Html.ActionLink("Back", "BackToStudent", new { id = Model.ModuleId })
     }
     @if (User.IsInRole("Teacher"))
     {
-        @Html.ActionLink("Back to module list", "BackToModule", new { id = Model.ModuleId })
+        @Html.ActionLink("Back", "BackToModule", new { id = Model.ModuleId })
     }
 </div>

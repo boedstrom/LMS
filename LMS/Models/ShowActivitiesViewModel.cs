@@ -5,7 +5,7 @@ using System.Web;
 
 namespace LMS.Models
 {
-    public class AddActivityViewModel
+    public class ShowActivitiesViewModel
     {         
         public int Id { get; set; }
         public int ModuleId { get; set; }

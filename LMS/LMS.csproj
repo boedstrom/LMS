@@ -177,7 +177,7 @@
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\ManageController.cs" />
     <Compile Include="Controllers\ModulesController.cs" />
-    <Compile Include="Controllers\UserViewModelsController.cs" />
+    <Compile Include="Controllers\UsersController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
@@ -196,21 +196,17 @@
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
     <Compile Include="Models\Activity.cs" />
-    <Compile Include="Models\AddActivityViewModel.cs" />
+    <Compile Include="Models\ShowActivitiesViewModel.cs" />
     <Compile Include="Models\CreateDocumentViewModel.cs" />
-    <Compile Include="Models\AddDocumentViewModel.cs" />
-    <Compile Include="Models\AddModuleViewModel.cs" />
-    <Compile Include="Models\AddUserViewModel.cs" />
+    <Compile Include="Models\ShowDocumentsViewModel.cs" />
+    <Compile Include="Models\ShowModulesViewModel.cs" />
+    <Compile Include="Models\ShowUsersViewModel.cs" />
     <Compile Include="Models\Course.cs" />
     <Compile Include="Models\Document.cs" />
     <Compile Include="Models\IdentityModels.cs" />
     <Compile Include="Models\ManageViewModels.cs" />
     <Compile Include="Models\Module.cs" />
-    <Compile Include="Models\TeacherViewModel.cs" />
-    <Compile Include="Models\UserViewModel.cs" />
-    <Compile Include="obj\Debug\TemporaryGeneratedFile_036C0B5B-1481-4323-8D20-8F5ADCB23D92.cs" />
-    <Compile Include="obj\Debug\TemporaryGeneratedFile_5937a670-0e60-4077-877b-f7221da3dda1.cs" />
-    <Compile Include="obj\Debug\TemporaryGeneratedFile_E7A71F73-0F8D-4B9B-B56E-8E70B10BC5D3.cs" />
+    <Compile Include="Models\Users.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Startup.cs" />
   </ItemGroup>
@@ -354,21 +350,25 @@
     <Content Include="Views\Activities\Details.cshtml" />
     <Content Include="Views\Activities\Edit.cshtml" />
     <Content Include="Views\Activities\Index.cshtml" />
-    <Content Include="Views\UserViewModels\Index.cshtml" />
-    <Content Include="Views\UserViewModels\Create.cshtml" />
-    <Content Include="Views\UserViewModels\Edit.cshtml" />
-    <Content Include="Views\UserViewModels\Delete.cshtml" />
-    <Content Include="Views\UserViewModels\Details.cshtml" />
+    <Content Include="Views\Users\Index.cshtml" />
+    <Content Include="Views\Users\Create.cshtml" />
+    <Content Include="Views\Users\Edit.cshtml" />
+    <Content Include="Views\Users\Delete.cshtml" />
+    <Content Include="Views\Users\Details.cshtml" />
     <Content Include="Views\Documents\Index.cshtml" />
     <Content Include="Views\Documents\Create.cshtml" />
-    <Content Include="Views\UserViewModels\CreateTeacher.cshtml" />
-    <Content Include="Views\UserViewModels\TeacherIndex.cshtml" />
-    <Content Include="Views\UserViewModels\DetailsTeacher.cshtml" />
-    <Content Include="Views\UserViewModels\EditTeacher.cshtml" />
-    <Content Include="Views\UserViewModels\DeleteTeacher.cshtml" />
+    <Content Include="Views\Users\CreateTeacher.cshtml" />
+    <Content Include="Views\Users\TeacherIndex.cshtml" />
+    <Content Include="Views\Users\DetailsTeacher.cshtml" />
+    <Content Include="Views\Users\EditTeacher.cshtml" />
+    <Content Include="Views\Users\DeleteTeacher.cshtml" />
+    <Content Include="Views\Courses\StudentActivityPartial.cshtml" />
+    <Content Include="Views\Courses\StudentIndex.cshtml" />
+    <Content Include="Views\Courses\StudentModulePartial.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Content\Files\" />
+    <Folder Include="obj\Debug\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="fonts\glyphicons-halflings-regular.woff" />

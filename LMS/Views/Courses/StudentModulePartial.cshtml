@@ -1,4 +1,4 @@
-﻿@model LMS.Models.AddModuleViewModel
+﻿@model LMS.Models.ShowModulesViewModel
 @{
     ViewBag.Title = "Index";
 }
@@ -34,6 +34,9 @@
             </td>
             <td>
                 @Html.DisplayFor(modelItem => item.EndDate)
+            </td>
+            <td>
+                @Html.ActionLink("Documents", "ShowModuleDocuments", new { id = item.Id })
             </td>
         </tr>
     }
