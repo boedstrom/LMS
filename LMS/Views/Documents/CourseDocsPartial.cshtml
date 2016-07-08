@@ -6,44 +6,59 @@
     }
 </p>
 <table class="table">
-    <tr>
-        <th>
-            @Html.DisplayNameFor(model => model.Documents.First().Name)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Documents.First().Description)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Documents.First().DocumentType)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Documents.First().Url)
-        </th>
-    </tr>
+    <colgroup>
+        <col class="col-md-2">
+        <col class="col-md-3">
+        <col class="col-md-1">
+        <col class="col-md-3">
+        <col class="col-md-2">
+        <col class="col-md-1">
+    </colgroup>
+    <tbody>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.Documents.First().Name)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Documents.First().Description)
+            </th>
+            <th>
+@*                @Html.DisplayNameFor(model => model.Documents.First().DocumentType)*@
+                Doc type
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Documents.First().Url)
+            </th>
+            <th>
+            </th>
+            <th>
+            </th>
+        </tr>
 
-@foreach (var item in Model.Documents)
-{
-    <tr>
-        <td>
-            @Html.DisplayFor(modelItem => item.Name)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Description)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.DocumentType)
-        </td>
-        <td>
-            <a href="~/Content/Files/@item.Url">@item.Url</a>
-        </td>
-        <td>
-            @if (User.IsInRole("Teacher"))
-            {
-                @Html.ActionLink("Delete", "Delete", new { id = item.Id })
-            }
-        </td>
-
-    </tr>
-}
-
+        @foreach (var item in Model.Documents)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Name)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Description)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.DocumentType)
+                </td>
+                <td>
+                    <a href="~/Content/Files/@item.Url">@item.Url</a>
+                </td>
+                <td>
+                    @if (User.IsInRole("Teacher"))
+                    {
+                        @Html.ActionLink("Delete", "Delete", new { id = item.Id })
+                    }
+                </td>
+                <td>
+                </td>
+            </tr>
+        }
+    </tbody>
 </table>

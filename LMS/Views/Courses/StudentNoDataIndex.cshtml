@@ -1,0 +1,17 @@
+﻿@model LMS.Models.ShowModulesViewModel
+@{
+    ViewBag.Title = "StudentNoDataIndex";
+}
+
+<h2>My current course: @Html.DisplayFor(model => model.CourseName)</h2>
+<div>
+    <h4>
+        Course duration: @Convert.ToDateTime(Model.CourseStart).ToString("yyyy-MM-dd") -
+        @Convert.ToDateTime(Model.CourseEnd).ToString("yyyy-MM-dd")
+    </h4>
+</div>
+<div>
+    <h2>There are required data missing or not yet entered into the system:
+    <br />
+    @Html.DisplayFor(model => model.CourseDescription)</h2>
+</div>

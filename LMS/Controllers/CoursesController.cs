@@ -80,15 +80,24 @@ namespace LMS.Controllers
             }
 
             ShowActivitiesViewModel studentActivityView = new ShowActivitiesViewModel();
-
             studentActivityView.ModuleId = currentModule.Id;
             studentActivityView.ModuleName = currentModule.Name;
             studentActivityView.ModuleStart = currentModule.StartDate.Date;
             studentActivityView.ModuleEnd = currentModule.EndDate.Date;
             studentActivityView.Activities = db.Activities.Where(m => m.Module.Id == currentModule.Id).ToList();
+            if (studentActivityView.Activities.Count() == 0)
+            {
+                studentActivityView.ModuleName = "There are no activities for the current module";
+                return PartialView("StudentNoDataPartial", studentActivityView);
+            }
             return PartialView("StudentActivityPartial", studentActivityView);
         }
-        
+
+        public ActionResult StudentNoDataPartial(ShowActivitiesViewModel studentActivityView)
+        {
+            return PartialView("StudentNoDataPartial", studentActivityView);
+        }
+
         // Student Index
         public ActionResult StudentIndex()
         {
@@ -101,6 +110,17 @@ namespace LMS.Controllers
             courseModules.CourseStart = course.StartDate.Date;
             courseModules.CourseEnd = course.EndDate.Date;
             courseModules.Modules = db.Modules.Where(m => m.Course.Id == course.Id).ToList();
+            if (courseModules.Modules.Count() == 0)
+            {
+                courseModules.CourseDescription = "There are no modules for this course";
+                return RedirectToAction("StudentNoDataIndex", courseModules);
+            }
+            return View(courseModules);
+        }
+
+        // Some data missing, show "error" view
+        public ActionResult StudentNoDataIndex(ShowModulesViewModel courseModules)
+        {
             return View(courseModules);
         }
 
