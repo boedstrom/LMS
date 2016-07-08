@@ -16,17 +16,19 @@ namespace LMS.Controllers
     {
         private ApplicationDbContext db = new ApplicationDbContext();
 
+        //
         public ActionResult BackToCourse(int? id)
         {
             return RedirectToAction("Index", "Courses");
         }
 
+        //
         public ActionResult BackToStudent(int? id)
         {
             return RedirectToAction("StudentIndex", "Courses", new { id });
         }
 
-        // GET: UserViewModels
+        // 
         public ActionResult Index(int? id)
         {
             ShowUsersViewModel courseUsers = new ShowUsersViewModel();
@@ -41,23 +43,20 @@ namespace LMS.Controllers
             return View(courseUsers);
         }
 
+        //
         public ActionResult TeacherIndex()
         {
-
-
             TeacherViewModel teachers = new TeacherViewModel();
 
             var roleId = db.Roles.FirstOrDefault(x => x.Name == "Teacher").Id;
-           teachers.Teachers = db.Users.Where(u => u.Roles.FirstOrDefault().RoleId == roleId).ToList();
+            teachers.Teachers = db.Users.Where(u => u.Roles.FirstOrDefault().RoleId == roleId).ToList();
             return View(teachers);
         }
+
         // GET
         public ActionResult CreateTeacher()
         {
-
-           
             return View();
-
         }
 
         //POST
@@ -69,25 +68,24 @@ namespace LMS.Controllers
             {
                 var uStore = new UserStore<ApplicationUser>(db);
                 var uManager = new UserManager<ApplicationUser>(uStore);
-
                 var rStore = new RoleStore<IdentityRole>(db);
                 var rManager = new RoleManager<IdentityRole>(rStore);
                 var role = rManager.FindByName("Teacher");
-
-                var user = new ApplicationUser {
+                var user = new ApplicationUser
+                {
                     UserName = userViewModel.Email,
                     Email = userViewModel.Email,
                     FirstName = userViewModel.FirstName,
                     LastName = userViewModel.LastName,
                 };
 
-
                 var result = uManager.Create(user, userViewModel.DefaultPassword);
                 if (result.Succeeded)
                 {
                     user = uManager.FindById(user.Id);
                     uManager.AddToRole(user.Id, role.Name);
-                } else
+                }
+                else
                 {
                     foreach (var error in result.Errors)
                     {
@@ -103,7 +101,7 @@ namespace LMS.Controllers
             return View(userViewModel);
         }
 
-        // GET: UserViewModels/Details/5
+        // GET: Users/Details/5
         public ActionResult Details(string id)
         {
             if (id == null)
@@ -124,7 +122,7 @@ namespace LMS.Controllers
             return View(userViewModel);
         }
 
-
+        //
         public ActionResult DetailsTeacher(string id)
         {
             if (id == null)
@@ -137,8 +135,6 @@ namespace LMS.Controllers
                 return HttpNotFound();
             }
 
-
-
             UserViewModel userViewModel = new UserViewModel();
             userViewModel.Id = user.Id;
             userViewModel.FirstName = user.FirstName;
@@ -148,7 +144,7 @@ namespace LMS.Controllers
             return View(userViewModel);
         }
 
-        // GET: UserViewModels/Create
+        // GET: Users/Create
         [Authorize(Roles = "Teacher")]
         public ActionResult Create(int? id)
         {
@@ -157,7 +153,7 @@ namespace LMS.Controllers
             return View(userViewModel);
         }
 
-        // POST: UserViewModels/Create
+        // POST: Users/Create
         [HttpPost]
         [ValidateAntiForgeryToken]
         [Authorize(Roles = "Teacher")]
@@ -167,7 +163,7 @@ namespace LMS.Controllers
             {
                 var rStore = new RoleStore<IdentityRole>(db);
                 var rManager = new RoleManager<IdentityRole>(rStore);
-                var role =  rManager.FindByName("Student");
+                var role = rManager.FindByName("Student");
 
                 var uStore = new UserStore<ApplicationUser>(db);
                 var uManager = new UserManager<ApplicationUser>(uStore);
@@ -189,7 +185,7 @@ namespace LMS.Controllers
             return View(userViewModel);
         }
 
-        // GET: UserViewModels/Edit/5
+        // GET: Users/Edit/5
         [Authorize(Roles = "Teacher")]
         public ActionResult Edit(string id)
         {
@@ -211,7 +207,7 @@ namespace LMS.Controllers
             return View(userViewModel);
         }
 
-        // POST: UserViewModels/Edit/5
+        // POST: Users/Edit/5
         [HttpPost]
         [ValidateAntiForgeryToken]
         [Authorize(Roles = "Teacher")]
@@ -235,7 +231,7 @@ namespace LMS.Controllers
             return View(userViewModel);
         }
 
-        // GET: UserViewModels/EditTeacher/5
+        // GET: Users/EditTeacher/5
         public ActionResult EditTeacher(string id)
         {
             if (id == null)
@@ -254,8 +250,6 @@ namespace LMS.Controllers
             userViewModel.Email = user.Email;
             return View(userViewModel);
         }
-
-
 
         //Post
         [HttpPost]
@@ -298,10 +292,7 @@ namespace LMS.Controllers
             return View(userViewModel);
         }
 
-
-
-
-        // GET: UserViewModels/Delete/5
+        // GET: Users/Delete/5
         [Authorize(Roles = "Teacher")]
         public ActionResult Delete(string id)
         {
@@ -323,7 +314,7 @@ namespace LMS.Controllers
             return View(userViewModel);
         }
 
-        // POST: UserViewModels/Delete/5
+        // POST: Users/Delete/5
         [HttpPost, ActionName("DeleteTeacher")]
         [ValidateAntiForgeryToken]
         [Authorize(Roles = "Teacher")]
@@ -333,13 +324,14 @@ namespace LMS.Controllers
             var uManager = new UserManager<ApplicationUser>(uStore);
 
             ApplicationUser user = db.Users.Where(u => u.Id == id).FirstOrDefault();
- 
+
 
             uManager.Delete(user);
             db.SaveChanges();
             return RedirectToAction("TeacherIndex");
         }
-        // POST: UserViewModels/Delete/5
+        
+        // POST: Users/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
         [Authorize(Roles = "Teacher")]
@@ -356,6 +348,7 @@ namespace LMS.Controllers
             return RedirectToAction("Index", new { id = courseId });
         }
 
+        //
         protected override void Dispose(bool disposing)
         {
             if (disposing)

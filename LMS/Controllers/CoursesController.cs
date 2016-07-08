@@ -15,6 +15,7 @@ namespace LMS.Controllers
     {
         private ApplicationDbContext db = new ApplicationDbContext();
 
+        // ***
         public ActionResult StudentActivityPartial(int? id)
         {
             Course course = db.Courses.Find(id);
@@ -93,6 +94,7 @@ namespace LMS.Controllers
             return PartialView("StudentActivityPartial", studentActivityView);
         }
 
+        // ***
         public ActionResult StudentNoDataPartial(ShowActivitiesViewModel studentActivityView)
         {
             return PartialView("StudentNoDataPartial", studentActivityView);
@@ -136,32 +138,32 @@ namespace LMS.Controllers
             return View(db.Courses.ToList());
         }
 
-        // 
+        // ***
         [Authorize(Roles = "Teacher")]
         public ActionResult ShowModules(int? id)
         {
             return RedirectToAction("Index", "Modules", new { id });
         }
 
-        // 
+        // ***
         public ActionResult ShowUsers(int? id)
         {
             return RedirectToAction("Index", "Users", new { id });
         }
 
-        // 
+        // ***
         public ActionResult ShowCourseDocuments(int? id)
         {
             return RedirectToAction("FromCourse", "Documents", new { id });
         }
 
-        // 
+        // ***
         public ActionResult ShowModuleDocuments(int? id)
         {
             return RedirectToAction("FromModule", "Documents", new { id });
         }
 
-        // 
+        // ***
         public ActionResult ShowActivityDocuments(int? id)
         {
             return RedirectToAction("FromActivity", "Documents", new { id });
@@ -267,6 +269,7 @@ namespace LMS.Controllers
             return RedirectToAction("Index");
         }
 
+        // ***
         protected override void Dispose(bool disposing)
         {
             if (disposing)

@@ -15,18 +15,20 @@ namespace LMS.Controllers
     {
         private ApplicationDbContext db = new ApplicationDbContext();
 
+        // ***
         public ActionResult BackToCourse(int? id)
         {
             return RedirectToAction("Index", "Courses");
         }
 
+        // ***
         [Authorize(Roles = "Teacher")]
         public ActionResult ShowActivities(int? id)
         {
             return RedirectToAction("Index", "Activities", new { id });
         }
 
-        // 
+        // ***
         [Authorize(Roles = "Teacher")]
         public ActionResult ShowDocuments(int? id)
         {
@@ -153,6 +155,7 @@ namespace LMS.Controllers
             return RedirectToAction("Index", "Modules", new { id = courseId });
         }
 
+        // ***
         protected override void Dispose(bool disposing)
         {
             if (disposing)

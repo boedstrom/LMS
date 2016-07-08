@@ -15,18 +15,20 @@ namespace LMS.Controllers
     {
         private ApplicationDbContext db = new ApplicationDbContext();
 
-        // 
+        // ***
         public ActionResult ShowDocuments(int? id)
         {
             return RedirectToAction("FromActivity", "Documents", new { id });
         }
 
+        // ***
         public ActionResult BackToModule(int? id)
         {
             Module thisModule = db.Modules.Where(c => c.Id == id).FirstOrDefault();
             return RedirectToAction("Index", "Modules", new { id = thisModule.Course.Id });
         }
 
+        // ***
         public ActionResult BackToStudent(int? id)
         {
             Module thisModule = db.Modules.Where(c => c.Id == id).FirstOrDefault();
@@ -151,6 +153,7 @@ namespace LMS.Controllers
             return RedirectToAction("Index", "Activities", new { id = moduleid });
         }
 
+        // ***
         protected override void Dispose(bool disposing)
         {
             if (disposing)

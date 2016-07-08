@@ -59,11 +59,11 @@
 
     </dl>
 </div>
-<p>
+<div>
     @if (User.IsInRole("Teacher"))
     {
-        @Html.ActionLink("Edit", "Edit", new { id = Model.Id })
+        @Html.ActionLink("Edit", "Edit", new { id = Model.Id }) 
         <span>|</span>
     }
-    @Html.ActionLink("Back to List", "Index", new { id = Model.Module.Id })
-</p>
+    @Html.ActionLink("Back", "Index", new { id = Model.Module.Id })
+</div>

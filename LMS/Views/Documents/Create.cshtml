@@ -64,7 +64,14 @@
 }
 
 <div>
-    @Html.ActionLink("Back", "Index", new { Model.Id })
+    @if (User.IsInRole("Student"))
+    {
+        @Html.ActionLink("Back", "FromActivity", new { Model.Id })
+    }
+    @if (User.IsInRole("Teacher"))
+    {
+        @Html.ActionLink("Back", "FromCreateView", Model)
+    }
 </div>
 
 @section Scripts {
