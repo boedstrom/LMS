@@ -17,7 +17,7 @@ namespace LMS.Controllers
     {
         private ApplicationDbContext db = new ApplicationDbContext();
 
-        //
+        // ***
         public ActionResult AssignmentDocsPartial(int? id)
         {
             Activity activity = db.Activities.Where(c => c.Id == id).FirstOrDefault();
@@ -32,7 +32,7 @@ namespace LMS.Controllers
             return PartialView("AssignmentDocsPartial", showDocViewModel);
         }
 
-        //
+        // ***
         public ActionResult StudentDocsPartial(int? id)
         {
             ApplicationUser student = db.Users.Where(u => u.UserName == User.Identity.Name).FirstOrDefault();
@@ -49,7 +49,7 @@ namespace LMS.Controllers
             return PartialView("StudentDocsPartial", showDocViewModel);
         }
 
-        //
+        // ***
         public ActionResult ReturnToIndex(int? id)
         {
             Document dlDoc = db.Documents.FirstOrDefault(m => m.Id == id);
@@ -70,7 +70,7 @@ namespace LMS.Controllers
             }
         }
 
-        //
+        // ***
         public ActionResult ReturnToList(ShowDocumentsViewModel addDocView)
         {
             switch (addDocView.ParentType)
@@ -91,7 +91,24 @@ namespace LMS.Controllers
             }
         }
 
-        // 
+        // ***
+        public ActionResult FromCreateView(CreateDocumentViewModel docViewModel)
+        {
+            switch (docViewModel.ParentType)
+            {
+                case DocParent.Course:
+                    return RedirectToAction("FromCourse", new { docViewModel.Id });
+
+                case DocParent.Module:
+                    return RedirectToAction("FromModule", new { docViewModel.Id });
+
+                case DocParent.Activity:
+                default:
+                    return RedirectToAction("FromActivity", new { docViewModel.Id });
+            }
+        }
+
+        // ***
         public ActionResult FromCourse(int? id)
         {
             Course course = db.Courses.Where(c => c.Id == id).FirstOrDefault();
@@ -105,7 +122,7 @@ namespace LMS.Controllers
             return View("Index", showDocViewModel);
         }
 
-        // 
+        // ***
         public ActionResult FromModule(int? id)
         {
             Module module = db.Modules.Where(c => c.Id == id).FirstOrDefault();
@@ -119,7 +136,7 @@ namespace LMS.Controllers
             return View("Index", showDocViewModel);
         }
 
-        // 
+        // ***
         public ActionResult FromActivity(int? id)
         {
             Activity activity = db.Activities.Where(c => c.Id == id).FirstOrDefault();
@@ -325,6 +342,7 @@ namespace LMS.Controllers
             }
         }
 
+        // ***
         protected override void Dispose(bool disposing)
         {
             if (disposing)

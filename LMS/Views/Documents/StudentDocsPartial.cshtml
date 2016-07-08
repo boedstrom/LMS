@@ -3,6 +3,9 @@
 <p>
     @Html.ActionLink("Add new document", "Create", Model)
 </p>
+@Html.HiddenFor(model => model.Id)
+@Html.HiddenFor(model => model.ParentType)
+
 <table class="table">
     <colgroup>
         <col class="col-md-2">
