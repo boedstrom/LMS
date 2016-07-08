@@ -97,7 +97,7 @@ namespace LMS.Controllers
                 }
 
                 db.SaveChanges();
-                return RedirectToAction("TeacherIndex", "UserViewModels");
+                return RedirectToAction("TeacherIndex", "Users");
             }
 
             return View(userViewModel);
@@ -183,7 +183,7 @@ namespace LMS.Controllers
                 uManager.AddToRole(user.Id, role.Name);
 
                 db.SaveChanges();
-                return RedirectToAction("Index", "UserViewModels", new { id = userViewModel.Course.Id });
+                return RedirectToAction("Index", "Users", new { id = userViewModel.Course.Id });
             }
 
             return View(userViewModel);
@@ -230,7 +230,7 @@ namespace LMS.Controllers
 
                 uManager.Update(user);
                 db.SaveChanges();
-                return RedirectToAction("Index", "UserViewModels", new { id = userViewModel.Course.Id });
+                return RedirectToAction("Index", "Users", new { id = userViewModel.Course.Id });
             }
             return View(userViewModel);
         }
@@ -273,7 +273,7 @@ namespace LMS.Controllers
 
                 uManager.Update(user);
                 db.SaveChanges();
-                return RedirectToAction("TeacherIndex", "UserViewModels");
+                return RedirectToAction("TeacherIndex", "Users");
             }
             return View(userViewModel);
         }
