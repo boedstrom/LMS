@@ -9,6 +9,7 @@ using System.Web.Mvc;
 using LMS.Models;
 using System.IO;
 using System.Threading.Tasks;
+using System.Text.RegularExpressions;
 
 namespace LMS.Controllers
 {
@@ -210,9 +211,32 @@ namespace LMS.Controllers
                 if (file != null && file.ContentLength > 0)
                     try
                     {
-                        string path = Path.Combine(Server.MapPath("~/Content/Files"), Path.GetFileName(file.FileName));
-                        file.SaveAs(path);
-                        newDoc.Url = Path.GetFileName(file.FileName);
+                        string fileName1 = Path.GetFileName(file.FileName);
+                        string fileName2 = fileName1;
+                        string pattern;
+                        string replacement;
+                        Regex rgx;
+
+                        if (fileName1.Contains("#"))
+                        {
+                            pattern = "#";
+                            replacement = "x";
+                            rgx = new Regex(pattern);
+                            fileName2 = rgx.Replace(fileName1, replacement);
+                        }
+
+                        fileName1 = fileName2;
+                        if (fileName1.Contains("%"))
+                        {
+                            pattern = "%";
+                            replacement = "p";
+                            rgx = new Regex(pattern);
+                            fileName2 = rgx.Replace(fileName1, replacement);
+                        }
+
+                        string filePath = Path.Combine(Server.MapPath("~/Content/Files"), fileName2);
+                        file.SaveAs(filePath);
+                        newDoc.Url = fileName2;
                     }
                     catch (Exception ex)
                     {
