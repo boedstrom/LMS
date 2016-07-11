@@ -22,14 +22,12 @@ namespace LMS.Controllers
         }
 
         // ***
-        [Authorize(Roles = "Teacher")]
         public ActionResult ShowActivities(int? id)
         {
             return RedirectToAction("Index", "Activities", new { id });
         }
 
         // ***
-        [Authorize(Roles = "Teacher")]
         public ActionResult ShowDocuments(int? id)
         {
             return RedirectToAction("FromModule", "Documents", new { id });

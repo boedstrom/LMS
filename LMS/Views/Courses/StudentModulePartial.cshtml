@@ -55,6 +55,7 @@
                     @Html.DisplayFor(modelItem => item.EndDate)
                 </td>
                 <td>
+                    @Html.ActionLink("Activities", "ShowActivitiesForPartialModules", new { id = item.Id })
                 </td>
                 <td>
                     @Html.ActionLink("Documents", "ShowModuleDocuments", new { id = item.Id })
