@@ -139,10 +139,15 @@ namespace LMS.Controllers
         }
 
         // ***
-        [Authorize(Roles = "Teacher")]
         public ActionResult ShowModules(int? id)
         {
             return RedirectToAction("Index", "Modules", new { id });
+        }
+
+        // ***
+        public ActionResult ShowActivitiesForPartialModules(int? id)
+        {
+            return RedirectToAction("ShowActivities", "Modules", new { id });
         }
 
         // ***
