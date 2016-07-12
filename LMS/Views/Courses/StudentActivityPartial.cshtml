@@ -2,7 +2,15 @@
 @{
     ViewBag.Title = "Index";
 }
-<h4>Activities in current module</h4>
+<h4>Activities in current module: @Html.DisplayFor(model => model.ModuleName)</h4>
+@*
+<p>
+    @if (User.IsInRole("Teacher"))
+    {
+        @Html.ActionLink("Add new activity", "CreateActivity", new { id = Model.ModuleId })
+    }
+</p>
+*@
 <table class="table">
     <colgroup>
         <col class="col-md-1">

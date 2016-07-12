@@ -9,8 +9,8 @@
     <colgroup>
         <col class="col-md-2">
         <col class="col-md-3">
-        <col class="col-md-1">
-        <col class="col-md-3">
+        <col class="col-md-2">
+        <col class="col-md-2">
         <col class="col-md-2">
         <col class="col-md-1">
     </colgroup>
@@ -23,14 +23,16 @@
                 @Html.DisplayNameFor(model => model.Documents.First().Description)
             </th>
             <th>
-                Type
-@*                @Html.DisplayNameFor(model => model.Documents.First().DocumentType)*@
-            </th>
-            <th>
                 Filename
 @*                @Html.DisplayNameFor(model => model.Documents.First().Url)*@
             </th>
             <th>
+                Type
+@*                @Html.DisplayNameFor(model => model.Documents.First().DocumentType)*@
+            </th>
+            <th>
+                Uploaded
+@*                @Html.DisplayNameFor(model => model.Documents.First().CreationDate)*@
             </th>
             <th>
             </th>
@@ -46,18 +48,19 @@
                     @Html.DisplayFor(modelItem => item.Description)
                 </td>
                 <td>
+                    <a href="~/Content/Files/@item.Url">@item.Url</a>
+                </td>
+                <td>
                     @Html.DisplayFor(modelItem => item.DocumentType)
                 </td>
                 <td>
-                    <a href="~/Content/Files/@item.Url">@item.Url</a>
+                    @Html.DisplayFor(modelItem => item.CreationDate)
                 </td>
                 <td>
                     @if (User.IsInRole("Teacher"))
                     {
                         @Html.ActionLink("Delete", "Delete", new { id = item.Id })
                     }
-                </td>
-                <td>
                 </td>
             </tr>
         }
