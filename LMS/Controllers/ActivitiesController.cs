@@ -84,6 +84,34 @@ namespace LMS.Controllers
             if (ModelState.IsValid)
             {
                 Module thisModule = db.Modules.Where(c => c.Id == activity.Module.Id).FirstOrDefault();
+                //--------------------------------------------------------------------------
+//              int compare = thisDate.CompareTo(thatDate);
+//              if (compare < 0)    thisDate has passed
+//              else if (compare == 0)  Same = today
+//              else // (compareValue > 0)  thisDate is in the future
+
+                //  Check activity start time against module end date
+                int compare = thisModule.EndDate.CompareTo(activity.StartTime.Date);
+
+                //  Module has ended when the activity starts
+                if (compare < 0)
+                {
+                    ViewBag.Message = "Activity starts after the module end date";
+                    return View(activity);
+                }
+                else
+                {
+                    //  Check activity end time against module end date
+                    compare = thisModule.EndDate.CompareTo(activity.EndTime.Date);
+                 
+                    //  Module has already ended when the activity ends
+                    if (compare < 0)
+                    {
+                        ViewBag.Message = "Activity ends after the module end date";
+                        return View(activity);
+                    }
+                }
+                //--------------------------------------------------------------------------
                 activity.Module = thisModule;
                 db.Activities.Add(activity);
                 db.SaveChanges();
