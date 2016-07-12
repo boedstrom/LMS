@@ -371,6 +371,7 @@
     <Content Include="Views\Documents\AssignmentDocsPartial.cshtml" />
     <Content Include="Views\Courses\StudentNoDataIndex.cshtml" />
     <Content Include="Views\Courses\StudentNoDataPartial.cshtml" />
+    <Content Include="Views\Courses\CourseIndex.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Content\Files\" />

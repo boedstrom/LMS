@@ -16,6 +16,31 @@ namespace LMS.Controllers
         private ApplicationDbContext db = new ApplicationDbContext();
 
         // ***
+        public ActionResult CreateActivity(int? id)
+        {
+            return RedirectToAction("Create", "Activities", new { id });
+        }
+
+            // Course Index
+        public ActionResult CourseIndex(int? id)
+        {
+            Course course = db.Courses.Find(id);
+            ShowModulesViewModel courseModules = new ShowModulesViewModel();
+            courseModules.CourseId = course.Id;
+            courseModules.CourseName = course.Name;
+            courseModules.CourseDescription = course.Description;
+            courseModules.CourseStart = course.StartDate.Date;
+            courseModules.CourseEnd = course.EndDate.Date;
+            courseModules.Modules = db.Modules.Where(m => m.Course.Id == course.Id).ToList();
+            if (courseModules.Modules.Count() == 0)
+            {
+                courseModules.CourseDescription = "There are no modules for this course";
+                return RedirectToAction("StudentNoDataIndex", courseModules);
+            }
+            return View(courseModules);
+        }
+
+        // ***
         public ActionResult StudentActivityPartial(int? id)
         {
             Course course = db.Courses.Find(id);
@@ -85,7 +110,7 @@ namespace LMS.Controllers
             studentActivityView.ModuleName = currentModule.Name;
             studentActivityView.ModuleStart = currentModule.StartDate.Date;
             studentActivityView.ModuleEnd = currentModule.EndDate.Date;
-            studentActivityView.Activities = db.Activities.Where(m => m.Module.Id == currentModule.Id).ToList();
+            studentActivityView.Activities = db.Activities.Where(m => m.Module.Id == currentModule.Id).ToList().OrderBy(m => m.StartTime);
             if (studentActivityView.Activities.Count() == 0)
             {
                 studentActivityView.ModuleName = "There are no activities for the current module";

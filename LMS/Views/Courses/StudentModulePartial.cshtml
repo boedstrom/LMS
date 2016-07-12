@@ -3,6 +3,13 @@
     ViewBag.Title = "Index";
 }
 <h4>Modules</h4>
+<p>
+    @if (User.IsInRole("Teacher"))
+    {
+        @Html.ActionLink("Add new module", "Create", new { id = Model.CourseId })
+    }
+</p>
+
 <table class="table">
     <colgroup>
         <col class="col-md-1">

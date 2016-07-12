@@ -35,6 +35,12 @@ namespace LMS.Controllers
             return RedirectToAction("StudentIndex", "Courses", new { id = thisModule.Course.Id });
         }
 
+        public ActionResult BackToCourse(int? id)
+        {
+            Module thisModule = db.Modules.Where(c => c.Id == id).FirstOrDefault();
+            return RedirectToAction("CourseIndex", "Courses", new { id = thisModule.Course.Id });
+        }
+
         // GET: Activities
         public ActionResult Index(int? id)
         {
@@ -45,7 +51,8 @@ namespace LMS.Controllers
             moduleActivities.ModuleName = module.Name;
             moduleActivities.ModuleStart = module.StartDate.Date;
             moduleActivities.ModuleEnd = module.EndDate.Date;
-            moduleActivities.Activities = db.Activities.Where(m => m.Module.Id == module.Id).ToList();
+            moduleActivities.Activities = db.Activities.Where(m => m.Module.Id == module.Id).ToList().OrderBy(m => m.StartTime);
+
             return View(moduleActivities);
         }
 
@@ -70,8 +77,8 @@ namespace LMS.Controllers
         {
             Activity activity = new Activity();
             activity.Module = db.Modules.Where(c => c.Id == id).FirstOrDefault();
-            activity.StartTime = DateTime.Now;
-            activity.EndTime = DateTime.Now.AddHours(1);
+            activity.StartTime = activity.Module.StartDate;
+            activity.EndTime = activity.Module.StartDate.AddHours(4);
             return View(activity);
         }
 
