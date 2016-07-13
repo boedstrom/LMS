@@ -41,7 +41,7 @@ namespace LMS.Controllers
         }
 
         // ***
-        public ActionResult StudentActivityPartial(int? id)
+        public ActionResult ActivityPartial(int? id)
         {
             Course course = db.Courses.Find(id);
             ShowModulesViewModel courseModules = new ShowModulesViewModel();
@@ -116,7 +116,7 @@ namespace LMS.Controllers
                 studentActivityView.ModuleName = "There are no activities for the current module";
                 return PartialView("StudentNoDataPartial", studentActivityView);
             }
-            return PartialView("StudentActivityPartial", studentActivityView);
+            return PartialView("ActivityPartial", studentActivityView);
         }
 
         // ***

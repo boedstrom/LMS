@@ -17,7 +17,7 @@
     <hr />
 </div>
 <div>
-    @Html.Action("StudentActivityPartial", new { id = Model.CourseId })
+    @Html.Action("ActivityPartial", new { id = Model.CourseId })
     <hr />
-    @Html.Partial("StudentModulePartial", Model)
+    @Html.Partial("ModulePartial", Model)
 </div>
