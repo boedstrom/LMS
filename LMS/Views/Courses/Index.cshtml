@@ -32,9 +32,10 @@
     </tr>
 
 @foreach (var item in Model) {
-    <tr>
+    <tr onclick="location.href = '@(Url.Action("Index","Users", new { id = item.Id }))'">
         <td>
             @Html.DisplayFor(modelItem => item.Name)
+            @*@Html.ActionLink(item.Name,"Index","Courses",new { id = item.Id })*@
         </td>
         <td>
             @Html.DisplayFor(modelItem => item.Description)
@@ -46,8 +47,8 @@
             @Html.DisplayFor(modelItem => item.EndDate)
         </td>
         <td>
-            @if (User.IsInRole("Teacher"))
-            {
+            @if (User.IsInRole("Teacher")) { 
+
                 @Html.ActionLink("Modules", "ShowModules", new { id = item.Id })
                 <span>|</span>
                 @Html.ActionLink("Students", "ShowUsers", new { id = item.Id })
