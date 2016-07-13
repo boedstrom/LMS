@@ -360,9 +360,9 @@
     <Content Include="Views\Users\DetailsTeacher.cshtml" />
     <Content Include="Views\Users\EditTeacher.cshtml" />
     <Content Include="Views\Users\DeleteTeacher.cshtml" />
-    <Content Include="Views\Courses\StudentActivityPartial.cshtml" />
+    <Content Include="Views\Courses\ActivityPartial.cshtml" />
     <Content Include="Views\Courses\StudentIndex.cshtml" />
-    <Content Include="Views\Courses\StudentModulePartial.cshtml" />
+    <Content Include="Views\Courses\ModulePartial.cshtml" />
     <Content Include="Views\Documents\Delete.cshtml" />
     <Content Include="Views\Documents\CourseDocsPartial.cshtml" />
     <Content Include="Views\Documents\StudentDocsPartial.cshtml" />
