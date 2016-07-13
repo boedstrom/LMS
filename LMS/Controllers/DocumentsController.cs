@@ -81,7 +81,8 @@ namespace LMS.Controllers
 
                 case DocParent.Module:
                     Module module = db.Modules.Where(c => c.Id == addDocView.Id).FirstOrDefault();
-                    return RedirectToAction("Index", "Modules", new { module.Course.Id });
+//                    return RedirectToAction("Index", "Modules", new { module.Course.Id });
+                    return RedirectToAction("CourseIndex", "Courses", new { module.Course.Id });
 
                 case DocParent.Activity:
                     Activity activity = db.Activities.Where(c => c.Id == addDocView.Id).FirstOrDefault();

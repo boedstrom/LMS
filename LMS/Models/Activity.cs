@@ -9,7 +9,8 @@ namespace LMS.Models
     public enum ActivityType
     {
         Lecture,
-        ELearning
+        ELearning,
+        Assignment
     }
 
     public class Activity
