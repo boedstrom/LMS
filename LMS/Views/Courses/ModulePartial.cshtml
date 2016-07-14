@@ -6,7 +6,7 @@
 <p>
     @if (User.IsInRole("Teacher"))
     {
-        @Html.ActionLink("Add new module", "Create", new { id = Model.CourseId })
+        @Html.ActionLink("Add new module", "CreateModule", new { id = Model.CourseId })
     }
 </p>
 

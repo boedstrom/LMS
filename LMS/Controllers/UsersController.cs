@@ -39,7 +39,7 @@ namespace LMS.Controllers
             courseUsers.CourseStart = course.StartDate.Date;
             courseUsers.CourseEnd = course.EndDate.Date;
 
-            courseUsers.Users = db.Users.Where(u => u.Course.Id == course.Id).ToList();
+            courseUsers.Users = db.Users.Where(u => u.Course.Id == course.Id).ToList().OrderBy(u => u.FirstName);
             return View(courseUsers);
         }
 
@@ -49,7 +49,7 @@ namespace LMS.Controllers
             TeacherViewModel teachers = new TeacherViewModel();
 
             var roleId = db.Roles.FirstOrDefault(x => x.Name == "Teacher").Id;
-            teachers.Teachers = db.Users.Where(u => u.Roles.FirstOrDefault().RoleId == roleId).ToList();
+            teachers.Teachers = db.Users.Where(u => u.Roles.FirstOrDefault().RoleId == roleId).ToList().OrderBy(u => u.FirstName);
             return View(teachers);
         }
 
