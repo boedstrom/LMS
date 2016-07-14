@@ -1,60 +1,75 @@
-﻿@model IEnumerable<LMS.Models.Module>
-
+﻿@model LMS.Models.ShowModulesViewModel
 @{
-    ViewBag.Title = "Index Modules";
+    ViewBag.Title = "Index";
 }
 
-<h2>Index Modules</h2>
+<h2>Modules for course @Html.DisplayFor(model => model.CourseName)</h2>
 
+<table class="table">
+    <tr>
+        <th>
+            Course duration: @Convert.ToDateTime(Model.CourseStart).ToString("yyyy-MM-dd") -
+            @Convert.ToDateTime(Model.CourseEnd).ToString("yyyy-MM-dd")
+        </th>
+    </tr>
+</table>
 <p>
-    @Html.ActionLink("Create New", "Create")
+    @if (User.IsInRole("Teacher"))
+    {
+        @Html.ActionLink("Add new module", "Create", new { id = Model.CourseId })
+    }
 </p>
 <table class="table">
     <tr>
         <th>
-            @Html.DisplayNameFor(model => model.Name)
+            @Html.DisplayNameFor(model => model.Modules.First().Name)
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.Description)
+            @Html.DisplayNameFor(model => model.Modules.First().Description)
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.StartDate)
+            Start date
+@*            @Html.DisplayNameFor(model => model.Modules.First().StartDate)*@
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.EndDate)
+            End date
+@*            @Html.DisplayNameFor(model => model.Modules.First().EndDate)*@
         </th>
         <th></th>
     </tr>
 
-@foreach (var item in Model) {
-    <tr>
-        <td>
-            @Html.DisplayFor(modelItem => item.Name)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Description)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.StartDate)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.EndDate)
-        </td>
-        <td>
-            @if (User.IsInRole("teacher"))
-            {
-                <span>|</span>
-                @Html.ActionLink("Edit", "Edit", new { id = item.Id })
-                <span>|</span>
-                @Html.ActionLink("Details", "Details", new { id = item.Id })
-                <span>|</span>
-                @Html.ActionLink("Delete", "Delete", new { id = item.Id })
-            }
-        </td>
-    </tr>
-}
-
+    @foreach (var item in Model.Modules)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.Name)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Description)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.StartDate)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.EndDate)
+            </td>
+            <td>
+                @if (User.IsInRole("Teacher"))
+                {
+                    @Html.ActionLink("Activities", "ShowActivities", new { id = item.Id })
+                    <span>|</span>
+                    @Html.ActionLink("Documents", "ShowDocuments", new { id = item.Id })
+                    <span>|</span>
+                    @Html.ActionLink("Edit", "Edit", new { id = item.Id })
+                    <span>|</span>
+                    @Html.ActionLink("Details", "Details", new { id = item.Id })
+                    <span>|</span>
+                    @Html.ActionLink("Delete", "Delete", new { id = item.Id })
+                }
+            </td>
+        </tr>
+    }
 </table>
 <div>
-    @Html.ActionLink("Back to Courses", "Index", "Courses")
+    @Html.ActionLink("Back", "Index", "Courses")
 </div>

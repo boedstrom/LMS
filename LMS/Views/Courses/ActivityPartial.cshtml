@@ -1,0 +1,78 @@
+﻿@model LMS.Models.ShowActivitiesViewModel
+@{
+    ViewBag.Title = "Index";
+}
+<h4>Activities in current module: @Html.DisplayFor(model => model.ModuleName)</h4>
+@*
+<p>
+    @if (User.IsInRole("Teacher"))
+    {
+        @Html.ActionLink("Add new activity", "CreateActivity", new { id = Model.ModuleId })
+    }
+</p>
+*@
+<table class="table">
+    <colgroup>
+        <col class="col-md-1">
+        <col class="col-md-3">
+        <col class="col-md-1">
+        <col class="col-md-2">
+        <col class="col-md-2">
+        <col class="col-md-1">
+        <col class="col-md-1">
+    </colgroup>
+    <tbody>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.Activities.First().Name)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Activities.First().Description)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Activities.First().Type)
+            </th>
+            <th>
+                Start time
+@*                @Html.DisplayNameFor(model => model.Activities.First().StartTime)*@
+            </th>
+            <th>
+                End time
+@*                @Html.DisplayNameFor(model => model.Activities.First().EndTime)*@
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Activities.First().Deadline)
+            </th>
+            <th>
+            </th>
+        </tr>
+
+        @foreach (var item in Model.Activities)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Name)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Description)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Type)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.StartTime)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.EndTime)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Deadline)
+                </td>
+                <td>
+                    @Html.ActionLink("Documents", "ShowActivityDocuments", new { id = item.Id })
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
+

@@ -1,0 +1,26 @@
+﻿@model LMS.Models.ShowModulesViewModel
+@{
+    ViewBag.Title = "CourseIndex";
+}
+
+<h2>Selected course: @Html.DisplayFor(model => model.CourseName)</h2>
+
+<div>
+    <h4>@Html.DisplayFor(model => model.CourseDescription)</h4>
+    <h4>
+        Course duration: @Convert.ToDateTime(Model.CourseStart).ToString("yyyy-MM-dd") -
+        @Convert.ToDateTime(Model.CourseEnd).ToString("yyyy-MM-dd")
+    </h4>
+    @Html.ActionLink("Students in this course", "ShowUsers", new { id = Model.CourseId }) | 
+    @Html.ActionLink("Documents for this course", "ShowCourseDocuments", new { id = Model.CourseId })
+    @Html.HiddenFor(model => model.CourseId)
+    <hr />
+</div>
+<div>
+    @Html.Action("ActivityPartial", new { id = Model.CourseId })
+    <hr />
+    @Html.Partial("ModulePartial", Model)
+</div>
+<div>
+    @Html.ActionLink("Back", "Index")
+</div>

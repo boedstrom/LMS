@@ -15,10 +15,45 @@ namespace LMS.Controllers
     {
         private ApplicationDbContext db = new ApplicationDbContext();
 
-        // GET: Activities
-        public ActionResult Index()
+        // ***
+        public ActionResult ShowDocuments(int? id)
         {
-            return View(db.Activities.ToList());
+            return RedirectToAction("FromActivity", "Documents", new { id });
+        }
+
+        // ***
+        public ActionResult BackToModule(int? id)
+        {
+            Module thisModule = db.Modules.Where(c => c.Id == id).FirstOrDefault();
+            return RedirectToAction("Index", "Modules", new { id = thisModule.Course.Id });
+        }
+
+        // ***
+        public ActionResult BackToStudent(int? id)
+        {
+            Module thisModule = db.Modules.Where(c => c.Id == id).FirstOrDefault();
+            return RedirectToAction("StudentIndex", "Courses", new { id = thisModule.Course.Id });
+        }
+
+        public ActionResult BackToCourse(int? id)
+        {
+            Module thisModule = db.Modules.Where(c => c.Id == id).FirstOrDefault();
+            return RedirectToAction("CourseIndex", "Courses", new { id = thisModule.Course.Id });
+        }
+
+        // GET: Activities
+        public ActionResult Index(int? id)
+        {
+            ShowActivitiesViewModel moduleActivities = new ShowActivitiesViewModel();
+
+            Module module = db.Modules.Where(c => c.Id == id).FirstOrDefault();
+            moduleActivities.ModuleId = module.Id;
+            moduleActivities.ModuleName = module.Name;
+            moduleActivities.ModuleStart = module.StartDate.Date;
+            moduleActivities.ModuleEnd = module.EndDate.Date;
+            moduleActivities.Activities = db.Activities.Where(m => m.Module.Id == module.Id).ToList().OrderBy(m => m.StartTime);
+
+            return View(moduleActivities);
         }
 
         // GET: Activities/Details/5
@@ -37,29 +72,64 @@ namespace LMS.Controllers
         }
 
         // GET: Activities/Create
-        public ActionResult Create()
+        [Authorize(Roles = "Teacher")]
+        public ActionResult Create(int? id)
         {
-            return View();
+            Activity activity = new Activity();
+            activity.Module = db.Modules.Where(c => c.Id == id).FirstOrDefault();
+            activity.StartTime = activity.Module.StartDate;
+            activity.EndTime = activity.Module.StartDate.AddHours(4);
+            return View(activity);
         }
 
         // POST: Activities/Create
-        // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
-        // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "Id,Name,Description,Type,StartTime,EndTime,Deadline")] Activity activity)
+        [Authorize(Roles = "Teacher")]
+        public ActionResult Create([Bind(Include = "Id,Name,Description,Type,StartTime,EndTime,Deadline,Module")] Activity activity)
         {
             if (ModelState.IsValid)
             {
+                Module thisModule = db.Modules.Where(c => c.Id == activity.Module.Id).FirstOrDefault();
+                //--------------------------------------------------------------------------
+//              int compare = thisDate.CompareTo(thatDate);
+//              if (compare < 0)    thisDate has passed
+//              else if (compare == 0)  Same = today
+//              else // (compareValue > 0)  thisDate is in the future
+
+                //  Check activity start time against module end date
+                int compare = thisModule.EndDate.CompareTo(activity.StartTime.Date);
+
+                //  Module has ended when the activity starts
+                if (compare < 0)
+                {
+                    ViewBag.Message = "Activity starts after the module end date";
+                    return View(activity);
+                }
+                else
+                {
+                    //  Check activity end time against module end date
+                    compare = thisModule.EndDate.CompareTo(activity.EndTime.Date);
+                 
+                    //  Module has already ended when the activity ends
+                    if (compare < 0)
+                    {
+                        ViewBag.Message = "Activity ends after the module end date";
+                        return View(activity);
+                    }
+                }
+                //--------------------------------------------------------------------------
+                activity.Module = thisModule;
                 db.Activities.Add(activity);
                 db.SaveChanges();
-                return RedirectToAction("Index");
+                return RedirectToAction("Index", "Activities", new { id = activity.Module.Id });
             }
 
             return View(activity);
         }
 
         // GET: Activities/Edit/5
+        [Authorize(Roles = "Teacher")]
         public ActionResult Edit(int? id)
         {
             if (id == null)
@@ -75,22 +145,22 @@ namespace LMS.Controllers
         }
 
         // POST: Activities/Edit/5
-        // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
-        // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "Id,Name,Description,Type,StartTime,EndTime,Deadline")] Activity activity)
+        [Authorize(Roles = "Teacher")]
+        public ActionResult Edit([Bind(Include = "Id,Name,Description,Type,StartTime,EndTime,Deadline,Module")] Activity activity)
         {
             if (ModelState.IsValid)
             {
                 db.Entry(activity).State = EntityState.Modified;
                 db.SaveChanges();
-                return RedirectToAction("Index");
+                return RedirectToAction("Index", "Activities", new {id = activity.Module.Id });
             }
             return View(activity);
         }
 
         // GET: Activities/Delete/5
+        [Authorize(Roles = "Teacher")]
         public ActionResult Delete(int? id)
         {
             if (id == null)
@@ -108,14 +178,17 @@ namespace LMS.Controllers
         // POST: Activities/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
+        [Authorize(Roles = "Teacher")]
         public ActionResult DeleteConfirmed(int id)
         {
             Activity activity = db.Activities.Find(id);
+            int moduleid = activity.Module.Id;
             db.Activities.Remove(activity);
             db.SaveChanges();
-            return RedirectToAction("Index");
+            return RedirectToAction("Index", "Activities", new { id = moduleid });
         }
 
+        // ***
         protected override void Dispose(bool disposing)
         {
             if (disposing)

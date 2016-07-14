@@ -1,0 +1,70 @@
+﻿@model LMS.Models.UserViewModel
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<h2>Student details</h2>
+
+<div>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.FirstName)
+        </dt>
+
+        <dd>
+            First name
+@*            @Html.DisplayFor(model => model.FirstName)*@
+        </dd>
+
+        <dt>
+            Last name
+@*            @Html.DisplayNameFor(model => model.LastName)*@
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.LastName)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Email)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Email)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.Course.Name)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.Course.Name)
+        </dd>
+@*
+    <dt>
+        @Html.DisplayNameFor(model => model.DefaultPassword)
+    </dt>
+
+    <dd>
+        @Html.DisplayFor(model => model.DefaultPassword)
+    </dd>
+
+    <dt>
+        @Html.DisplayNameFor(model => model.UserType)
+    </dt>
+
+    <dd>
+        @Html.DisplayFor(model => model.UserType)
+    </dd>*@
+    </dl>
+</div>
+@Html.HiddenFor(model => model.Id)
+@Html.HiddenFor(model => model.Course.Id)
+<p>
+    @if (User.IsInRole("Teacher"))
+    {
+        @Html.ActionLink("Edit", "Edit", new { id = Model.Id })
+        <span>|</span>
+    }
+    @Html.ActionLink("Back to List", "Index", new { id = Model.Course.Id })
+</p>

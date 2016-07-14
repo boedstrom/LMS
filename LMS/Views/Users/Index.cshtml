@@ -1,0 +1,79 @@
+﻿@model LMS.Models.ShowUsersViewModel
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2>Students for course @Html.DisplayFor(model => model.CourseName)</h2>
+<table class="table">
+    <tr>
+        <th>
+            Course duration: @Convert.ToDateTime(Model.CourseStart).ToString("yyyy-MM-dd") -
+            @Convert.ToDateTime(Model.CourseEnd).ToString("yyyy-MM-dd")
+        </th>
+    </tr>
+</table>
+<p>
+    @if (User.IsInRole("Teacher"))
+    {
+        @Html.ActionLink("Register new student", "Create", new { id = Model.CourseId })
+    }
+</p>
+<table class="table">
+    <tr>
+        <th>
+            First name
+@*            @Html.DisplayNameFor(model => model.Users.First().FullName)*@
+        </th>
+        <th>
+            Last name
+@*            @Html.DisplayNameFor(model => model.Users.First().Email)*@
+        </th>
+@*        <th>
+        @Html.DisplayNameFor(model => model.DefaultPassword)
+    </th>
+    <th>
+        @Html.DisplayNameFor(model => model.UserType)
+    </th>*@
+        <th></th>
+    </tr>
+
+@foreach (var user in Model.Users) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => user.FullName)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => user.Email)
+        </td>
+@*
+        <td>
+            @Html.DisplayFor(modelItem => user.DefaultPassword)
+        </td>
+    <td>
+        @Html.DisplayFor(modelItem => user.UserType)
+    </td>
+*@
+        <td>
+            @if (User.IsInRole("Teacher"))
+            {
+                @Html.ActionLink("Edit", "Edit", new { id = user.Id })
+                <span>|</span>
+                @Html.ActionLink("Details", "Details", new { id = user.Id })
+                <span>|</span>
+                @Html.ActionLink("Delete", "Delete", new { id = user.Id })
+            }
+        </td>
+    </tr>
+}
+</table>
+<div>
+    @if (User.IsInRole("Student"))
+    {
+        @Html.ActionLink("Back", "BackToStudent", new { id = Model.CourseId })
+    }
+    @if (User.IsInRole("Teacher"))
+    {
+        @Html.ActionLink("Back", "BackToCourse", new { id = Model.CourseId })
+    }
+</div>

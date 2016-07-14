@@ -17,6 +17,9 @@ namespace LMS.Models
             // Add custom user claims here
             return userIdentity;
         }
+        public string FirstName { get; set; }
+        public string LastName { get; set; }
+        public string FullName { get { return FirstName + " " + LastName; } }
 
         public virtual Course Course { get; set; }
         public virtual ICollection<Document> Documents { get; set; }
@@ -36,7 +39,7 @@ namespace LMS.Models
 
         public System.Data.Entity.DbSet<LMS.Models.Course> Courses { get; set; }
         public System.Data.Entity.DbSet<LMS.Models.Module> Modules { get; set; }
-
-        public System.Data.Entity.DbSet<LMS.Models.AddModuleViewModel> AddModuleViewModels { get; set; }
+        public System.Data.Entity.DbSet<LMS.Models.Activity> Activities { get; set; }
+        public System.Data.Entity.DbSet<LMS.Models.Document> Documents { get; set; }
     }
 }
