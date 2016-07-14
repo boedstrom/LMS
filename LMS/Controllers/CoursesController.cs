@@ -16,12 +16,18 @@ namespace LMS.Controllers
         private ApplicationDbContext db = new ApplicationDbContext();
 
         // ***
+        public ActionResult CreateModule(int? id)
+        {
+            return RedirectToAction("Create", "Modules", new { id });
+        }
+
+        // ***
         public ActionResult CreateActivity(int? id)
         {
             return RedirectToAction("Create", "Activities", new { id });
         }
 
-            // Course Index
+        // Course Index
         public ActionResult CourseIndex(int? id)
         {
             Course course = db.Courses.Find(id);
@@ -31,7 +37,7 @@ namespace LMS.Controllers
             courseModules.CourseDescription = course.Description;
             courseModules.CourseStart = course.StartDate.Date;
             courseModules.CourseEnd = course.EndDate.Date;
-            courseModules.Modules = db.Modules.Where(m => m.Course.Id == course.Id).ToList();
+            courseModules.Modules = db.Modules.Where(m => m.Course.Id == course.Id).ToList().OrderBy(m => m.StartDate);
             if (courseModules.Modules.Count() == 0)
             {
                 courseModules.CourseDescription = "There are no modules for this course";
@@ -50,7 +56,7 @@ namespace LMS.Controllers
             courseModules.CourseDescription = course.Description;
             courseModules.CourseStart = course.StartDate.Date;
             courseModules.CourseEnd = course.EndDate.Date;
-            courseModules.Modules = db.Modules.Where(m => m.Course.Id == course.Id).ToList();
+            courseModules.Modules = db.Modules.Where(m => m.Course.Id == course.Id).ToList().OrderBy(m => m.StartDate);
             Module currentModule = courseModules.Modules.FirstOrDefault();
 
             int compareEnd = course.EndDate.CompareTo(DateTime.Today);
@@ -136,7 +142,7 @@ namespace LMS.Controllers
             courseModules.CourseDescription = course.Description;
             courseModules.CourseStart = course.StartDate.Date;
             courseModules.CourseEnd = course.EndDate.Date;
-            courseModules.Modules = db.Modules.Where(m => m.Course.Id == course.Id).ToList();
+            courseModules.Modules = db.Modules.Where(m => m.Course.Id == course.Id).ToList().OrderBy(m => m.StartDate);
             if (courseModules.Modules.Count() == 0)
             {
                 courseModules.CourseDescription = "There are no modules for this course";
@@ -160,7 +166,7 @@ namespace LMS.Controllers
         // GET: Courses
         public ActionResult Index()
         {
-            return View(db.Courses.ToList());
+            return View(db.Courses.ToList().OrderBy(c => c.StartDate));
         }
 
         // ***

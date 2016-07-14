@@ -44,7 +44,7 @@ namespace LMS.Controllers
             courseModules.CourseDescription = course.Description;
             courseModules.CourseStart = course.StartDate.Date;
             courseModules.CourseEnd = course.EndDate.Date;
-            courseModules.Modules = db.Modules.Where(m => m.Course.Id == course.Id).ToList();
+            courseModules.Modules = db.Modules.Where(m => m.Course.Id == course.Id).ToList().OrderBy(m => m.StartDate);
             return View(courseModules);
         }
 
@@ -68,9 +68,9 @@ namespace LMS.Controllers
         public ActionResult Create(int? id)
         {
             Module module = new Module();
-            module.StartDate = DateTime.Now;
-            module.EndDate = DateTime.Now.AddDays(1);
             module.Course = db.Courses.Where(c => c.Id == id).FirstOrDefault();
+            module.StartDate = module.Course.StartDate.Date;
+            module.EndDate = module.Course.StartDate.Date.AddDays(1);
             return View(module);
         }
 
@@ -85,28 +85,40 @@ namespace LMS.Controllers
                 Course thisCourse = db.Courses.Where(c => c.Id == module.Course.Id).FirstOrDefault();
                 //--------------------------------------------------------------------------
                 //              int compare = thisDate.CompareTo(thatDate);
-                //              if (compare < 0)    thisDate has passed
-                //              else if (compare == 0)  Same = today
-                //              else // (compareValue > 0)  thisDate is in the future
+                //              if (compare < 0)    thisDate has passed                 -1
+                //              else if (compare == 0)  Same = today                    0
+                //              else // (compareValue > 0)  thisDate is in the future   1
 
-                //  Check activity start time against module end date
-                int compare = thisCourse.EndDate.CompareTo(module.StartDate);
+                //  Check module start time against course start date
+                int compare = thisCourse.StartDate.Date.CompareTo(module.StartDate.Date);
 
-                //  Module has ended when the activity starts
-                if (compare < 0)
+                //  Module starts before the course
+                if (compare > 0)
                 {
-                    ViewBag.Message = "Activity starts after the module end date";
+                    ViewBag.Message = "Module starts before the course start date";
                     return View(module);
                 }
                 else
                 {
-                    //  Check activity end time against module end date
-                    compare = thisCourse.EndDate.CompareTo(module.EndDate);
+                    //  Check module start time against course end date
+                    compare = thisCourse.EndDate.Date.CompareTo(module.StartDate.Date);
 
-                    //  Module has already ended when the activity ends
-                    if (compare < 0)
+                    //  Module starts before the course end
+                    if (compare > 0)
                     {
-                        ViewBag.Message = "Activity ends after the module end date";
+                        //  Check module end date against course end date
+                        compare = thisCourse.EndDate.Date.CompareTo(module.EndDate.Date);
+
+                        if (compare < 0)
+                        {
+                            ViewBag.Message = "Module ends after the course end date";
+                            return View(module);
+                        }
+                    }
+                    //  Module has ended when the activity starts
+                    else
+                    {
+                        ViewBag.Message = "Module starts after the course end date";
                         return View(module);
                     }
                 }

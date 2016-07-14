@@ -92,29 +92,42 @@ namespace LMS.Controllers
             {
                 Module thisModule = db.Modules.Where(c => c.Id == activity.Module.Id).FirstOrDefault();
                 //--------------------------------------------------------------------------
-//              int compare = thisDate.CompareTo(thatDate);
-//              if (compare < 0)    thisDate has passed
-//              else if (compare == 0)  Same = today
-//              else // (compareValue > 0)  thisDate is in the future
+                //              int compare = thisDate.CompareTo(thatDate);
+                //              if (compare < 0)    thisDate has passed                 -1
+                //              else if (compare == 0)  Same = today                    0
+                //              else // (compareValue > 0)  thisDate is in the future   1
 
-                //  Check activity start time against module end date
-                int compare = thisModule.EndDate.CompareTo(activity.StartTime.Date);
+                //  Check Activity start time against module start date
+                int compare = thisModule.StartDate.Date.CompareTo(activity.StartTime.Date);
 
-                //  Module has ended when the activity starts
-                if (compare < 0)
+                //  Activity starts before the module
+                if (compare > 0)
                 {
-                    ViewBag.Message = "Activity starts after the module end date";
+                    ViewBag.Message = "Activity starts before the module start date";
                     return View(activity);
                 }
                 else
                 {
-                    //  Check activity end time against module end date
-                    compare = thisModule.EndDate.CompareTo(activity.EndTime.Date);
-                 
-                    //  Module has already ended when the activity ends
-                    if (compare < 0)
+                    //  Check activity start time against module end date
+                    compare = thisModule.EndDate.Date.CompareTo(activity.StartTime.Date);
+
+                    //  Activity starts before the module end
+                    if (compare > 0)
                     {
-                        ViewBag.Message = "Activity ends after the module end date";
+                        //  Check activity end date against module end date
+                        compare = thisModule.EndDate.Date.CompareTo(activity.EndTime.Date);
+
+                        //  Module has ended when the activity ends
+                        if (compare < 0)
+                        {
+                            ViewBag.Message = "Activity ends after the module end date";
+                            return View(activity);
+                        }
+                    }
+                    //  Module has ended when the activity starts
+                    else
+                    {
+                        ViewBag.Message = "Activity starts after the module end date";
                         return View(activity);
                     }
                 }

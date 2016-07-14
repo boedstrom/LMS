@@ -119,7 +119,7 @@ namespace LMS.Controllers
             showDocViewModel.Name = course.Name;
             showDocViewModel.ParentType = DocParent.Course;
             showDocViewModel.ParentClass = "course";
-            showDocViewModel.Documents = db.Documents.Where(m => m.Course.Id == course.Id).ToList();
+            showDocViewModel.Documents = db.Documents.Where(m => m.Course.Id == course.Id).ToList().OrderBy(m => m.CreationDate);
 
             return View("Index", showDocViewModel);
         }
@@ -133,7 +133,7 @@ namespace LMS.Controllers
             showDocViewModel.Name = module.Name;
             showDocViewModel.ParentType = DocParent.Module;
             showDocViewModel.ParentClass = "module";
-            showDocViewModel.Documents = db.Documents.Where(m => m.Module.Id == module.Id).ToList();
+            showDocViewModel.Documents = db.Documents.Where(m => m.Module.Id == module.Id).ToList().OrderBy(m => m.CreationDate);
 
             return View("Index", showDocViewModel);
         }
@@ -147,7 +147,7 @@ namespace LMS.Controllers
             showDocViewModel.Name = activity.Name;
             showDocViewModel.ParentType = DocParent.Activity;
             showDocViewModel.ParentClass = "activity";
-            showDocViewModel.Documents = db.Documents.Where(m => m.Activity.Id == activity.Id && m.DocumentType != DocType.Assignment).ToList();
+            showDocViewModel.Documents = db.Documents.Where(m => m.Activity.Id == activity.Id && m.DocumentType != DocType.Assignment).ToList().OrderBy(m => m.CreationDate);
 
             if (User.IsInRole("Student"))
             {
