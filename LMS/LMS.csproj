@@ -183,14 +183,34 @@
     <Compile Include="Migrations\201606221314106_Initial.Designer.cs">
       <DependentUpon>201606221314106_Initial.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201606231245113_AddModules.cs" />
+    <Compile Include="Migrations\201606231245113_AddModules.Designer.cs">
+      <DependentUpon>201606231245113_AddModules.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201606231346319_AddModules2.cs" />
+    <Compile Include="Migrations\201606231346319_AddModules2.Designer.cs">
+      <DependentUpon>201606231346319_AddModules2.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201606231353420_new_AddModules.cs" />
+    <Compile Include="Migrations\201606231353420_new_AddModules.Designer.cs">
+      <DependentUpon>201606231353420_new_AddModules.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201606231423366_zz1.cs" />
+    <Compile Include="Migrations\201606231423366_zz1.Designer.cs">
+      <DependentUpon>201606231423366_zz1.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
     <Compile Include="Models\Activity.cs" />
+    <Compile Include="Models\AddModuleViewModel.cs" />
     <Compile Include="Models\Course.cs" />
     <Compile Include="Models\Document.cs" />
     <Compile Include="Models\IdentityModels.cs" />
     <Compile Include="Models\ManageViewModels.cs" />
     <Compile Include="Models\Module.cs" />
+    <Compile Include="obj\Debug\TemporaryGeneratedFile_036C0B5B-1481-4323-8D20-8F5ADCB23D92.cs" />
+    <Compile Include="obj\Debug\TemporaryGeneratedFile_5937a670-0e60-4077-877b-f7221da3dda1.cs" />
+    <Compile Include="obj\Debug\TemporaryGeneratedFile_E7A71F73-0F8D-4B9B-B56E-8E70B10BC5D3.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Startup.cs" />
   </ItemGroup>
@@ -203,6 +223,14 @@
     <Content Include="Content\Site.css" />
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />
+    <Content Include="Content\Files\160407 -Kursschema NB16.pdf" />
+    <Content Include="Content\Files\160613 - Kursschema NB16.pdf" />
+    <Content Include="Content\Files\C# Övning 3  - Inkapsling, arv och polymorfism.pdf" />
+    <Content Include="Content\Files\EntitetsRealtioner.pptx" />
+    <Content Include="Content\Files\Inlämningsuppgift entitetsrelationer.docx" />
+    <Content Include="Content\Files\LathundGitHub %281%29.pdf" />
+    <Content Include="Content\Files\Övning 12- Garage 2.pdf" />
+    <Content Include="Content\Files\Övning 13 ER diagram.pdf" />
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
     <Content Include="Scripts\jquery-1.10.2.js" />
     <Content Include="Scripts\jquery-1.10.2.min.js" />
@@ -264,6 +292,7 @@
     <Content Include="Views\Activities\Details.cshtml" />
     <Content Include="Views\Activities\Edit.cshtml" />
     <Content Include="Views\Activities\Index.cshtml" />
+    <Content Include="Views\Modules\AddModule.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
@@ -279,6 +308,18 @@
   <ItemGroup>
     <EmbeddedResource Include="Migrations\201606221314106_Initial.resx">
       <DependentUpon>201606221314106_Initial.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201606231245113_AddModules.resx">
+      <DependentUpon>201606231245113_AddModules.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201606231346319_AddModules2.resx">
+      <DependentUpon>201606231346319_AddModules2.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201606231353420_new_AddModules.resx">
+      <DependentUpon>201606231353420_new_AddModules.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201606231423366_zz1.resx">
+      <DependentUpon>201606231423366_zz1.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>
